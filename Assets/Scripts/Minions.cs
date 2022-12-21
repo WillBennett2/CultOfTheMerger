@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -57,6 +59,11 @@ public class Minions : MonoBehaviour
 
                 m_minion.m_currentLevel += 1;
                 m_currentLevel = m_minion.m_currentLevel;
+                if (m_currentLevel >= m_minionProgression.m_minionProgression.Count())
+                {
+                    Debug.Log("At / Above level cap");
+                }
+                
 
                 ChangeMinionGameObject();
                 Destroy(onTileGameObject);                //Delete land minion
