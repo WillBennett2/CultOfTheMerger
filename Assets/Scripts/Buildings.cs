@@ -39,6 +39,13 @@ public class Buildings : MonoBehaviour
     private void SpawnMinion()
     {
         m_minionObject = Instantiate(m_minionPrefab);
+        SetMinionType();
+        m_spawnMinion = false;
+        m_minionObject = null;
+    }
+
+    private void SetMinionType()
+    {
         Minions minionsScript = m_minionObject.GetComponent<Minions>();
         if (minionsScript)
         {
@@ -59,7 +66,5 @@ public class Buildings : MonoBehaviour
                 minionsScript.SetMinionValues(m_minionType, m_buildingItems[1], 0);
             }
         }
-        m_spawnMinion = false;
-        m_minionObject = null;
     }
 }
