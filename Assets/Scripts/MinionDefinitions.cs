@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-struct MinionDefinions
+public struct MinionDefinions
 {
     public enum MMinionType {Zombie,Skeleton}
-
     public enum MManaType {Necro,Life,Night}
 
     public MMinionType m_minionType;

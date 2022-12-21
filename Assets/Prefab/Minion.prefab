@@ -145,8 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_minionType: 1
-  m_minionProgression: {fileID: 11400000, guid: af8efebf448712247bf95e6327cb6d7b,
-    type: 2}
+  m_minionProgression: {fileID: 0}
   m_currentLevel: 0
   m_currentGameObject: {fileID: 0}
   m_previousPosition: {x: 0, y: 0, z: 0}

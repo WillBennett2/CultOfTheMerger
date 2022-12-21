@@ -16,16 +16,26 @@ public class Minions : MonoBehaviour
 
     [SerializeField] public Vector3 m_previousPosition;
 
+    public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
+    {
+        m_minionType = minionType;
+        m_minionProgression = minionProgression;
+        m_currentLevel = currentLevel;
+    }
     // Start is called before the first frame update
     void Start()
     {
         //m_minionManager = GameObject.FindGameObjectWithTag("MinionManager").GetComponent<MinionManagers>();
-        if(m_minionProgression!=null)
+        DefineMinion();
+    }
+    
+    private void DefineMinion()
+    {
+        if(m_minionProgression)
             m_minion = new MinionDefinions(m_minionType,m_minionProgression,m_currentLevel);
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangeMinionGameObject();
     }
-    
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision!");
