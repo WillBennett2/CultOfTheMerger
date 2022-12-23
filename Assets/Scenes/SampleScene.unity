@@ -498,6 +498,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave
       objectReference: {fileID: 0}
+    - target: {fileID: 1072640369382412887, guid: 3693dbd304c04004bb913ad61cfafa4c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 2157571922437851218, guid: 3693dbd304c04004bb913ad61cfafa4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -506,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 2157571922437851218, guid: 3693dbd304c04004bb913ad61cfafa4c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1053321
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 2157571922437851218, guid: 3693dbd304c04004bb913ad61cfafa4c,
         type: 3}
@@ -516,7 +521,7 @@ PrefabInstance:
     - target: {fileID: 2157571922437851218, guid: 3693dbd304c04004bb913ad61cfafa4c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08494735
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 2157571922437851218, guid: 3693dbd304c04004bb913ad61cfafa4c,
         type: 3}
@@ -1447,6 +1452,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 853824946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &928301218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1072640369382412887, guid: 3693dbd304c04004bb913ad61cfafa4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 362300044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &928301221
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928301218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0608947, y: 1.4122447, z: 1}
+  m_Center: {x: -0.013627857, y: 0.20612246, z: -2.8381057e-17}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1524,14 +1548,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 8.27, z: -0.09}
+  m_LocalRotation: {x: 0.52292424, y: -0, z: -0, w: 0.8523792}
+  m_LocalPosition: {x: 0, y: 10.36, z: -4.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 63.057, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1544,6 +1568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec9b9d0805a9d44dbee7264bcf9fda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_draggingTag: Minion
+  m_camera: {fileID: 963194227}
 --- !u!1 &1056375851
 GameObject:
   m_ObjectHideFlags: 0
