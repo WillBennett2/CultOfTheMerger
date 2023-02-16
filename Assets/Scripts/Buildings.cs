@@ -32,6 +32,11 @@ public class Buildings : MonoBehaviour
         }
     }
 
+    public void Tapped()
+    {
+        //m_spawnMinion = true;
+        SpawnMinion();
+    }
     private int GenRandomNum()
     {
         return (Random.Range(0, 2));
