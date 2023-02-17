@@ -87,7 +87,7 @@ public class Buildings : MonoBehaviour
                 new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
                     m_gridRef[tileNum].transform.position.z), Quaternion.identity);
             m_gridRef[tileNum].GetComponent<TileInfo>().m_tileTaken = true;
-            
+            m_minionObject.GetComponent<Minions>().m_homeTile = m_gridRef[tileNum];
             SetMinionType();
         }
         

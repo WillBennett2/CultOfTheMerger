@@ -17,6 +17,7 @@ public class Minions : MonoBehaviour
 
 
     [SerializeField] public Vector3 m_previousPosition;
+    [SerializeField] public GameObject m_homeTile;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
     {
@@ -38,11 +39,27 @@ public class Minions : MonoBehaviour
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangeMinionGameObject();
     }
+
+    public void BeingHeld()
+    {
+        Debug.Log("I'm being held");
+        //disable collider
+    }
+
+    public void Dropped()
+    {
+        Debug.Log("I was dropped");
+        //is tile below open
+        
+        //snapping back to grid
+        
+        //Move current grid
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision!");
         var script = other.gameObject.GetComponent<Minions>();
-        if (script!=null)
+        if (script != null)
         {
             Merge(m_minion, script.gameObject);
         }
