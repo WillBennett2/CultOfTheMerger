@@ -22,14 +22,22 @@ public class GridManager : MonoBehaviour
     void Update()
     {
     }
-    
+
+    void RegenerateGrid()
+    {
+        CreateGrid();
+    }
     void CreateGrid()
     {
         for (int i = 0; i < m_columnLength * m_rowLength; i++)
         {
-            m_grid[i] = Instantiate(m_gridPrefeb, new Vector3(m_xStartPos + (m_xDistance* (i % m_columnLength)),m_yStartPos + 0.0f ,m_zStartPos + (m_zDistance * (i/m_columnLength))),Quaternion.identity);
+            //GameObject tempObject= Instantiate(m_gridPrefeb, new Vector3(m_xStartPos + (m_xDistance* (i % m_columnLength)),m_yStartPos + 0.0f ,m_zStartPos - (m_zDistance * (i / m_columnLength))),Quaternion.identity); 
+            
+            
+            m_grid[i] = Instantiate(m_gridPrefeb, new Vector3(m_xStartPos + (m_xDistance* (i % m_columnLength)),m_yStartPos + 0.0f ,m_zStartPos - (m_zDistance * (i / m_columnLength))),Quaternion.identity);
             m_grid[i].transform.parent = m_parentObject.transform;
         }
     }
+    
     
 }

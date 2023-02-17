@@ -369,6 +369,12 @@ PrefabInstance:
       propertyPath: m_GridManager
       value: 
       objectReference: {fileID: 963194230}
+    - target: {fileID: 6009662601260614733, guid: 3693dbd304c04004bb913ad61cfafa4c,
+        type: 3}
+      propertyPath: m_buildingItems
+      value: 
+      objectReference: {fileID: 11400000, guid: 8385f4aebcb096e4ca0e87e2e24b8f21,
+        type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3693dbd304c04004bb913ad61cfafa4c, type: 3}
@@ -1008,7 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_xStartPos: -1.5
   m_yStartPos: 0
-  m_zStartPos: -1.5
+  m_zStartPos: 1.5
   m_columnLength: 3
   m_rowLength: 3
   m_xDistance: 1.5
@@ -1562,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1818183659
 Transform:
   m_ObjectHideFlags: 0

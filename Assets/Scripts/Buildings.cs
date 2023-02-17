@@ -15,7 +15,7 @@ public class Buildings : MonoBehaviour
     [SerializeField] private MSpawnType.BuildingType m_spawnType;
     [SerializeField] private bool m_spawnMinion = false;
     [SerializeField] private MinionDefinions.MMinionType m_minionType;
-    [SerializeField] private MinionLevels[] m_buildingItems = new MinionLevels[2] ;
+    [SerializeField] private BuildingItems m_buildingItems ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_minionObject;
     
@@ -87,9 +87,10 @@ public class Buildings : MonoBehaviour
                 new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
                     m_gridRef[tileNum].transform.position.z), Quaternion.identity);
             m_gridRef[tileNum].GetComponent<TileInfo>().m_tileTaken = true;
+            
+            SetMinionType();
         }
-
-        SetMinionType();
+        
         m_spawnMinion = false;
         m_minionObject = null;
     }
@@ -109,11 +110,11 @@ public class Buildings : MonoBehaviour
             }
             if (m_minionType == MinionDefinions.MMinionType.Skeleton)
             {
-                minionsScript.SetMinionValues(m_minionType, m_buildingItems[0], 0);
+                minionsScript.SetMinionValues(m_minionType,  m_buildingItems.GetMinionLevels(0), 0);
             }
             else
             {
-                minionsScript.SetMinionValues(m_minionType, m_buildingItems[1], 0);
+                minionsScript.SetMinionValues(m_minionType, m_buildingItems.GetMinionLevels(1), 0);
             }
         }
     }
