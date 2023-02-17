@@ -54,26 +54,41 @@ public class Buildings : MonoBehaviour
         if (m_spawnMinion)
         {
             SpawnMinion();
-            m_spawnMinion = false;
         }
     }
 
     public void Tapped()
     {
-
         SpawnMinion();
     }
     private int GenRandomNum()
     {
         return (Random.Range(0, 2));
     }
+
+    private int FindFreeTile()
+    {
+        for (int i = 0; i < m_sizeOfGrid; i++)
+        {
+            if (!m_gridRef[i].GetComponent<TileInfo>().m_tileTaken)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
     private void SpawnMinion()
     {
-        int tileNum = Random.Range(0, m_sizeOfGrid);
-        m_minionObject = Instantiate(m_minionPrefab);
-        m_minionObject.transform.position = new Vector3(m_gridRef[tileNum].transform.position.x,m_minionPrefab.transform.position.y,m_gridRef[tileNum].transform.position.z);
-        m_gridRef[tileNum].GetComponent<TileInfo>().m_tileTaken = true;
-        
+        int tileNum = FindFreeTile();
+        if (tileNum != -1)
+        {
+            m_minionObject = Instantiate(m_minionPrefab,
+                new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
+                    m_gridRef[tileNum].transform.position.z), Quaternion.identity);
+            m_gridRef[tileNum].GetComponent<TileInfo>().m_tileTaken = true;
+        }
+
         SetMinionType();
         m_spawnMinion = false;
         m_minionObject = null;
