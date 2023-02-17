@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 struct MSpawnType
 {
@@ -11,17 +13,40 @@ struct MSpawnType
 public class Buildings : MonoBehaviour
 {
     [SerializeField] private MSpawnType.BuildingType m_spawnType;
-    [SerializeField] private bool m_spawnMinion;
+    [SerializeField] private bool m_spawnMinion = false;
     [SerializeField] private MinionDefinions.MMinionType m_minionType;
     [SerializeField] private MinionLevels[] m_buildingItems = new MinionLevels[2] ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_minionObject;
+    
+    [SerializeField] private GridManager m_GridManager;
+    [SerializeField] private GameObject[] m_gridRef;
+    private int m_sizeOfGrid;
 
     // Start is called before the first frame update
     void Start()
     {
         //auto assign item based on type?
+        
+        StartCoroutine(LateStart(1));
     }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        PopulateGrid();
+    }
+
+    private void PopulateGrid()
+    {
+        m_sizeOfGrid = m_GridManager.m_grid.Length;
+        m_gridRef = new GameObject[m_sizeOfGrid];
+        for (int i = 0; i < m_sizeOfGrid; i++)
+        {
+            m_gridRef[i] = m_GridManager.m_grid[i];
+        }
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -29,12 +54,13 @@ public class Buildings : MonoBehaviour
         if (m_spawnMinion)
         {
             SpawnMinion();
+            m_spawnMinion = false;
         }
     }
 
     public void Tapped()
     {
-        //m_spawnMinion = true;
+
         SpawnMinion();
     }
     private int GenRandomNum()
@@ -43,7 +69,11 @@ public class Buildings : MonoBehaviour
     }
     private void SpawnMinion()
     {
+        int tileNum = Random.Range(0, m_sizeOfGrid);
         m_minionObject = Instantiate(m_minionPrefab);
+        m_minionObject.transform.position = new Vector3(m_gridRef[tileNum].transform.position.x,m_minionPrefab.transform.position.y,m_gridRef[tileNum].transform.position.z);
+        m_gridRef[tileNum].GetComponent<TileInfo>().m_tileTaken = true;
+        
         SetMinionType();
         m_spawnMinion = false;
         m_minionObject = null;

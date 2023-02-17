@@ -1483,6 +1483,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1570,6 +1571,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_draggingTag: Minion
   m_camera: {fileID: 963194227}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64207f78f1f9c4147a72b83c593b1e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_xStartPos: -1.5
+  m_yStartPos: 0
+  m_zStartPos: -1.5
+  m_columnLength: 3
+  m_rowLength: 3
+  m_xDistance: 1.5
+  m_zDistance: 1.5
+  m_gridPrefeb: {fileID: 2080793558587559536, guid: 9dd8c18051443e7459df6e90426c2186,
+    type: 3}
+  m_generateGrid: 0
 --- !u!1 &1056375851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,7 +2065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1323139872
 Transform:
   m_ObjectHideFlags: 0
