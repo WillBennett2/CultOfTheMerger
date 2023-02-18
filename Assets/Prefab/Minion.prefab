@@ -150,6 +150,9 @@ MonoBehaviour:
   m_currentLevel: 0
   m_currentGameObject: {fileID: 0}
   m_previousPosition: {x: 0, y: 0, z: 0}
+  m_homeTile: {fileID: 0}
+  m_GridManager: {fileID: 5283478642304274219, guid: 44dcb4c03e9bb5c4cb0b1bf8b881e35d,
+    type: 3}
 --- !u!65 &6594047281536436637
 BoxCollider:
   m_ObjectHideFlags: 0

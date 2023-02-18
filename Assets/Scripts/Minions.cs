@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Minions : MonoBehaviour
 {
@@ -14,10 +11,9 @@ public class Minions : MonoBehaviour
     [SerializeField] private int m_currentLevel;
     private MinionDefinions m_minion;
     [SerializeField]private GameObject m_currentGameObject;
-
-
-    [SerializeField] public Vector3 m_previousPosition;
-    [SerializeField] public GameObject m_homeTile;
+    
+    [SerializeField] private GameObject m_homeTile;
+    [SerializeField] private GridManager m_GridManager;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
     {
@@ -28,7 +24,6 @@ public class Minions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_minionManager = GameObject.FindGameObjectWithTag("MinionManager").GetComponent<MinionManagers>();
         DefineMinion();
     }
     
@@ -39,21 +34,37 @@ public class Minions : MonoBehaviour
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangeMinionGameObject();
     }
-
+    
     public void BeingHeld()
     {
         Debug.Log("I'm being held");
-        //disable collider
+        //m_GridManager.UpdateTile(m_homeTile, false); //doesnt work in this class for some reason
+        m_homeTile.GetComponent<TileInfo>().m_tileTaken = false;
+        gameObject.GetComponent<Collider>().enabled = false;
     }
 
     public void Dropped()
     {
-        Debug.Log("I was dropped");
-        //is tile below open
-        
-        //snapping back to grid
-        
+        gameObject.GetComponent<Collider>().enabled = true;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position,-Vector3.up, out hit))
+        {
+            if (hit.transform.GetComponent<TileInfo>()!= null && !hit.transform.GetComponent<TileInfo>().m_tileTaken)        //is tile below open
+            {
+                Debug.Log("I was dropped");
+                SetHomeTile( hit.transform.gameObject);
+                //m_GridManager.UpdateTile(m_homeTile,true); //doesnt work in this class for some reason
+                m_homeTile.GetComponent<TileInfo>().m_tileTaken = true;
+            }
+        }
+
+        transform.position = new Vector3(m_homeTile.transform.position.x,transform.position.y,m_homeTile.transform.position.z); //snapping back to grid
         //Move current grid
+    }
+
+    public void SetHomeTile(GameObject newHomeTile)
+    {
+        m_homeTile = newHomeTile;
     }
     private void OnTriggerEnter(Collider other)
     {
