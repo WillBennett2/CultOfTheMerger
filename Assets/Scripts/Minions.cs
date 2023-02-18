@@ -14,6 +14,7 @@ public class Minions : MonoBehaviour
     
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private GridManager m_GridManager;
+    [SerializeField] public bool m_beingMoved = false;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
     {
@@ -39,19 +40,19 @@ public class Minions : MonoBehaviour
     {
         Debug.Log("I'm being held");
         //m_GridManager.UpdateTile(m_homeTile, false); //doesnt work in this class for some reason
-        m_homeTile.GetComponent<TileInfo>().m_tileTaken = false;
-        gameObject.GetComponent<Collider>().enabled = false;
+        m_beingMoved = true;
     }
 
     public void Dropped()
     {
-        gameObject.GetComponent<Collider>().enabled = true;
+        m_beingMoved = false;
         RaycastHit hit;
         if (Physics.Raycast(transform.position,-Vector3.up, out hit))
         {
             if (hit.transform.GetComponent<TileInfo>()!= null && !hit.transform.GetComponent<TileInfo>().m_tileTaken)        //is tile below open
             {
                 Debug.Log("I was dropped");
+                m_homeTile.GetComponent<TileInfo>().m_tileTaken = false;
                 SetHomeTile( hit.transform.gameObject);
                 //m_GridManager.UpdateTile(m_homeTile,true); //doesnt work in this class for some reason
                 m_homeTile.GetComponent<TileInfo>().m_tileTaken = true;
@@ -66,35 +67,42 @@ public class Minions : MonoBehaviour
     {
         m_homeTile = newHomeTile;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         Debug.Log("Collision!");
         var script = other.gameObject.GetComponent<Minions>();
         if (script != null)
         {
-            Merge(m_minion, script.gameObject);
+            if (!m_beingMoved)
+            {
+                Merge(m_minion, script.gameObject);
+            }
         }
     }
 
     private void Merge(MinionDefinions inHand,GameObject onTileGameObject)
     {
-        MinionDefinions onTile = onTileGameObject.GetComponent<Minions>().m_minion;   
-        if (inHand.m_minionType == onTile.m_minionType)
+        MinionDefinions onTile = onTileGameObject.GetComponent<Minions>().m_minion;
+        bool beingMoved = onTileGameObject.GetComponent<Minions>().m_beingMoved;
+        if (!beingMoved)
         {
-            if (inHand.m_currentLevel == onTile.m_currentLevel)
+            if (inHand.m_minionType == onTile.m_minionType)
             {
-                Debug.Log("yay");
-
-                m_minion.m_currentLevel += 1;
-                m_currentLevel = m_minion.m_currentLevel;
-                if (m_currentLevel >= m_minionProgression.m_minionProgression.Count())
+                if (inHand.m_currentLevel == onTile.m_currentLevel)
                 {
-                    Debug.Log("At / Above level cap");
-                }
-                
+                    Debug.Log("yay");
 
-                ChangeMinionGameObject();
-                Destroy(onTileGameObject);                //Delete land minion
+                    m_minion.m_currentLevel += 1;
+                    m_currentLevel = m_minion.m_currentLevel;
+                    if (m_currentLevel >= m_minionProgression.m_minionProgression.Count())
+                    {
+                        Debug.Log("At / Above level cap");
+                    }
+                    
+                    ChangeMinionGameObject();
+                    onTileGameObject.GetComponent<Minions>().m_homeTile.GetComponent<TileInfo>().m_tileTaken = false;
+                    Destroy(onTileGameObject); //Delete land minion
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ public class Draggable : MonoBehaviour
 
     private bool isDragging = false;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isDragging)
         {
