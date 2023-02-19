@@ -149,10 +149,11 @@ MonoBehaviour:
   m_minionProgression: {fileID: 0}
   m_currentLevel: 0
   m_currentGameObject: {fileID: 0}
-  m_previousPosition: {x: 0, y: 0, z: 0}
   m_homeTile: {fileID: 0}
-  m_GridManager: {fileID: 5283478642304274219, guid: 44dcb4c03e9bb5c4cb0b1bf8b881e35d,
-    type: 3}
+  m_homeTileNum: 0
+  m_GridManager: {fileID: 0}
+  m_beingMoved: 0
+  m_onTileMinion: {fileID: 0}
 --- !u!65 &6594047281536436637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,8 +165,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9, z: 1}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &6594047281536436636
 Rigidbody:
   m_ObjectHideFlags: 0

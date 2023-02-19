@@ -33,27 +33,15 @@ public class GridManager : MonoBehaviour
         {
             m_grid[i] = Instantiate(m_gridPrefeb, new Vector3(m_xStartPos + (m_xDistance* (i % m_columnLength)),m_yStartPos + 0.0f ,m_zStartPos - (m_zDistance * (i / m_columnLength))),Quaternion.identity);
             m_grid[i].transform.parent = m_parentObject.transform;
+            m_grid[i].GetComponent<TileInfo>().m_tileNum = i;
         }
     }
-
-    int FindTile(GameObject tile)
+    
+    public void UpdateTile(int tileNum, bool state)
     {
-        for (int i = 0; i < m_columnLength * m_rowLength; i++)
+        if (tileNum < m_columnLength * m_rowLength)
         {
-            if (m_grid[i] == tile)
-            {
-                Debug.Log("Found tile");
-                return i;
-            }
-        }
-        return -1;
-    }
-    public void UpdateTile(GameObject tile, bool state)
-    {
-        int tileToUpdate = FindTile(tile);
-        if (tileToUpdate != -1)
-        {
-            m_grid[tileToUpdate].GetComponent<TileInfo>().m_tileTaken = state;
+            m_grid[tileNum].GetComponent<TileInfo>().m_tileTaken = state;
         }
     }
     
