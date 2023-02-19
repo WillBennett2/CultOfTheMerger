@@ -16,7 +16,7 @@ public class Minions : MonoBehaviour
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private int m_homeTileNum;
     [SerializeField] private GridManager m_GridManager;
-    [SerializeField] public bool m_beingMoved = false;
+    [SerializeField] private bool m_beingMoved = false;
     [SerializeField] private Minions m_onTileMinion;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
@@ -117,17 +117,17 @@ public class Minions : MonoBehaviour
                 if (inHand.m_currentLevel == onTile.m_currentLevel)
                 {
                     Debug.Log("yay");
-                    if (m_currentLevel < m_minionProgression.m_minionProgression.Count())
+                    if (m_currentLevel < m_minionProgression.m_minionProgression.Count()-1)
                     {
                         m_minion.m_currentLevel += 1;
                         m_currentLevel = m_minion.m_currentLevel;
+                        
+                        ChangeMinionVisual();
+                        m_GridManager.UpdateTile(m_homeTileNum,false);
+                        SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
+                    
+                        Destroy(onTileMinion.gameObject); //Delete land minion
                     }
-                    
-                    ChangeMinionVisual();
-                    m_GridManager.UpdateTile(m_homeTileNum,false);
-                    SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
-                    
-                    Destroy(onTileMinion.gameObject); //Delete land minion
                 }
             }
         }
