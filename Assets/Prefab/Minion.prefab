@@ -196,3 +196,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCam: {fileID: 5283478642304274222, guid: 44dcb4c03e9bb5c4cb0b1bf8b881e35d, type: 3}
+  isDragable: 1

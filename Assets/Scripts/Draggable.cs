@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Draggable : MonoBehaviour
@@ -10,10 +11,11 @@ public class Draggable : MonoBehaviour
     private float startZPos;
 
     private bool isDragging = false;
+    [SerializeField]private bool isDragable = false;
 
     private void FixedUpdate()
     {
-        if (isDragging)
+        if (isDragging&&isDragable)
         {
             DragObject();
         }
@@ -34,7 +36,15 @@ public class Draggable : MonoBehaviour
         startZPos = mousePos.z - transform.localPosition.z;
 
         isDragging = true;
-        gameObject.GetComponent<Minions>().BeingHeld();
+        if (gameObject.GetComponent<Minions>()!=null)
+        {
+            gameObject.GetComponent<Minions>().BeingHeld();
+        }
+        else if(gameObject.GetComponent<Buildings>()!=null)
+        {
+            gameObject.GetComponent<Buildings>().Tapped();
+        }
+
     }
 
     private void OnMouseUp()
