@@ -63,12 +63,17 @@ public class Minions : MonoBehaviour
                     SetHomeTile(newHomeTile,newHomeTileNum );
                     m_GridManager.UpdateTile(m_homeTileNum,true);
                 }
+                else if(m_onTileMinion!=null) //try to merge
+                {
+                    Debug.Log("Drop merge");
+                    Merge(m_minion,m_onTileMinion);
+                }
             }
-            else if(m_onTileMinion!=null) //try to merge
+            /*else if(m_onTileMinion!=null) //try to merge
             {
                 Debug.Log("Drop merge");
                 Merge(m_minion,m_onTileMinion);
-            }
+            }*/
         }
         
         MoveToHomeTile();
