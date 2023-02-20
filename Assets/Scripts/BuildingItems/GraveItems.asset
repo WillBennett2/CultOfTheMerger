@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00bb46ea5e2508e4aaac367d85547daa, type: 3}
-  m_Name: SkeletonItems
+  m_Name: GraveItems
   m_EditorClassIdentifier: 
   m_buildingItems:
-  - {fileID: 3232920848754399374, guid: dc894a8778f02694ca702493ac2cedd7, type: 3}
-  - {fileID: 3137709903653336175, guid: f7d2a420c35b3e1498c0c79d526804ba, type: 3}
+  - {fileID: 11400000, guid: af8efebf448712247bf95e6327cb6d7b, type: 2}
+  - {fileID: 11400000, guid: 8df19e851b220ef4d83b2f6f6221b24d, type: 2}

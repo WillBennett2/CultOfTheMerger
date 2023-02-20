@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2157571922437851218}
   - component: {fileID: 6009662601260614733}
+  - component: {fileID: 207165447993969902}
   m_Layer: 0
   m_Name: Grave
   m_TagString: Untagged
@@ -49,11 +50,25 @@ MonoBehaviour:
   m_spawnType: 0
   m_spawnMinion: 0
   m_minionType: 1
-  m_buildingItems:
-  - {fileID: 11400000, guid: af8efebf448712247bf95e6327cb6d7b, type: 2}
-  - {fileID: 11400000, guid: 8df19e851b220ef4d83b2f6f6221b24d, type: 2}
+  m_buildingItems: {fileID: 0}
   m_minionPrefab: {fileID: 6594047281536436633, guid: 394ecf5e9186fa94ea30452f96916b02,
     type: 3}
+  m_GridManager: {fileID: 0}
+  m_gridRef: []
+--- !u!114 &207165447993969902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072640369382412887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273dfe9bfc5025245a4705292e938c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isDraggable: 0
+  m_isInteractable: 1
 --- !u!1 &1113664866602737186
 GameObject:
   m_ObjectHideFlags: 0

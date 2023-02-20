@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = m_camera.ScreenPointToRay(touchPos);
-            if (Physics.Raycast(ray, out hit) && hit.collider.tag == m_draggingTag)
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag(m_draggingTag))
             {
                 m_toDrag = hit.transform;
                 m_previousPos = m_toDrag.position;
@@ -48,7 +48,7 @@ public class PlayerControls : MonoBehaviour
 
             }
 
-            if (Physics.Raycast(ray, out hit) && hit.collider.tag == "Building")
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Building"))
             {
                 hit.transform.GetComponent<Buildings>().Tapped();
             }

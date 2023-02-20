@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Minions : MonoBehaviour
 {
-
-
+    [Header("Self Data")]
     [SerializeField] private MinionDefinions.MMinionType m_minionType;
     [SerializeField] private MinionLevels m_minionProgression;
     [SerializeField] private int m_currentLevel;
     private MinionDefinions m_minion;
     [SerializeField]private GameObject m_currentGameObject;
-
-
-    [SerializeField] public Vector3 m_previousPosition;
+    
+    [Header("Movement Data")]
+    [SerializeField] private GameObject m_homeTile;
+    [SerializeField] private int m_homeTileNum;
+    [SerializeField] private GridManager m_GridManager;
+    [SerializeField] private bool m_beingMoved = false;
+    [SerializeField] private Minions m_onTileMinion;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
     {
@@ -27,7 +28,7 @@ public class Minions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_minionManager = GameObject.FindGameObjectWithTag("MinionManager").GetComponent<MinionManagers>();
+        m_GridManager = Camera.main.GetComponent<GridManager>();
         DefineMinion();
     }
     
@@ -36,42 +37,94 @@ public class Minions : MonoBehaviour
         if(m_minionProgression)
             m_minion = new MinionDefinions(m_minionType,m_minionProgression,m_currentLevel);
         m_currentGameObject = transform.GetChild(0).gameObject;
-        ChangeMinionGameObject();
+        ChangeMinionVisual();
     }
-    private void OnTriggerEnter(Collider other)
+    
+    public void BeingHeld()
+    {
+        Debug.Log("I'm being held");
+        //m_GridManager.UpdateTile(m_homeTile, false); //doesnt work in this class for some reason
+        m_beingMoved = true;
+    }
+
+    public void Dropped()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position,-Vector3.up, out hit))
+        {
+            if (hit.transform.GetComponent<TileInfo>()!= null)        //is tile below open
+            {
+                if (!hit.transform.GetComponent<TileInfo>().m_tileTaken) // take tile
+                {
+                    TileInfo hitTileInfo = hit.transform.GetComponent<TileInfo>();
+                    m_GridManager.UpdateTile(m_homeTileNum,false);
+                    GameObject newHomeTile = hit.transform.gameObject;
+                    int newHomeTileNum = hitTileInfo.m_tileNum;
+                    SetHomeTile(newHomeTile,newHomeTileNum );
+                    m_GridManager.UpdateTile(m_homeTileNum,true);
+                }
+            }
+        }
+        if (m_onTileMinion!=null) //try to merge
+        {
+            Debug.Log("Drop merge");
+            Merge(m_minion,m_onTileMinion);
+        }
+        
+        MoveToHomeTile();
+        //Move current grid
+        m_beingMoved = false;
+    }
+
+    public void SetHomeTile(GameObject newHomeTile,int newHomeTileNum)
+    {
+        m_homeTile = newHomeTile;
+        m_homeTileNum = newHomeTileNum;
+        MoveToHomeTile();
+    }
+
+    private void MoveToHomeTile()
+    {
+        transform.position = new Vector3(m_homeTile.transform.position.x,transform.position.y,m_homeTile.transform.position.z); //snapping back to grid
+    }
+    private void OnTriggerStay(Collider other)
     {
         Debug.Log("Collision!");
         var script = other.gameObject.GetComponent<Minions>();
-        if (script!=null)
+        if (script != null)
         {
-            Merge(m_minion, script.gameObject);
+            m_onTileMinion = script;
         }
     }
 
-    private void Merge(MinionDefinions inHand,GameObject onTileGameObject)
+    private void OnTriggerExit(Collider other)
     {
-        MinionDefinions onTile = onTileGameObject.GetComponent<Minions>().m_minion;   
-        if (inHand.m_minionType == onTile.m_minionType)
-        {
-            if (inHand.m_currentLevel == onTile.m_currentLevel)
-            {
-                Debug.Log("yay");
+        m_onTileMinion = null;
+    }
 
+    private void Merge(MinionDefinions inHand,Minions onTileMinion)
+    {
+        MinionDefinions onTile = onTileMinion.m_minion;
+        bool beingMoved = onTileMinion.m_beingMoved;
+        if (!beingMoved && inHand.m_minionType == onTile.m_minionType && inHand.m_currentLevel == onTile.m_currentLevel )
+        {
+            Debug.Log("yay");
+            if (m_currentLevel < m_minionProgression.m_minionProgression.Count()-1)
+            {
                 m_minion.m_currentLevel += 1;
                 m_currentLevel = m_minion.m_currentLevel;
-                if (m_currentLevel >= m_minionProgression.m_minionProgression.Count())
-                {
-                    Debug.Log("At / Above level cap");
-                }
                 
-
-                ChangeMinionGameObject();
-                Destroy(onTileGameObject);                //Delete land minion
+                ChangeMinionVisual();
+                m_GridManager.UpdateTile(m_homeTileNum,false);
+                SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
+            
+                Destroy(onTileMinion.gameObject); //Delete land minion
             }
+
         }
     }
 
-    private void ChangeMinionGameObject()
+    private void ChangeMinionVisual()
     {
         Destroy(m_currentGameObject);
         m_currentGameObject = Instantiate(m_minion.m_minionLevels.m_minionProgression[m_minion.m_currentLevel],transform );
