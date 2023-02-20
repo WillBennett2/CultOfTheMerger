@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileTaken: 0
+  m_tileNum: 0

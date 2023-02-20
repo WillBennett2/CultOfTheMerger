@@ -94,10 +94,6 @@ public class Minions : MonoBehaviour
         if (script != null)
         {
             m_onTileMinion = script;
-            /*if (!m_beingMoved)
-            {
-                Merge(m_minion, script.gameObject);
-            }*/
         }
     }
 
@@ -110,26 +106,21 @@ public class Minions : MonoBehaviour
     {
         MinionDefinions onTile = onTileMinion.m_minion;
         bool beingMoved = onTileMinion.m_beingMoved;
-        if (!beingMoved)
+        if (!beingMoved && inHand.m_minionType == onTile.m_minionType && inHand.m_currentLevel == onTile.m_currentLevel )
         {
-            if (inHand.m_minionType == onTile.m_minionType)
+            Debug.Log("yay");
+            if (m_currentLevel < m_minionProgression.m_minionProgression.Count()-1)
             {
-                if (inHand.m_currentLevel == onTile.m_currentLevel)
-                {
-                    Debug.Log("yay");
-                    if (m_currentLevel < m_minionProgression.m_minionProgression.Count()-1)
-                    {
-                        m_minion.m_currentLevel += 1;
-                        m_currentLevel = m_minion.m_currentLevel;
-                        
-                        ChangeMinionVisual();
-                        m_GridManager.UpdateTile(m_homeTileNum,false);
-                        SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
-                    
-                        Destroy(onTileMinion.gameObject); //Delete land minion
-                    }
-                }
+                m_minion.m_currentLevel += 1;
+                m_currentLevel = m_minion.m_currentLevel;
+                
+                ChangeMinionVisual();
+                m_GridManager.UpdateTile(m_homeTileNum,false);
+                SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
+            
+                Destroy(onTileMinion.gameObject); //Delete land minion
             }
+
         }
     }
 

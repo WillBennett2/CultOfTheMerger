@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2157571922437851218}
   - component: {fileID: 6009662601260614733}
-  - component: {fileID: 2276543387393949045}
+  - component: {fileID: 207165447993969902}
   m_Layer: 0
   m_Name: Grave
   m_TagString: Untagged
@@ -55,7 +55,7 @@ MonoBehaviour:
     type: 3}
   m_GridManager: {fileID: 0}
   m_gridRef: []
---- !u!114 &2276543387393949045
+--- !u!114 &207165447993969902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,11 +64,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1072640369382412887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ed875e93655f54781d3bd3d672566e, type: 3}
+  m_Script: {fileID: 11500000, guid: 273dfe9bfc5025245a4705292e938c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCam: {fileID: 5283478642304274222, guid: 44dcb4c03e9bb5c4cb0b1bf8b881e35d, type: 3}
-  isDragable: 0
+  m_isDraggable: 0
+  m_isInteractable: 1
 --- !u!1 &1113664866602737186
 GameObject:
   m_ObjectHideFlags: 0

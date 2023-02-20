@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6594047281536436638}
   - component: {fileID: 6594047281536436637}
   - component: {fileID: 6594047281536436636}
-  - component: {fileID: 367237092206122084}
+  - component: {fileID: -3114023650313296142}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Minion
@@ -183,7 +183,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &367237092206122084
+--- !u!114 &-3114023650313296142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,8 +192,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6594047281536436633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ed875e93655f54781d3bd3d672566e, type: 3}
+  m_Script: {fileID: 11500000, guid: 273dfe9bfc5025245a4705292e938c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCam: {fileID: 5283478642304274222, guid: 44dcb4c03e9bb5c4cb0b1bf8b881e35d, type: 3}
-  isDragable: 1
+  m_isDraggable: 1
+  m_isInteractable: 1
