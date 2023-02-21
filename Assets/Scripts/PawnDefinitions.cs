@@ -6,13 +6,11 @@ using UnityEngine;
 public struct PawnDefinitions
 {
     
-    public enum MPawnObjects { Minions,Building,Item}
-    public enum MMinionType {Zombie,Skeleton}
-    public enum MManaType {Necro,Life,Night}
-
-    public enum MBuildingType { Grave,Life,Night }
-
-    public enum MItemType { }
+    public enum MPawnObjects {Empty,Minions,Building,Item}
+    public enum MMinionType {Empty,Zombie,Skeleton}
+    public enum MManaType {Empty,Necro,Life,Night}
+    public enum MBuildingType {Empty,Grave,Life,Night }
+    public enum MItemType {Empty,Coin,Potion,Food }
 
     public MPawnObjects m_pawnObjects;
     public MMinionType m_minionType;

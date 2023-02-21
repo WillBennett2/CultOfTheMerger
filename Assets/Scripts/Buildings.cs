@@ -13,8 +13,13 @@ struct MSpawnType
 public class Buildings : MonoBehaviour
 {
     [SerializeField] private MSpawnType.BuildingType m_spawnType;
+    
     [SerializeField] private bool m_spawnMinion = false;
-    [SerializeField] private MinionDefinions.MMinionType m_minionType;
+    [SerializeField] private PawnDefinitions.MPawnObjects m_objectType;
+    [SerializeField] private PawnDefinitions.MMinionType m_minionType;
+    [SerializeField] private PawnDefinitions.MManaType m_manaType;
+    [SerializeField] private PawnDefinitions.MBuildingType m_buildingType;
+    [SerializeField] private PawnDefinitions.MItemType m_itemType;
     [SerializeField] private BuildingItems m_buildingItems ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_minionObject;
@@ -98,24 +103,28 @@ public class Buildings : MonoBehaviour
 
     private void SetMinionType()
     {
-        Minions minionsScript = m_minionObject.GetComponent<Minions>();
-        if (minionsScript)
+        PawnMerge pawnMergeScript = m_minionObject.GetComponent<PawnMerge>();
+        if (pawnMergeScript)
         {
             if (GenRandomNum() == 0)
             {
-                m_minionType = MinionDefinions.MMinionType.Skeleton;
+                m_minionType = PawnDefinitions.MMinionType.Skeleton;
+                m_manaType = PawnDefinitions.MManaType.Empty;
             }
             else
             {
-                m_minionType = MinionDefinions.MMinionType.Zombie;
+                m_minionType = PawnDefinitions.MMinionType.Zombie;
+                m_manaType = PawnDefinitions.MManaType.Empty;
             }
-            if (m_minionType == MinionDefinions.MMinionType.Skeleton)
+            
+            if (m_minionType == PawnDefinitions.MMinionType.Skeleton)
             {
-                minionsScript.SetMinionValues(m_minionType,  m_buildingItems.GetMinionLevels(0), 0);
+                //object type,minion type, mana type, building type, item type, pawn level, current level
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(0), 0);
             }
             else
             {
-                minionsScript.SetMinionValues(m_minionType, m_buildingItems.GetMinionLevels(1), 0);
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(1), 0);
             }
         }
     }

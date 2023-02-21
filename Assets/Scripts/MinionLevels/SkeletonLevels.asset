@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce052a25441e604aac2791ad7de0a82, type: 3}
+  m_Script: {fileID: 11500000, guid: f6bc9f45ffb97784689aae91a13d0b1f, type: 3}
   m_Name: SkeletonLevels
   m_EditorClassIdentifier: 
-  m_minionProgression:
+  m_pawnProgression:
   - {fileID: 3232920848754399374, guid: dc894a8778f02694ca702493ac2cedd7, type: 3}
-  - {fileID: 3137709903653336175, guid: f7d2a420c35b3e1498c0c79d526804ba, type: 3}
   - {fileID: 2075962012466506024, guid: a2a367bd295f8824e96744278c50fc68, type: 3}
+  - {fileID: 3137709903653336175, guid: f7d2a420c35b3e1498c0c79d526804ba, type: 3}

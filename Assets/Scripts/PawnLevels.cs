@@ -6,10 +6,4 @@ using UnityEngine;
 public class PawnLevels : ScriptableObject
 {
     public GameObject[] m_pawnProgression = new GameObject[4];
-
-    public GameObject[] GetPawnProgression()
-    {
-        return m_pawnProgression;
-            
-    }
 }

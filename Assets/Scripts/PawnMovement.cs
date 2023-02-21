@@ -39,7 +39,6 @@ public class PawnMovement : MonoBehaviour
 
     public void BeingHeld()
     {
-        Debug.Log("I'm being held");
         m_beingMoved = true;
     }
     public void Dropped()
@@ -60,7 +59,7 @@ public class PawnMovement : MonoBehaviour
                 }
             }
         }
-        gameObject.GetComponent<Minions>().AttemptDropMerge();
+        gameObject.GetComponent<PawnMerge>().AttemptDropMerge();
         MoveToHomeTile();
         //Move current grid
         m_beingMoved = false;
