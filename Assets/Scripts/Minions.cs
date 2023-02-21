@@ -11,12 +11,9 @@ public class Minions : MonoBehaviour
     [SerializeField] private int m_currentLevel;
     private MinionDefinions m_minion;
     [SerializeField]private GameObject m_currentGameObject;
-    
-    [Header("Movement Data")]
-    [SerializeField] private GameObject m_homeTile;
-    [SerializeField] private int m_homeTileNum;
-    [SerializeField] private GridManager m_GridManager;
-    [SerializeField] private bool m_beingMoved = false;
+
+    [Header("Movement Data")] 
+    private PawnMovement m_pawnMovement;
     [SerializeField] private Minions m_onTileMinion;
 
     public void SetMinionValues(MinionDefinions.MMinionType minionType,MinionLevels minionProgression, int currentLevel)
@@ -25,10 +22,9 @@ public class Minions : MonoBehaviour
         m_minionProgression = minionProgression;
         m_currentLevel = currentLevel;
     }
-    // Start is called before the first frame update
     void Start()
     {
-        m_GridManager = Camera.main.GetComponent<GridManager>();
+        m_pawnMovement=gameObject.GetComponent<PawnMovement>();
         DefineMinion();
     }
     
@@ -39,54 +35,16 @@ public class Minions : MonoBehaviour
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangeMinionVisual();
     }
-    
-    public void BeingHeld()
-    {
-        Debug.Log("I'm being held");
-        //m_GridManager.UpdateTile(m_homeTile, false); //doesnt work in this class for some reason
-        m_beingMoved = true;
-    }
 
-    public void Dropped()
+    public void AttemptDropMerge()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position,-Vector3.up, out hit))
-        {
-            if (hit.transform.GetComponent<TileInfo>()!= null)        //is tile below open
-            {
-                if (!hit.transform.GetComponent<TileInfo>().m_tileTaken) // take tile
-                {
-                    TileInfo hitTileInfo = hit.transform.GetComponent<TileInfo>();
-                    m_GridManager.UpdateTile(m_homeTileNum,false);
-                    GameObject newHomeTile = hit.transform.gameObject;
-                    int newHomeTileNum = hitTileInfo.m_tileNum;
-                    SetHomeTile(newHomeTile,newHomeTileNum );
-                    m_GridManager.UpdateTile(m_homeTileNum,true);
-                }
-            }
-        }
         if (m_onTileMinion!=null) //try to merge
         {
             Debug.Log("Drop merge");
             Merge(m_minion,m_onTileMinion);
         }
-        
-        MoveToHomeTile();
-        //Move current grid
-        m_beingMoved = false;
     }
 
-    public void SetHomeTile(GameObject newHomeTile,int newHomeTileNum)
-    {
-        m_homeTile = newHomeTile;
-        m_homeTileNum = newHomeTileNum;
-        MoveToHomeTile();
-    }
-
-    private void MoveToHomeTile()
-    {
-        transform.position = new Vector3(m_homeTile.transform.position.x,transform.position.y,m_homeTile.transform.position.z); //snapping back to grid
-    }
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("Collision!");
@@ -105,7 +63,7 @@ public class Minions : MonoBehaviour
     private void Merge(MinionDefinions inHand,Minions onTileMinion)
     {
         MinionDefinions onTile = onTileMinion.m_minion;
-        bool beingMoved = onTileMinion.m_beingMoved;
+        bool beingMoved = onTileMinion.GetComponent<PawnMovement>().GetBeingMoved();
         if (!beingMoved && inHand.m_minionType == onTile.m_minionType && inHand.m_currentLevel == onTile.m_currentLevel )
         {
             Debug.Log("yay");
@@ -115,8 +73,8 @@ public class Minions : MonoBehaviour
                 m_currentLevel = m_minion.m_currentLevel;
                 
                 ChangeMinionVisual();
-                m_GridManager.UpdateTile(m_homeTileNum,false);
-                SetHomeTile(onTileMinion.m_homeTile,onTileMinion.m_homeTileNum);
+                m_pawnMovement.SetHomeTile();
+                m_pawnMovement.SetHomeTile(onTileMinion.GetComponent<PawnMovement>().GetHomeTile(),onTileMinion.GetComponent<PawnMovement>().GetHomeTileNum());
             
                 Destroy(onTileMinion.gameObject); //Delete land minion
             }

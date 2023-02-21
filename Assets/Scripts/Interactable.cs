@@ -18,7 +18,7 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -47,9 +47,9 @@ public class Interactable : MonoBehaviour
         m_isDragging = true;
         if(m_isDraggable)
         {
-            if (gameObject.GetComponent<Minions>() != null)
+            if (gameObject.GetComponent<PawnMovement>() != null)
             {
-                gameObject.GetComponent<Minions>().BeingHeld();
+                gameObject.GetComponent<PawnMovement>().BeingHeld();
             }
         }
 
@@ -68,7 +68,7 @@ public class Interactable : MonoBehaviour
         {
             m_isDragging = false;
             
-            gameObject.GetComponent<Minions>().Dropped();
+            gameObject.GetComponent<PawnMovement>().Dropped();
         }
     }
     private void DragObject()

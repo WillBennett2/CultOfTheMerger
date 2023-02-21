@@ -88,8 +88,8 @@ public class Buildings : MonoBehaviour
                     m_gridRef[tileNum].transform.position.z), Quaternion.identity);
 
             m_GridManager.UpdateTile(tileNum,true);
-            m_minionObject.GetComponent<Minions>().SetHomeTile(m_gridRef[tileNum],tileNum);
             SetMinionType();
+            m_minionObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
         }
         
         m_spawnMinion = false;
