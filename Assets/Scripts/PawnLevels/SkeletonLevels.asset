@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pawnProgression:
   - {fileID: 3232920848754399374, guid: dc894a8778f02694ca702493ac2cedd7, type: 3}
-  - {fileID: 2075962012466506024, guid: a2a367bd295f8824e96744278c50fc68, type: 3}
   - {fileID: 3137709903653336175, guid: f7d2a420c35b3e1498c0c79d526804ba, type: 3}
+  - {fileID: 2075962012466506024, guid: a2a367bd295f8824e96744278c50fc68, type: 3}
