@@ -52,21 +52,35 @@ public class PawnMerge : MonoBehaviour
     }
     private void Merge(PawnDefinitions inHand,PawnMerge onTilePawn)
     {
+        bool sameType = false;
         m_onTilePawn = onTilePawn;
-        bool beingMoved = m_onTilePawn.GetComponent<PawnMovement>().GetBeingMoved();
-        if (!beingMoved && inHand.m_minionType == onTilePawn.m_minionType && inHand.m_currentLevel == onTilePawn.m_currentLevel )
+        if (inHand.m_minionType == onTilePawn.m_minionType)
         {
-            if (m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
-            {
-                m_pawn.m_currentLevel += 1;
-                m_currentLevel = m_pawn.m_currentLevel;
-                
-                ChangeMinionVisual();
-                gameObject.GetComponent<PawnMovement>().SetHomeTile();
-                gameObject.GetComponent<PawnMovement>().SetHomeTile(m_onTilePawn.GetComponent<PawnMovement>().GetHomeTile(),m_onTilePawn.GetComponent<PawnMovement>().GetHomeTileNum());
+            sameType = true;
+        }
+
+        if (inHand.m_buildingType == onTilePawn.m_buildingType)
+        {
+            sameType = true;
+        }
+
+        if (inHand.m_itemType == onTilePawn.m_itemType)
+        {
+            sameType = true;
+        }
+        bool beingMoved = m_onTilePawn.GetComponent<PawnMovement>().GetBeingMoved();
+        if (sameType && !beingMoved && inHand.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
+        {
+            Debug.Log("AAA");
+            m_pawn.m_currentLevel += 1;
+            m_currentLevel = m_pawn.m_currentLevel;
             
-                Destroy(m_onTilePawn.gameObject); //Delete land minion
-            }
+            ChangeMinionVisual();
+            gameObject.GetComponent<PawnMovement>().SetHomeTile();
+            gameObject.GetComponent<PawnMovement>().SetHomeTile(m_onTilePawn.GetComponent<PawnMovement>().GetHomeTile(),m_onTilePawn.GetComponent<PawnMovement>().GetHomeTileNum());
+        
+            Destroy(m_onTilePawn.gameObject); //Delete land minion
+            
 
         }
     }

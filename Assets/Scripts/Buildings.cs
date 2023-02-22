@@ -30,7 +30,7 @@ public class Buildings : MonoBehaviour
     void Start()
     {
         //auto assign item based on type?
-        
+        m_GridManager = Camera.main.GetComponent<GridManager>();
         StartCoroutine(LateStart(1));
     }
 
@@ -94,7 +94,7 @@ public class Buildings : MonoBehaviour
             m_GridManager.UpdateTile(tileNum,true);
             if (m_objectType == PawnDefinitions.MPawnObjects.Building)
             {
-            
+                SetBuildingType();
             }
 
             if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
@@ -112,7 +112,33 @@ public class Buildings : MonoBehaviour
         m_spawnMinion = false;
         m_pawnObject = null;
     }
+    private void SetBuildingType()
+    {
+        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+        if (pawnMergeScript)
+        {
+            if (GenRandomNum() == 0)
+            {
+                m_buildingType = PawnDefinitions.MBuildingType.Grave;
+            }
+            else
+            {
+                m_buildingType = PawnDefinitions.MBuildingType.Grave;
+            }
 
+            if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
+            {
+                //object type,minion type, mana type, building type, item type, pawn level, current level
+                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                    m_buildingItems.GetPawnLevels(0), 0);
+            }
+            else
+            {
+                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                    m_buildingItems.GetPawnLevels(1), 0);
+            }
+        }
+    }
     private void SetItemType()
     {
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();

@@ -12,6 +12,7 @@ public struct PawnDefinitions
     public enum MBuildingType {Empty,Grave,Life,Night,General }
     public enum MItemType {Empty,Coin,Potion,Food }
 
+
     public MPawnObjects m_pawnObjects;
     public MMinionType m_minionType;
     public MManaType m_manaType;
