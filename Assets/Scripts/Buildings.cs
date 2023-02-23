@@ -49,20 +49,11 @@ public class Buildings : MonoBehaviour
             m_gridRef[i] = m_GridManager.m_grid[i];
         }
     }
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (m_spawnMinion)
-        {
-            SpawnPawn();
-        }
-    }
 
     public void Tapped()
     {
-        SpawnPawn();
+        if(gameObject.GetComponent<Interactable>().TappedObject == gameObject)
+            SpawnPawn();
 
     }
     private int GenRandomNum()
