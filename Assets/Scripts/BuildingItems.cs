@@ -4,11 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuildingItems",menuName = "ScriptableObjects/BuildingItems")]
 public class BuildingItems : ScriptableObject
 {
-    [SerializeField]private MinionLevels[] m_buildingItems = new MinionLevels[2];
+    [SerializeField]private PawnLevels[] m_buildingItems = new PawnLevels[2];
 
-    public MinionLevels GetMinionLevels(int index)
+    public PawnLevels GetPawnLevels(int index)
     {
-
         return m_buildingItems[index];
     }
 }

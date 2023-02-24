@@ -13,12 +13,13 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private bool m_isDraggable = false;
     [SerializeField] private bool m_isInteractable = false;
-
+    [SerializeField] private GameManager m_gameManager;
     private bool m_isMinion;
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_gameManager = FindObjectOfType<GameManager>();
+        m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -30,6 +31,14 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    public GameObject TappedObject
+    {
+        get
+        {
+            return m_gameManager.SelectedPawn;
+
+        }
+    }
     private void OnMouseDown()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -43,13 +52,13 @@ public class Interactable : MonoBehaviour
 
         m_startXPos = mousePos.x - transform.localPosition.x;
         m_startZPos = mousePos.z - transform.localPosition.z;
-
+        
         m_isDragging = true;
         if(m_isDraggable)
         {
-            if (gameObject.GetComponent<Minions>() != null)
+            if (gameObject.GetComponent<PawnMovement>() != null)
             {
-                gameObject.GetComponent<Minions>().BeingHeld();
+                gameObject.GetComponent<PawnMovement>().BeingHeld();
             }
         }
 
@@ -60,6 +69,7 @@ public class Interactable : MonoBehaviour
                 gameObject.GetComponent<Buildings>().Tapped();
             }
         }
+        m_gameManager.SelectedPawn = gameObject;
     }
 
     private void OnMouseUp()
@@ -68,7 +78,7 @@ public class Interactable : MonoBehaviour
         {
             m_isDragging = false;
             
-            gameObject.GetComponent<Minions>().Dropped();
+            gameObject.GetComponent<PawnMovement>().Dropped();
         }
     }
     private void DragObject()

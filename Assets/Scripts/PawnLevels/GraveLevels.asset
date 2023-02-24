@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bb46ea5e2508e4aaac367d85547daa, type: 3}
-  m_Name: GraveItems
+  m_Script: {fileID: 11500000, guid: f6bc9f45ffb97784689aae91a13d0b1f, type: 3}
+  m_Name: GraveLevels
   m_EditorClassIdentifier: 
-  m_buildingItems:
-  - {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
-  - {fileID: 11400000, guid: c73a68d9c14e6d947b1b196c2005fce1, type: 2}
+  m_pawnProgression:
+  - {fileID: 2262881969125099700, guid: 0f30c42837af1f2459a63fc78792e116, type: 3}
+  - {fileID: 2488706935641311458, guid: c530e894714fdfb45aa531e25606baa8, type: 3}
