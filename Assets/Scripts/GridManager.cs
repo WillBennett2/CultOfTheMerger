@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class GridManager : MonoBehaviour
 {
@@ -9,6 +13,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private float m_xDistance, m_zDistance;
     [SerializeField] private GameObject m_parentObject;
     [SerializeField] private GameObject m_gridPrefeb;
+    [SerializeField] private bool m_regen;
+
 
     [SerializeField] public GameObject[] m_grid;
     // Start is called before the first frame update
@@ -21,10 +27,27 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_regen)
+        {
+            RegenerateGrid(4,4);
+            m_regen = false;
+        }
     }
 
-    void RegenerateGrid()
+    void ClearGrid()
     {
+        for (int i = 0; i<m_grid.Length; i++)
+        {
+            Destroy(m_grid[i]);
+        }
+    }
+    public void RegenerateGrid(int columnLength, int rowLength)
+    {
+        ClearGrid();
+        //Array.Clear(m_grid,0,m_grid.Length);
+        m_columnLength = columnLength;
+        m_rowLength = rowLength;
+        m_grid = new GameObject[m_columnLength * m_rowLength];
         CreateGrid();
     }
     void CreateGrid()

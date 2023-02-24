@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 179726714}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,6 +269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selectedPawn: {fileID: 0}
+  m_gridManager: {fileID: 0}
+  m_buildings: []
+  m_regen: 0
 --- !u!4 &179726715
 Transform:
   m_ObjectHideFlags: 0
@@ -1038,6 +1041,7 @@ MonoBehaviour:
   m_parentObject: {fileID: 1323139871}
   m_gridPrefeb: {fileID: 2080793558587559536, guid: 9dd8c18051443e7459df6e90426c2186,
     type: 3}
+  m_regen: 0
   m_grid: []
 --- !u!4 &1139751061 stripped
 Transform:
