@@ -68,8 +68,8 @@ public class Interactable : MonoBehaviour
             {
                 gameObject.GetComponent<Buildings>().Tapped();
             }
-        }
-        m_gameManager.SelectedPawn = gameObject;
+			m_gameManager.SelectedPawn = gameObject;
+		}
     }
 
     private void OnMouseUp()
