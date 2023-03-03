@@ -26,6 +26,11 @@ public class Buildings : MonoBehaviour
     [SerializeField] private GameObject[] m_gridRef;
     private int m_sizeOfGrid;
 
+    [SerializeField] private ObjectData m_objectDataRef;
+    [SerializeField] private ObjectData.Minion[] m_objectDatas;
+    [SerializeField] private int m_minionTypesNum = 1;
+    [SerializeField] private ObjectData.Minion[] m_minionData;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +38,9 @@ public class Buildings : MonoBehaviour
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_gameManager = FindObjectOfType<GameManager>();
         m_gameManager.Buildings.Add(this);
+        AssignObjectData();
         StartCoroutine(LateStart(1));
+        
     }
 
     IEnumerator LateStart(float waitTime)
@@ -42,6 +49,15 @@ public class Buildings : MonoBehaviour
         PopulateGrid();
     }
 
+    private void AssignObjectData()
+    {
+        m_minionData = new ObjectData.Minion[m_minionTypesNum];
+        m_objectDatas = m_objectDataRef.Objects;
+        for (int i = 0; i < m_minionTypesNum; i++)
+        {
+            m_minionData[i] = m_objectDatas[i];
+        }
+    }
     private void OnDestroy()
     {
         m_gameManager.Buildings.Remove(this);
@@ -171,8 +187,9 @@ public class Buildings : MonoBehaviour
         {
             if (GenRandomNum() == 0)
             {
-                m_minionType = PawnDefinitions.MMinionType.Skeleton;
-                minionData.ManaType = PawnDefinitions.MManaType.Necro;
+                m_minionType = m_minionData[0].m_minionType;
+                minionData.ManaType = m_minionData[0].m_manaType;
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType, m_minionData[0].m_manaType,m_buildingType, m_itemType, m_minionData[0].m_pawnLevels, 0);
             }
             else
             {
@@ -183,7 +200,7 @@ public class Buildings : MonoBehaviour
             if (m_minionType == PawnDefinitions.MMinionType.Skeleton)
             {
                 //object type,minion type, mana type, building type, item type, pawn level, current level
-                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(0), 0);
+                //pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(0), 0);
             }
             else
             {
