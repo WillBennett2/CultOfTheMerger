@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 179726714}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,6 +269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selectedPawn: {fileID: 0}
+  m_gridManager: {fileID: 0}
+  m_buildings: []
+  m_regen: 0
 --- !u!4 &179726715
 Transform:
   m_ObjectHideFlags: 0
@@ -994,14 +997,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.52292424, y: -0, z: -0, w: 0.8523792}
+  m_LocalRotation: {x: 0.58099955, y: -0, z: -0, w: 0.81390387}
   m_LocalPosition: {x: 0, y: 10.36, z: -4.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 63.057, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 71.042, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1041,7 @@ MonoBehaviour:
   m_parentObject: {fileID: 1323139871}
   m_gridPrefeb: {fileID: 2080793558587559536, guid: 9dd8c18051443e7459df6e90426c2186,
     type: 3}
+  m_regen: 0
   m_grid: []
 --- !u!4 &1139751061 stripped
 Transform:

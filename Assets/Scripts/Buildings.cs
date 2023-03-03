@@ -12,7 +12,6 @@ struct MSpawnType
 
 public class Buildings : MonoBehaviour
 {
-    [SerializeField] private bool m_spawnMinion = false;
     [SerializeField] private PawnDefinitions.MPawnObjects m_objectType;
     [SerializeField] private PawnDefinitions.MMinionType m_minionType;
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
@@ -21,7 +20,8 @@ public class Buildings : MonoBehaviour
     [SerializeField] private BuildingItems m_buildingItems ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_pawnObject;
-    
+
+    [SerializeField] private GameManager m_gameManager;
     [SerializeField] private GridManager m_GridManager;
     [SerializeField] private GameObject[] m_gridRef;
     private int m_sizeOfGrid;
@@ -31,6 +31,8 @@ public class Buildings : MonoBehaviour
     {
         //auto assign item based on type?
         m_GridManager = Camera.main.GetComponent<GridManager>();
+        m_gameManager = FindObjectOfType<GameManager>();
+        m_gameManager.Buildings.Add(this);
         StartCoroutine(LateStart(1));
     }
 
@@ -40,7 +42,12 @@ public class Buildings : MonoBehaviour
         PopulateGrid();
     }
 
-    private void PopulateGrid()
+    private void OnDestroy()
+    {
+        m_gameManager.Buildings.Remove(this);
+    }
+
+    public void PopulateGrid()
     {
         m_sizeOfGrid = m_GridManager.m_grid.Length;
         m_gridRef = new GameObject[m_sizeOfGrid];
@@ -100,7 +107,6 @@ public class Buildings : MonoBehaviour
             m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
         }
         
-        m_spawnMinion = false;
         m_pawnObject = null;
     }
     private void SetBuildingType()
