@@ -166,17 +166,18 @@ public class Buildings : MonoBehaviour
     private void SetMinionType()
     {
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+        Minions minionData = m_pawnObject.GetComponent<Minions>();
         if (pawnMergeScript)
         {
             if (GenRandomNum() == 0)
             {
                 m_minionType = PawnDefinitions.MMinionType.Skeleton;
-                m_manaType = PawnDefinitions.MManaType.Empty;
+                minionData.ManaType = PawnDefinitions.MManaType.Necro;
             }
             else
             {
                 m_minionType = PawnDefinitions.MMinionType.Zombie;
-                m_manaType = PawnDefinitions.MManaType.Empty;
+                minionData.ManaType = PawnDefinitions.MManaType.Life;
             }
             
             if (m_minionType == PawnDefinitions.MMinionType.Skeleton)
