@@ -44,7 +44,6 @@ public class GridManager : MonoBehaviour
     public void RegenerateGrid(int columnLength, int rowLength)
     {
         ClearGrid();
-        //Array.Clear(m_grid,0,m_grid.Length);
         m_columnLength = columnLength;
         m_rowLength = rowLength;
         m_grid = new GameObject[m_columnLength * m_rowLength];
