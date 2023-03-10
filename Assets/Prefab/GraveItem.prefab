@@ -92,11 +92,12 @@ MonoBehaviour:
   m_gridRef: []
   m_objectDataRef: {fileID: 11400000, guid: 57a79b05778014b45b43daa2c02ca9d4, type: 2}
   m_objectDatas: []
-  m_minionTypesNum: 1
+  m_minionTypesNum: 2
   m_minionData:
   - m_minionType: 0
     m_pawnLevels: {fileID: 0}
     m_manaType: 0
+    m_baseMana: 0
     m_manaMultiplier: 0
     m_sacrificialBaseValue: 0
     m_sacrificialMultiplier: 0

@@ -193,18 +193,9 @@ public class Buildings : MonoBehaviour
             }
             else
             {
-                m_minionType = PawnDefinitions.MMinionType.Zombie;
-                minionData.ManaType = PawnDefinitions.MManaType.Life;
-            }
-            
-            if (m_minionType == PawnDefinitions.MMinionType.Skeleton)
-            {
-                //object type,minion type, mana type, building type, item type, pawn level, current level
-                //pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(0), 0);
-            }
-            else
-            {
-                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(1), 0);
+                m_minionType = m_minionData[1].m_minionType;
+                minionData.ManaType = m_minionData[1].m_manaType;
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType, m_minionData[1].m_manaType,m_buildingType, m_itemType, m_minionData[1].m_pawnLevels, 0);
             }
         }
     }
