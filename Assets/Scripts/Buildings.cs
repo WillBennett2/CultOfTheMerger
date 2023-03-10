@@ -122,7 +122,7 @@ public class Buildings : MonoBehaviour
             }
             m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
         }
-        
+        m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
         m_pawnObject = null;
     }
     private void SetBuildingType()

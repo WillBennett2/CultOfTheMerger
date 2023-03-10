@@ -71,7 +71,6 @@ public class PawnMerge : MonoBehaviour
         bool beingMoved = m_onTilePawn.GetComponent<PawnMovement>().GetBeingMoved();
         if (sameType && !beingMoved && inHand.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
         {
-            Debug.Log("AAA");
             m_pawn.m_currentLevel += 1;
             m_currentLevel = m_pawn.m_currentLevel;
             
