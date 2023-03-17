@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_minionType: 2
     m_pawnLevels: {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
     m_manaType: 1
-    m_baseMana: 5
+    m_baseMana: 3
     m_manaMultiplier: 1.2
     m_sacrificialBaseValue: 50
     m_sacrificialMultiplier: 2.1

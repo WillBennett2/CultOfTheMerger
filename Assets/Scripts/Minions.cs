@@ -5,20 +5,11 @@ using UnityEngine;
 
 public class Minions : MonoBehaviour
 {
-    [SerializeField] private PawnDefinitions.MManaType m_manaType;
-    private void Start()
+    
+    [SerializeField] private int m_id;
+    public int ID
     {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    public PawnDefinitions.MManaType ManaType
-    {
-        get => m_manaType;
-        set => m_manaType = value;
+        get => m_id;
+        set => m_id = value;
     }
 }
