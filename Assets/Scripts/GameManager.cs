@@ -38,6 +38,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Buildings> m_buildings;
     [SerializeField] private List<PawnMovement> m_moveablePawns;
     [SerializeField] private bool m_regen;
+    [SerializeField] private int m_idCount;
+
+    public int ID
+    {
+        get
+        {
+            m_idCount++;
+            return m_idCount;
+        }
+    }
     public GameObject SelectedPawn
     {
         get { return m_selectedPawn; }

@@ -181,7 +181,7 @@ public class Buildings : MonoBehaviour
     }
     private void SetMinionType()
     {
-        m_pawnObject.GetComponent<Minions>().ID = 1;
+        m_pawnObject.GetComponent<Minions>().ID = m_gameManager.ID;
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
         PawnMana manaData = m_pawnObject.GetComponent<PawnMana>();
         if (pawnMergeScript)
