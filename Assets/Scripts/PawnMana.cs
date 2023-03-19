@@ -9,8 +9,11 @@ public class PawnMana : MonoBehaviour
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
     [SerializeField] private float m_baseMana;
     [SerializeField] private float m_manaMultiplier;
+    [SerializeField] private int m_manaCost;
 
     [SerializeField]private Inventory m_inventoryScript;
+    
+    
     // Start is called before the first frame update
 
     public void SetManaValues(PawnDefinitions.MManaType manaType, float baseMana, float manaMultiplier)
@@ -31,13 +34,13 @@ public class PawnMana : MonoBehaviour
         m_inventoryScript = FindObjectOfType<Inventory>();
         
         
-        m_inventoryScript.Necro = m_baseMana;
+        m_inventoryScript.NecroModifier = m_baseMana;
     }
 
     private void OnDestroy()
     {
         GameEvents.m_current.onMinionLevelUp -= LevelUpManaGen;
-        m_inventoryScript.Necro = -m_baseMana;
+        m_inventoryScript.NecroModifier = -m_baseMana;
     }
 
     private void LevelUpManaGen(int id)

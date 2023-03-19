@@ -18,6 +18,7 @@ MonoBehaviour:
     m_manaType: 1
     m_baseMana: 3
     m_manaMultiplier: 1.2
+    m_manaCost: 0
     m_sacrificialBaseValue: 50
     m_sacrificialMultiplier: 2.1
   - m_minionType: 1
@@ -25,5 +26,6 @@ MonoBehaviour:
     m_manaType: 1
     m_baseMana: 5
     m_manaMultiplier: 1.2
+    m_manaCost: 10
     m_sacrificialBaseValue: 80
     m_sacrificialMultiplier: 2.3
