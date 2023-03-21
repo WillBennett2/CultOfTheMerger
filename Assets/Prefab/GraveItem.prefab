@@ -89,6 +89,7 @@ MonoBehaviour:
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: fa0000002c01000090010000f4010000bc020000
+  m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
   m_gameManager: {fileID: 0}
   m_inventory: {fileID: 0}
   m_GridManager: {fileID: 0}
@@ -102,7 +103,6 @@ MonoBehaviour:
     m_manaType: 0
     m_baseMana: 0
     m_manaMultiplier: 0
-    m_manaCost: 0
     m_sacrificialBaseValue: 0
     m_sacrificialMultiplier: 0
 --- !u!114 &207165447993969902

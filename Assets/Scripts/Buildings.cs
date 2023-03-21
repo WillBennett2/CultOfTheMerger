@@ -22,6 +22,7 @@ public class Buildings : MonoBehaviour
     private GameObject m_pawnObject;
     [SerializeField] private int m_buildingLevel;
     [SerializeField] private int[] m_spawnCosts;
+    [SerializeField] private BuildingData m_buildingData;
 
     [Header("References")]
     [SerializeField] private GameManager m_gameManager;
@@ -84,9 +85,9 @@ public class Buildings : MonoBehaviour
             SpawnPawn();
 
     }
-    private int GenRandomNum()
+    private int GenRandomNum(int endNum)
     {
-        return (Random.Range(0,2 ));
+        return (Random.Range(0,endNum ));
     }
 
     private int FindFreeTile()
@@ -112,19 +113,19 @@ public class Buildings : MonoBehaviour
     }
     private void SpawnPawn()
     {
+        ResetTypes();
+        
         int tileNum = FindFreeTile();
         if (tileNum != -1)
         {
             if (m_objectType == PawnDefinitions.MPawnObjects.Building)
             {
-                CreateObject(tileNum);
-                SetBuildingType();
+                SetBuildingType(tileNum);
             }
 
             if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
             {
-                //if (m_inventory.Necro > 10) 
-                SetMinionType(tileNum,GenRandomNum());
+                SetMinionType(tileNum,GenRandomNum(2));
             }
 
             if (m_objectType == PawnDefinitions.MPawnObjects.Item)
@@ -140,30 +141,39 @@ public class Buildings : MonoBehaviour
             }
         }
     }
-    private void SetBuildingType()
+    private void SetBuildingType(int tileNum)
     {
-        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
-        if (pawnMergeScript)
-        {
-            if (GenRandomNum() == 0)
-            {
-                m_buildingType = PawnDefinitions.MBuildingType.Grave;
-            }
-            else
-            {
-                m_buildingType = PawnDefinitions.MBuildingType.Grave;
-            }
+        int randNum = GenRandomNum(0);
 
-            if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
+        if (randNum == 0 && m_inventory.Rune.m_deathRuneCount >= m_buildingData.RuneCost.m_graveRuneCost )
+        {
+            m_buildingType = PawnDefinitions.MBuildingType.Grave;
+            m_inventory.DeathRune = - m_buildingData.RuneCost.m_graveRuneCost;
+        }
+        else if (randNum == 1)
+        {
+            m_buildingType = PawnDefinitions.MBuildingType.Life;
+        }
+
+        //if xyz
+        if (m_buildingType != PawnDefinitions.MBuildingType.Empty)
+        {
+            CreateObject(tileNum);
+            PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+            if (pawnMergeScript)
             {
-                //object type,minion type, mana type, building type, item type, pawn level, current level
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
-                    m_buildingItems.GetPawnLevels(0), 0);
-            }
-            else
-            {
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
-                    m_buildingItems.GetPawnLevels(1), 0);
+
+                if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
+                {
+                    //object type,minion type, mana type, building type, item type, pawn level, current level
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                        m_buildingItems.GetPawnLevels(0), 0);
+                }
+                else
+                {
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                        m_buildingItems.GetPawnLevels(1), 0);
+                }
             }
         }
     }
@@ -172,7 +182,7 @@ public class Buildings : MonoBehaviour
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
         if (pawnMergeScript)
         {
-            if (GenRandomNum() == 0)
+            if (GenRandomNum(1) == 0)
             {
                 m_itemType = PawnDefinitions.MItemType.Coin;
             }
@@ -212,5 +222,12 @@ public class Buildings : MonoBehaviour
             }
         }
 
+    }
+
+    private void ResetTypes()
+    {
+        m_minionType = PawnDefinitions.MMinionType.Empty;
+        m_itemType = PawnDefinitions.MItemType.Empty;
+        m_buildingType = PawnDefinitions.MBuildingType.Empty;
     }
 }

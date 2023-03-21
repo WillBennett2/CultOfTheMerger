@@ -23,12 +23,38 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_lifeUIText;
     [SerializeField] private Slider m_lifeSlider;
     [Header("Store3")]
-    [SerializeField] private float manaStore3;
+    [SerializeField] private float m_manaStore3;
     [Header("Shop")]
-    [SerializeField] private int coinCount;
-    [SerializeField] private int gemCount;
-    
+    [SerializeField] private int m_coinCount;
+    [SerializeField] private int m_gemCount;
+    [SerializeField] public Runes m_runes;
 
+    [Serializable]public struct Runes
+    {
+        [SerializeField] public int m_deathRuneCount;
+        [SerializeField] public int runeCount2;
+        [SerializeField] public int runeCount3;
+        [SerializeField] public int runeCount4;
+    }
+
+    public Runes Rune
+    {
+        get
+        {
+            return m_runes;
+        }
+    }
+    public int DeathRune
+    {
+        get
+        {
+            return m_runes.m_deathRuneCount;
+        }
+        set
+        {
+            m_runes.m_deathRuneCount += value;
+        }
+    }
     public float NecroModifier
     {
         set

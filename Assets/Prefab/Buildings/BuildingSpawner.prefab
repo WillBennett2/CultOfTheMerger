@@ -55,7 +55,11 @@ MonoBehaviour:
   m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
   m_minionPrefab: {fileID: 1072640369382412887, guid: 3693dbd304c04004bb913ad61cfafa4c,
     type: 3}
+  m_buildingLevel: 0
+  m_spawnCosts: 
+  m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
   m_gameManager: {fileID: 0}
+  m_inventory: {fileID: 0}
   m_GridManager: {fileID: 0}
   m_gridRef: []
   m_objectDataRef: {fileID: 11400000, guid: 57a79b05778014b45b43daa2c02ca9d4, type: 2}
