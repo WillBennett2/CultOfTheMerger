@@ -9,7 +9,6 @@ public class PawnMana : MonoBehaviour
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
     [SerializeField] private float m_baseMana;
     [SerializeField] private float m_manaMultiplier;
-    [SerializeField] private int m_manaCost;
 
     [SerializeField]private Inventory m_inventoryScript;
     

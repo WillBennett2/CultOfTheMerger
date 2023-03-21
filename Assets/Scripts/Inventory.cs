@@ -81,8 +81,4 @@ public class Inventory : MonoBehaviour
         m_necroSlider.value = m_necroStore;
         m_necroUIText.text = Mathf.Round(m_necroStore).ToString();
     }
-    void Update()
-    {
-
-    }
 }

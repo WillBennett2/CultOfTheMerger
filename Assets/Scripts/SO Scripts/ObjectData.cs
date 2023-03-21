@@ -13,7 +13,6 @@ public class ObjectData : ScriptableObject
         public PawnDefinitions.MManaType m_manaType;
         public float m_baseMana;
         public float m_manaMultiplier;
-        public float m_manaCost;
         public float m_sacrificialBaseValue;
         public float m_sacrificialMultiplier;
     }

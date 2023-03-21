@@ -1013,12 +1013,12 @@ PrefabInstance:
     - target: {fileID: 2488706935641311459, guid: c530e894714fdfb45aa531e25606baa8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.22641563
+      value: -1.56
       objectReference: {fileID: 0}
     - target: {fileID: 2488706935641311459, guid: c530e894714fdfb45aa531e25606baa8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2022123
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 2488706935641311459, guid: c530e894714fdfb45aa531e25606baa8,
         type: 3}
@@ -1623,9 +1623,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_generateMana: 1
   m_genDelay: 10
-  m_necroStore: 0
-  m_totalNecroModifier: 0
-  m_necroCapacity: 1000
+  m_necroStore: 3000
+  m_totalNecroModifier: 10
+  m_necroCapacity: 3000
   m_necroUIText: {fileID: 207669599}
   m_necroSlider: {fileID: 1332718003}
   m_lifeStore: 0
