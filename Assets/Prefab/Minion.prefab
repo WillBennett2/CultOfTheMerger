@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404893b1be79e8e42a2e5d359c9cdaf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_manaType: 0
+  m_id: 0
 --- !u!65 &6594047281536436637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221,9 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bf33b0609cecf459d56c93d65c6445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_id: 0
   m_objectType: 1
   m_minionType: 0
-  m_manaType: 1
+  m_manaType: 0
   m_buildingType: 0
   m_itemType: 0
   m_pawnProgression: {fileID: 0}
@@ -241,4 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093ec2d7b408e6f4bbc19aea74bd3072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_id: 0
   m_manaType: 0
+  m_baseMana: 0
+  m_manaMultiplier: 0
+  m_inventoryScript: {fileID: 0}
