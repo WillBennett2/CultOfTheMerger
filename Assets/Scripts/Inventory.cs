@@ -100,6 +100,10 @@ public class Inventory : MonoBehaviour
         {
             NecroStore = m_totalNecroModifier;
         }
+        else
+        {
+            m_necroStore = m_necroCapacity;
+        }
     }
 
     void UpdateUI()
