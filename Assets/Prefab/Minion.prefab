@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: -3114023650313296142}
   - component: {fileID: -523772077596086275}
   - component: {fileID: -736199017071926923}
+  - component: {fileID: 2914249147671588374}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Minion
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404893b1be79e8e42a2e5d359c9cdaf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_id: 0
 --- !u!65 &6594047281536436637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isDraggable: 1
   m_isInteractable: 1
+  m_gameManager: {fileID: 0}
 --- !u!114 &-523772077596086275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,11 +221,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bf33b0609cecf459d56c93d65c6445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_id: 0
   m_objectType: 1
   m_minionType: 0
-  m_manaType: 1
+  m_manaType: 0
   m_buildingType: 0
   m_itemType: 0
   m_pawnProgression: {fileID: 0}
   m_currentLevel: 0
   m_currentGameObject: {fileID: 0}
+--- !u!114 &2914249147671588374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594047281536436633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093ec2d7b408e6f4bbc19aea74bd3072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 0
+  m_manaType: 0
+  m_baseMana: 0
+  m_manaMultiplier: 0
+  m_inventoryScript: {fileID: 0}

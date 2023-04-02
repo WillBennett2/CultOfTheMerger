@@ -8,6 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField] private GameManager m_gameManager;
     [SerializeField] private float m_xStartPos,m_yStartPos ,m_zStartPos;
     [SerializeField] private int m_columnLength, m_rowLength;
     [SerializeField] private float m_xDistance, m_zDistance;
@@ -17,9 +18,11 @@ public class GridManager : MonoBehaviour
 
 
     [SerializeField] public GameObject[] m_grid;
+    
     // Start is called before the first frame update
     void Start()
     {
+        m_gameManager = FindObjectOfType<GameManager>();
         m_grid = new GameObject[m_columnLength * m_rowLength];
         CreateGrid();
     }
@@ -48,6 +51,10 @@ public class GridManager : MonoBehaviour
         m_rowLength = rowLength;
         m_grid = new GameObject[m_columnLength * m_rowLength];
         CreateGrid();
+        for (int i = 0; i < m_gameManager.Pawns.Count; i++)
+        {
+            m_gameManager.Pawns[i].Dropped();
+        }
     }
     void CreateGrid()
     {

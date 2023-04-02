@@ -5,6 +5,7 @@ using UnityEngine;
 public class PawnMerge : MonoBehaviour
 {
     private PawnMerge m_onTilePawn;
+    [SerializeField] private int m_id;
     [SerializeField] private PawnDefinitions.MPawnObjects m_objectType;
     [SerializeField] private PawnDefinitions.MMinionType m_minionType;
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
@@ -17,14 +18,13 @@ public class PawnMerge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.GetComponent<Minions>())
+        {
+            m_id = gameObject.GetComponent<Minions>().ID;   
+        }
         DefinePawn();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void SetPawnValues(PawnDefinitions.MPawnObjects objectType,PawnDefinitions.MMinionType minionType,
         PawnDefinitions.MManaType manaType,PawnDefinitions.MBuildingType buildingType,PawnDefinitions.MItemType itemType,
         PawnLevels pawnProgression, int currentLevel)
@@ -42,9 +42,9 @@ public class PawnMerge : MonoBehaviour
         if(m_pawnProgression)
             m_pawn = new PawnDefinitions(m_objectType,m_minionType,m_manaType,m_buildingType,m_itemType,m_pawnProgression,m_currentLevel);
         m_currentGameObject = transform.GetChild(0).gameObject;
-        ChangeMinionVisual();
+        ChangePawnVisual();
     }
-    private void ChangeMinionVisual()
+    private void ChangePawnVisual()
     {
         Destroy(m_currentGameObject);
         m_currentGameObject = Instantiate(m_pawn.m_pawnLevels.m_pawnProgression[m_pawn.m_currentLevel],transform );
@@ -59,29 +59,29 @@ public class PawnMerge : MonoBehaviour
             sameType = true;
         }
 
-        if (inHand.m_buildingType == onTilePawn.m_buildingType)
+        if (inHand.m_buildingType != PawnDefinitions.MBuildingType.Empty && inHand.m_buildingType == onTilePawn.m_buildingType)
         {
             sameType = true;
         }
 
-        if (inHand.m_itemType == onTilePawn.m_itemType)
+        if (inHand.m_itemType != PawnDefinitions.MItemType.Empty && inHand.m_itemType == onTilePawn.m_itemType)
         {
             sameType = true;
         }
+        
         bool beingMoved = m_onTilePawn.GetComponent<PawnMovement>().GetBeingMoved();
         if (sameType && !beingMoved && inHand.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
         {
-            Debug.Log("AAA");
             m_pawn.m_currentLevel += 1;
             m_currentLevel = m_pawn.m_currentLevel;
             
-            ChangeMinionVisual();
+            ChangePawnVisual();
             gameObject.GetComponent<PawnMovement>().SetHomeTile();
             gameObject.GetComponent<PawnMovement>().SetHomeTile(m_onTilePawn.GetComponent<PawnMovement>().GetHomeTile(),m_onTilePawn.GetComponent<PawnMovement>().GetHomeTileNum());
         
             Destroy(m_onTilePawn.gameObject); //Delete land minion
-            
 
+            GameEvents.m_current.MinionLevelUp(m_id);
         }
     }
     public void AttemptDropMerge()

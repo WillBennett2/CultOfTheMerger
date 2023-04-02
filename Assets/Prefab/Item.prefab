@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isDraggable: 1
   m_isInteractable: 1
+  m_gameManager: {fileID: 0}
 --- !u!114 &6088688922613971462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bf33b0609cecf459d56c93d65c6445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 3
+  m_id: 0
+  m_objectType: 0
   m_minionType: 0
   m_manaType: 0
   m_buildingType: 0

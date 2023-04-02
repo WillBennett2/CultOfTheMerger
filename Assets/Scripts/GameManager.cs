@@ -36,7 +36,18 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GridManager m_gridManager;
     [SerializeField] private List<Buildings> m_buildings;
+    [SerializeField] private List<PawnMovement> m_moveablePawns;
     [SerializeField] private bool m_regen;
+    [SerializeField] private int m_idCount;
+
+    public int ID
+    {
+        get
+        {
+            m_idCount++;
+            return m_idCount;
+        }
+    }
     public GameObject SelectedPawn
     {
         get { return m_selectedPawn; }
@@ -50,6 +61,13 @@ public class GameManager : MonoBehaviour
         get
         {
             return m_buildings;
+        }
+    }
+    public List<PawnMovement> Pawns
+    {
+        get
+        {
+            return m_moveablePawns;
         }
     }
     public void RegenGird()

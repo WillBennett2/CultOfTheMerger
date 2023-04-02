@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Minions : MonoBehaviour
 {
-    private void Start()
+    
+    [SerializeField] private int m_id;
+    public int ID
     {
-        
-    }
-
-    private void Update()
-    {
-        
+        get => m_id;
+        set => m_id = value;
     }
 }

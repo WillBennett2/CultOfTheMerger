@@ -20,20 +20,33 @@ public class Buildings : MonoBehaviour
     [SerializeField] private BuildingItems m_buildingItems ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_pawnObject;
+    [SerializeField] private int m_buildingLevel;
+    [SerializeField] private int[] m_spawnCosts;
+    [SerializeField] private BuildingData m_buildingData;
 
+    [Header("References")]
     [SerializeField] private GameManager m_gameManager;
+    [SerializeField] private Inventory m_inventory;
     [SerializeField] private GridManager m_GridManager;
     [SerializeField] private GameObject[] m_gridRef;
     private int m_sizeOfGrid;
 
+    [SerializeField] private ObjectData m_objectDataRef;
+    [SerializeField] private ObjectData.Minion[] m_objectDatas;
+    [SerializeField] private int m_minionTypesNum = 1;
+    [SerializeField] private ObjectData.Minion[] m_minionData;
+    
     // Start is called before the first frame update
     void Start()
     {
         //auto assign item based on type?
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_gameManager = FindObjectOfType<GameManager>();
+        m_inventory = FindObjectOfType<Inventory>();
         m_gameManager.Buildings.Add(this);
+        AssignObjectData();
         StartCoroutine(LateStart(1));
+        
     }
 
     IEnumerator LateStart(float waitTime)
@@ -42,6 +55,15 @@ public class Buildings : MonoBehaviour
         PopulateGrid();
     }
 
+    private void AssignObjectData()
+    {
+        m_minionData = new ObjectData.Minion[m_minionTypesNum];
+        m_objectDatas = m_objectDataRef.Objects;
+        for (int i = 0; i < m_minionTypesNum; i++)
+        {
+            m_minionData[i] = m_objectDatas[i];
+        }
+    }
     private void OnDestroy()
     {
         m_gameManager.Buildings.Remove(this);
@@ -63,9 +85,9 @@ public class Buildings : MonoBehaviour
             SpawnPawn();
 
     }
-    private int GenRandomNum()
+    private int GenRandomNum(int endNum)
     {
-        return (Random.Range(0,2 ));
+        return (Random.Range(0,endNum ));
     }
 
     private int FindFreeTile()
@@ -80,59 +102,78 @@ public class Buildings : MonoBehaviour
 
         return -1;
     }
+
+    private void CreateObject(int tileNum)
+    {
+        m_pawnObject = Instantiate(m_minionPrefab,
+            new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
+                m_gridRef[tileNum].transform.position.z), Quaternion.identity);
+        m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
+        m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
+    }
     private void SpawnPawn()
     {
+        ResetTypes();
+        
         int tileNum = FindFreeTile();
         if (tileNum != -1)
         {
-            m_pawnObject = Instantiate(m_minionPrefab,
-                new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
-                    m_gridRef[tileNum].transform.position.z), Quaternion.identity);
-
-            m_GridManager.UpdateTile(tileNum,true);
             if (m_objectType == PawnDefinitions.MPawnObjects.Building)
             {
-                SetBuildingType();
+                SetBuildingType(tileNum);
             }
 
             if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
             {
-                SetMinionType();
+                SetMinionType(tileNum,GenRandomNum(2));
             }
 
             if (m_objectType == PawnDefinitions.MPawnObjects.Item)
             {
+                CreateObject(tileNum);
                 SetItemType();
             }
-            m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
-        }
-        
-        m_pawnObject = null;
-    }
-    private void SetBuildingType()
-    {
-        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
-        if (pawnMergeScript)
-        {
-            if (GenRandomNum() == 0)
-            {
-                m_buildingType = PawnDefinitions.MBuildingType.Grave;
-            }
-            else
-            {
-                m_buildingType = PawnDefinitions.MBuildingType.Grave;
-            }
 
-            if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
+            if (m_pawnObject != null)
             {
-                //object type,minion type, mana type, building type, item type, pawn level, current level
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
-                    m_buildingItems.GetPawnLevels(0), 0);
+                m_GridManager.UpdateTile(tileNum,true);
+                m_pawnObject = null;
             }
-            else
+        }
+    }
+    private void SetBuildingType(int tileNum)
+    {
+        int randNum = GenRandomNum(0);
+
+        if (randNum == 0 && m_inventory.Rune.m_deathRuneCount >= m_buildingData.RuneCost.m_graveRuneCost )
+        {
+            m_buildingType = PawnDefinitions.MBuildingType.Grave;
+            m_inventory.DeathRune = - m_buildingData.RuneCost.m_graveRuneCost;
+        }
+        else if (randNum == 1)
+        {
+            m_buildingType = PawnDefinitions.MBuildingType.Life;
+        }
+
+        //if xyz
+        if (m_buildingType != PawnDefinitions.MBuildingType.Empty)
+        {
+            CreateObject(tileNum);
+            PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+            if (pawnMergeScript)
             {
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
-                    m_buildingItems.GetPawnLevels(1), 0);
+
+                if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
+                {
+                    //object type,minion type, mana type, building type, item type, pawn level, current level
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                        m_buildingItems.GetPawnLevels(0), 0);
+                }
+                else
+                {
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,
+                        m_buildingItems.GetPawnLevels(1), 0);
+                }
             }
         }
     }
@@ -141,7 +182,7 @@ public class Buildings : MonoBehaviour
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
         if (pawnMergeScript)
         {
-            if (GenRandomNum() == 0)
+            if (GenRandomNum(1) == 0)
             {
                 m_itemType = PawnDefinitions.MItemType.Coin;
             }
@@ -163,31 +204,30 @@ public class Buildings : MonoBehaviour
             }
         }
     }
-    private void SetMinionType()
+    private void SetMinionType(int tileNum,int randNum)
     {
-        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
-        if (pawnMergeScript)
+        //check if enough mana to spawn
+        if (m_minionData[randNum].m_manaType == PawnDefinitions.MManaType.Necro && m_inventory.NecroStore >= m_spawnCosts[m_buildingLevel])
         {
-            if (GenRandomNum() == 0)
+            m_inventory.NecroStore = -m_spawnCosts[m_buildingLevel];
+            CreateObject(tileNum);
+            m_pawnObject.GetComponent<Minions>().ID = m_gameManager.ID;
+            PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+            PawnMana manaData = m_pawnObject.GetComponent<PawnMana>();
+            if (pawnMergeScript)
             {
-                m_minionType = PawnDefinitions.MMinionType.Skeleton;
-                m_manaType = PawnDefinitions.MManaType.Empty;
-            }
-            else
-            {
-                m_minionType = PawnDefinitions.MMinionType.Zombie;
-                m_manaType = PawnDefinitions.MManaType.Empty;
-            }
-            
-            if (m_minionType == PawnDefinitions.MMinionType.Skeleton)
-            {
-                //object type,minion type, mana type, building type, item type, pawn level, current level
-                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(0), 0);
-            }
-            else
-            {
-                pawnMergeScript.SetPawnValues(m_objectType,m_minionType,m_manaType,m_buildingType, m_itemType, m_buildingItems.GetPawnLevels(1), 0);
+                m_minionType = m_minionData[randNum].m_minionType;
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType, m_minionData[randNum].m_manaType,m_buildingType, m_itemType, m_minionData[randNum].m_pawnLevels, 0);
+                manaData.SetManaValues(m_minionData[randNum].m_manaType, m_objectDatas[randNum].m_baseMana,m_objectDatas[randNum].m_manaMultiplier);
             }
         }
+
+    }
+
+    private void ResetTypes()
+    {
+        m_minionType = PawnDefinitions.MMinionType.Empty;
+        m_itemType = PawnDefinitions.MItemType.Empty;
+        m_buildingType = PawnDefinitions.MBuildingType.Empty;
     }
 }
