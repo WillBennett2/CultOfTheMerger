@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObjectData", menuName = "ScriptableObjects/ObjectData")]
 public class ObjectData : ScriptableObject
 {
+
     [System.Serializable]public struct Minion
     {
         [SerializeField] private string m_name;
@@ -14,6 +15,7 @@ public class ObjectData : ScriptableObject
         public PawnDefinitions.MManaType m_manaType;
         public float m_baseMana;
         public float m_manaMultiplier;
+        public PawnDefinitions.MSacrificeTypes m_sacrificeType;
         public float m_sacrificialBaseValue;
         public float m_sacrificialMultiplier;
     }
@@ -33,7 +35,9 @@ public class ObjectData : ScriptableObject
     [System.Serializable]public struct Item
     {
         [SerializeField] private string m_name;
-
+        public PawnDefinitions.MItemType m_itemType;
+        public PawnLevels m_pawnLevels;
+        public PawnDefinitions.MSacrificeTypes m_sacrificeType;
         public float m_sacrificialBaseValue;
         public float m_sacrificialMultiplier;
     }

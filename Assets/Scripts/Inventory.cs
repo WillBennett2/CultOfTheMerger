@@ -93,6 +93,17 @@ public class Inventory : MonoBehaviour
             m_cultSacrificeValue += value;
         }
     }
+    public int Coins
+    {
+        get
+        {
+            return m_coinCount;
+        }
+        set
+        {
+            m_coinCount += value;
+        }
+    }
     private IEnumerator Start()
     {
         m_necroSlider.value = m_necroStore;

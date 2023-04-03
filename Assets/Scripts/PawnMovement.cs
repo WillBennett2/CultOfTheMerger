@@ -6,6 +6,7 @@ using UnityEngine;
 public class PawnMovement : MonoBehaviour
 {
     private PawnMerge m_pawnMergeScript;
+    private PawnSacrifice m_pawnSacrificeScript;
     [Header("Movement Data")]
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private int m_homeTileNum;
@@ -16,6 +17,14 @@ public class PawnMovement : MonoBehaviour
     {
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_pawnMergeScript = GetComponent<PawnMerge>();
+        m_pawnSacrificeScript = GetComponent<PawnSacrifice>();
+    }
+
+    private void OnDestroy()
+    {
+        
+            m_GridManager.UpdateTile(m_homeTileNum,false);
+        
     }
 
     public bool GetBeingMoved()
@@ -23,14 +32,23 @@ public class PawnMovement : MonoBehaviour
         return m_beingMoved;
     }
 
-    public GameObject GetHomeTile()
+    public GameObject GetHomeTile
     {
-        return m_homeTile;
+        get
+        {
+            return m_homeTile;    
+        }
+        set
+        {
+            m_homeTile = value;
+        }
+        
     }
 
-    public int GetHomeTileNum()
+    public int GetHomeTileNum
     {
-        return m_homeTileNum;
+        get { return m_homeTileNum; }
+        set { m_homeTileNum = value; }
     }
 
     public void SetHomeTile()
@@ -60,6 +78,7 @@ public class PawnMovement : MonoBehaviour
                 }
             }
         }
+        m_pawnSacrificeScript.AttemptSacrifice();
         m_pawnMergeScript.AttemptDropMerge();
         MoveToHomeTile();
         //Move current grid
