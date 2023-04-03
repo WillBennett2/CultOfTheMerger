@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2132466175951722674, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ca50d58a0f7773a4c9c45caa0432adef, type: 2}
     - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
       propertyPath: m_RootOrder
@@ -48,10 +53,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5229283668344492284, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_thisMinionScript
+      value: 
+      objectReference: {fileID: 4480239107840930712}
+    - target: {fileID: 5229283668344492284, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_thisMovementScript
+      value: 
+      objectReference: {fileID: 7445983337484536637}
     - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
       propertyPath: m_Name
-      value: Minion 1
+      value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_TagString
+      value: Minion
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -92,3 +112,15 @@ MonoBehaviour:
   m_baseMana: 0
   m_manaMultiplier: 0
   m_inventoryScript: {fileID: 0}
+--- !u!114 &7445983337484536637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6088688922613971462, guid: f67caf1f7443dfb4ba764bbd50942680,
+    type: 3}
+  m_PrefabInstance: {fileID: 3686807854431121723}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153599298191366668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beec1263174391f4980dd14f8c30a3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

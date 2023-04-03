@@ -24,6 +24,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Slider m_lifeSlider;
     [Header("Store3")]
     [SerializeField] private float m_manaStore3;
+
+    [Header("Sacrifice")] 
+    [SerializeField] private int m_cultSacrificeValue;
     [Header("Shop")]
     [SerializeField] private int m_coinCount;
     [SerializeField] private int m_gemCount;
@@ -79,6 +82,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public int SacrificeValue
+    {
+        get
+        {
+            return m_cultSacrificeValue;
+        }
+        set
+        {
+            m_cultSacrificeValue += value;
+        }
+    }
     private IEnumerator Start()
     {
         m_necroSlider.value = m_necroStore;

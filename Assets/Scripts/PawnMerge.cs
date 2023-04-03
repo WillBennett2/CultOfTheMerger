@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PawnMerge : MonoBehaviour
 {
+    [SerializeField]private PawnMovement m_thisMovementScript;
+    [SerializeField] private Minions m_thisMinionScript;
+    
     private PawnMerge m_onTilePawn;
     [SerializeField] private int m_id;
     [SerializeField] private PawnDefinitions.MPawnObjects m_objectType;
@@ -15,13 +18,22 @@ public class PawnMerge : MonoBehaviour
     [SerializeField] private int m_currentLevel;
     private PawnDefinitions m_pawn;
     [SerializeField]private GameObject m_currentGameObject;
+
+    public PawnMovement GetThisMovementScript
+    {
+        get
+        {
+            return m_thisMovementScript;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         if (gameObject.GetComponent<Minions>())
         {
-            m_id = gameObject.GetComponent<Minions>().ID;   
+            m_id = m_thisMinionScript.ID;   
         }
+        
         DefinePawn();
     }
     
@@ -69,15 +81,15 @@ public class PawnMerge : MonoBehaviour
             sameType = true;
         }
         
-        bool beingMoved = m_onTilePawn.GetComponent<PawnMovement>().GetBeingMoved();
+        bool beingMoved = m_onTilePawn.GetThisMovementScript.GetBeingMoved();
         if (sameType && !beingMoved && inHand.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
         {
             m_pawn.m_currentLevel += 1;
             m_currentLevel = m_pawn.m_currentLevel;
             
             ChangePawnVisual();
-            gameObject.GetComponent<PawnMovement>().SetHomeTile();
-            gameObject.GetComponent<PawnMovement>().SetHomeTile(m_onTilePawn.GetComponent<PawnMovement>().GetHomeTile(),m_onTilePawn.GetComponent<PawnMovement>().GetHomeTileNum());
+            m_thisMovementScript.SetHomeTile();
+            m_thisMovementScript.SetHomeTile(m_onTilePawn.GetThisMovementScript.GetHomeTile(),m_onTilePawn.GetThisMovementScript.GetHomeTileNum());
         
             Destroy(m_onTilePawn.gameObject); //Delete land minion
 

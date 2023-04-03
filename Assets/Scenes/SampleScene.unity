@@ -580,7 +580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.20999908, y: 0}
+  m_AnchoredPosition: {x: 0.21000671, y: 0}
   m_SizeDelta: {x: -0.20999637, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &580483084
@@ -964,6 +964,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
+      propertyPath: m_objectDataRef
+      value: 
+      objectReference: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264,
+        type: 2}
     - target: {fileID: 408791475145392446, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
       propertyPath: m_RootOrder
@@ -972,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 408791475145392446, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4801292
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 408791475145392446, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
@@ -982,7 +988,7 @@ PrefabInstance:
     - target: {fileID: 408791475145392446, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.6405153
+      value: 3.98
       objectReference: {fileID: 0}
     - target: {fileID: 408791475145392446, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
@@ -1162,6 +1168,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 147630249249420182, guid: 3b78bd433ea1d5e4596908c63c306a29,
+        type: 3}
+      propertyPath: m_objectDataRef
+      value: 
+      objectReference: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264,
+        type: 2}
     - target: {fileID: 147630249249420184, guid: 3b78bd433ea1d5e4596908c63c306a29,
         type: 3}
       propertyPath: m_Name
@@ -1321,6 +1333,7 @@ MonoBehaviour:
   m_lifeUIText: {fileID: 0}
   m_lifeSlider: {fileID: 0}
   m_manaStore3: 0
+  m_cultSacrificeValue: 0
   m_coinCount: 0
   m_gemCount: 0
   m_runes:

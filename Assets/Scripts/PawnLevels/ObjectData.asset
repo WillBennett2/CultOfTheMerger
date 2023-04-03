@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04db8086233c5a4c86328c58eef92cb, type: 3}
   m_Name: ObjectData
   m_EditorClassIdentifier: 
-  m_objects:
-  - m_minionType: 2
+  m_minions:
+  - m_name: Skeleton
+    m_minionType: 2
     m_pawnLevels: {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
     m_manaType: 1
     m_baseMana: 3
     m_manaMultiplier: 1.2
-    m_manaCost: 0
-    m_sacrificialBaseValue: 50
+    m_sacrificialBaseValue: 25
     m_sacrificialMultiplier: 2.1
-  - m_minionType: 1
+  - m_name: Zombie
+    m_minionType: 1
     m_pawnLevels: {fileID: 11400000, guid: c73a68d9c14e6d947b1b196c2005fce1, type: 2}
     m_manaType: 1
     m_baseMana: 5
     m_manaMultiplier: 1.2
-    m_manaCost: 10
-    m_sacrificialBaseValue: 80
-    m_sacrificialMultiplier: 2.3
+    m_sacrificialBaseValue: 50
+    m_sacrificialMultiplier: 2.1
+  m_items:
+  - m_name: Coin
+    m_sacrificialBaseValue: 250
+    m_sacrificialMultiplier: 0

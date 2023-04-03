@@ -24,9 +24,9 @@ public class PawnMana : MonoBehaviour
     
     void Start()
     {
-        if (gameObject.GetComponent<Minions>())
+        if (GetComponent<Minions>())
         {
-            m_id = gameObject.GetComponent<Minions>().ID;   
+            m_id = GetComponent<Minions>().ID;   
         }
 
         GameEvents.m_current.onMinionLevelUp += LevelUpManaGen;

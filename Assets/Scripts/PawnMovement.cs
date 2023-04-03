@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PawnMovement : MonoBehaviour
 {
-
+    private PawnMerge m_pawnMergeScript;
     [Header("Movement Data")]
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private int m_homeTileNum;
@@ -15,6 +15,7 @@ public class PawnMovement : MonoBehaviour
     private void Start()
     {
         m_GridManager = Camera.main.GetComponent<GridManager>();
+        m_pawnMergeScript = GetComponent<PawnMerge>();
     }
 
     public bool GetBeingMoved()
@@ -59,7 +60,7 @@ public class PawnMovement : MonoBehaviour
                 }
             }
         }
-        gameObject.GetComponent<PawnMerge>().AttemptDropMerge();
+        m_pawnMergeScript.AttemptDropMerge();
         MoveToHomeTile();
         //Move current grid
         m_beingMoved = false;

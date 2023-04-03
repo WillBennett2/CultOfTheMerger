@@ -53,6 +53,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GraveItem
       objectReference: {fileID: 0}
+    - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f67caf1f7443dfb4ba764bbd50942680, type: 3}
@@ -89,14 +94,5 @@ MonoBehaviour:
   m_inventory: {fileID: 0}
   m_GridManager: {fileID: 0}
   m_gridRef: []
-  m_objectDataRef: {fileID: 11400000, guid: 57a79b05778014b45b43daa2c02ca9d4, type: 2}
-  m_objectDatas: []
-  m_minionTypesNum: 2
-  m_minionData:
-  - m_minionType: 0
-    m_pawnLevels: {fileID: 0}
-    m_manaType: 0
-    m_baseMana: 0
-    m_manaMultiplier: 0
-    m_sacrificialBaseValue: 0
-    m_sacrificialMultiplier: 0
+  m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
+  m_minionData: []

@@ -10,6 +10,8 @@ public class Interactable : MonoBehaviour
     private float m_startZPos;
 
     private bool m_isDragging = false;
+    private PawnMovement m_thisPawnMovementScript;
+    private Buildings m_thisPawnBuildingScript;
 
     [SerializeField] private bool m_isDraggable = false;
     [SerializeField] private bool m_isInteractable = false;
@@ -19,6 +21,8 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         m_gameManager = FindObjectOfType<GameManager>();
+        m_thisPawnMovementScript = GetComponent<PawnMovement>();
+        m_thisPawnBuildingScript = GetComponent<Buildings>();
         m_mainCamera = Camera.main;
     }
 
@@ -56,17 +60,17 @@ public class Interactable : MonoBehaviour
         m_isDragging = true;
         if(m_isDraggable)
         {
-            if (gameObject.GetComponent<PawnMovement>() != null)
+            if (m_thisPawnMovementScript != null)
             {
-                gameObject.GetComponent<PawnMovement>().BeingHeld();
+                m_thisPawnMovementScript.BeingHeld();
             }
         }
 
         if (m_isInteractable)
         {
-            if (gameObject.GetComponent<Buildings>() != null)
+            if (m_thisPawnBuildingScript != null)
             {
-                gameObject.GetComponent<Buildings>().Tapped();
+                m_thisPawnBuildingScript.Tapped();
             }
 			m_gameManager.SelectedPawn = gameObject;
 		}
@@ -78,7 +82,7 @@ public class Interactable : MonoBehaviour
         {
             m_isDragging = false;
             
-            gameObject.GetComponent<PawnMovement>().Dropped();
+            m_thisPawnMovementScript.Dropped();
         }
     }
     private void DragObject()
