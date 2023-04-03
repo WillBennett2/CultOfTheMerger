@@ -27,6 +27,10 @@ public class Inventory : MonoBehaviour
 
     [Header("Sacrifice")] 
     [SerializeField] private int m_cultSacrificeValue;
+    [SerializeField] private int m_maxCultValue;
+    [SerializeField]private TextMeshProUGUI m_cultValueUIText;
+    [SerializeField]private TextMeshProUGUI m_MaxCultValueUIText;
+    [SerializeField] private Slider m_cultValueSlider;
     [Header("Shop")]
     [SerializeField] private int m_coinCount;
     [SerializeField] private int m_gemCount;
@@ -74,7 +78,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_necroStore += value;
-            UpdateUI();
+            UpdateManaUI();
         }
         get
         {
@@ -91,6 +95,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_cultSacrificeValue += value;
+            UpdateGeneralUI();
         }
     }
     public int Coins
@@ -109,11 +114,16 @@ public class Inventory : MonoBehaviour
         m_necroSlider.value = m_necroStore;
         m_necroUIText.text = Mathf.Round(m_necroStore).ToString();
         m_necroSlider.maxValue = m_necroCapacity;
+
+        m_cultValueSlider.value = m_cultSacrificeValue;
+        m_cultValueSlider.maxValue = m_maxCultValue;
+        m_cultValueUIText.text = Mathf.Round(m_cultSacrificeValue).ToString();
+        m_MaxCultValueUIText.text = ChangeUINumber(m_maxCultValue).ToString()+ "K";
         
         while (m_generateMana)
         {
             GenerateMana();
-            UpdateUI();
+            UpdateManaUI();
             yield return new WaitForSeconds(m_genDelay);
         }
         
@@ -131,9 +141,25 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void UpdateUI()
+    void UpdateManaUI()
     {
         m_necroSlider.value = m_necroStore;
-        m_necroUIText.text = Mathf.Round(m_necroStore).ToString();
+        m_necroUIText.text =ChangeUINumber((int) m_necroStore).ToString()+"K";
+    }
+
+    void UpdateGeneralUI()
+    {
+        m_cultValueSlider.value = m_cultSacrificeValue;
+        m_cultValueUIText.text = Mathf.Round(ChangeUINumber(m_cultSacrificeValue)).ToString();
+    }
+
+    int ChangeUINumber(int value)
+    {
+        if (value >= 1000)
+        {
+            value /= 1000;
+        }
+
+        return value;
     }
 }

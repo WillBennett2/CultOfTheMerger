@@ -44,8 +44,12 @@ public class PawnMana : MonoBehaviour
 
     private void LevelUpManaGen(int id)
     {
-        if(id == m_id)
+        if (id == m_id)
+        {
+            m_inventoryScript.NecroModifier = -m_baseMana;
             m_baseMana *= m_manaMultiplier;
+            m_inventoryScript.NecroModifier = +m_baseMana;
+        }
     }
 
     // Update is called once per frame
