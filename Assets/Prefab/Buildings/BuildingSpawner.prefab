@@ -53,7 +53,7 @@ MonoBehaviour:
   m_buildingType: 1
   m_itemType: 0
   m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
-  m_minionPrefab: {fileID: 1072640369382412887, guid: 3693dbd304c04004bb913ad61cfafa4c,
+  m_minionPrefab: {fileID: 933107220898322176, guid: 4a3f5e832b4ec644ba8b9e55bfdb974a,
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: 

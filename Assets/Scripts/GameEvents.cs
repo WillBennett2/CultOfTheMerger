@@ -13,12 +13,21 @@ public class GameEvents : MonoBehaviour
         m_current = this;
     }
     public event Action<int> onMinionLevelUp;
-
     public void MinionLevelUp(int id)
     {
         if (onMinionLevelUp!=null)
         {
             onMinionLevelUp(id);
+        }
+    }
+
+    public event Action<GameObject, PawnDefinitions.MSacrificeTypes,float> onPawnSacrifice;
+
+    public void PawnSacrifice(GameObject pawnReference,PawnDefinitions.MSacrificeTypes sacrificeTypes ,float sacrificeValue)
+    {
+        if (onPawnSacrifice!=null)
+        {
+            onPawnSacrifice(pawnReference,sacrificeTypes ,sacrificeValue);
         }
     }
 }

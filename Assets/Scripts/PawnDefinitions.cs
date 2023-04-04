@@ -11,6 +11,10 @@ public struct PawnDefinitions
     public enum MManaType {Empty,Necro,Life,Night}
     public enum MBuildingType {Empty,Grave,Life,Night,General }
     public enum MItemType {Empty,Coin,Potion,Food }
+    public enum MSacrificeTypes
+    {
+        Empty,CultValue,Mana1,Mana2,Mana3,Coin,Gem,Rune1,Rune2,Rune3,Rune4
+    }
 
 
     public MPawnObjects m_pawnObjects;
@@ -18,17 +22,18 @@ public struct PawnDefinitions
     public MManaType m_manaType;
     public MBuildingType m_buildingType;
     public MItemType m_itemType;
+    public MSacrificeTypes m_sacrificeTypes;
     public PawnLevels m_pawnLevels;
     public int m_currentLevel;
 
-    public PawnDefinitions(MPawnObjects pawnObjects,MMinionType minionType,MManaType manaType,MBuildingType buildingType,MItemType itemType,PawnLevels pawnLevels ,int currentLevel)
+    public PawnDefinitions(MPawnObjects pawnObjects,MMinionType minionType,MManaType manaType,MBuildingType buildingType,MItemType itemType,MSacrificeTypes sacrificeTypes,PawnLevels pawnLevels ,int currentLevel)
     {
         this.m_pawnObjects = pawnObjects;
         this.m_minionType = minionType;
         this.m_manaType = manaType;
         this.m_buildingType = buildingType;
         this.m_itemType = itemType;
-        
+        this.m_sacrificeTypes = sacrificeTypes;
         this.m_pawnLevels = pawnLevels;
         this.m_currentLevel = currentLevel;
     }
