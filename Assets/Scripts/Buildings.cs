@@ -86,6 +86,10 @@ public class Buildings : MonoBehaviour
     {
         if(gameObject.GetComponent<Interactable>().TappedObject == gameObject)
             SpawnPawn();
+        else
+        {
+            SpawnPawn();
+        }
 
     }
     private int GenRandomNum(int endNum)
