@@ -619,14 +619,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182f7e972f6cbc6429ae9e2663b695e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 0
+  m_objectType: 2
   m_minionType: 0
   m_manaType: 0
   m_buildingType: 0
   m_itemType: 0
   m_sacrificeTypes: 0
   m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
-  m_minionPrefab: {fileID: 0}
+  m_minionPrefab: {fileID: 933107220898322176, guid: 4a3f5e832b4ec644ba8b9e55bfdb974a,
+    type: 3}
   m_buildingLevel: 0
   m_spawnCosts: 
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
