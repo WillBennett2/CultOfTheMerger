@@ -13,6 +13,8 @@ public class Buildings : MonoBehaviour
     [SerializeField] private PawnDefinitions.MBuildingType m_buildingType;
     [SerializeField] private PawnDefinitions.MItemType m_itemType;
     [SerializeField] private PawnDefinitions.MSacrificeTypes m_sacrificeTypes;
+    [SerializeField] private PawnDefinitions.MEnemyTypes m_enemyTypes;
+    [SerializeField] private PawnDefinitions.MRewardType m_rewardType;
     [SerializeField] private BuildingItems m_buildingItems ;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_pawnObject;
@@ -32,6 +34,8 @@ public class Buildings : MonoBehaviour
     [SerializeField] private List<ObjectData.Minion> m_minionData;
     private int m_itemTypesCount;
     [SerializeField] private List<ObjectData.Item> m_itemData;
+    private int m_enemyTypesCount;
+    [SerializeField] private List<ObjectData.Enemy> m_enemyData;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +69,12 @@ public class Buildings : MonoBehaviour
         {
             m_itemData.Add(new ObjectData.Item());
             m_itemData[i] = m_objectDataRef.Items[i];
+        }
+        m_enemyTypesCount = m_objectDataRef.Enemies.Length;
+        for (int i = 0; i < m_enemyTypesCount; i++)
+        {
+            m_enemyData.Add(new ObjectData.Enemy());
+            m_enemyData[i] = m_objectDataRef.Enemies[i];
         }
     }
     private void OnDestroy()
@@ -148,6 +158,13 @@ public class Buildings : MonoBehaviour
             CreateObject(tileNum);
             SetItemType(randNum);
         }
+        if (m_objectType == PawnDefinitions.MPawnObjects.Enemy)
+        {
+            int randNum = GenRandomNum(m_enemyTypesCount); 
+            CreateObject(tileNum);
+            SetEnemyType(randNum);
+        }
+        
 
         if (m_pawnObject != null)
         {
@@ -183,12 +200,12 @@ public class Buildings : MonoBehaviour
                 if (m_buildingType == PawnDefinitions.MBuildingType.Grave)
                 {
                     //object type,minion type, mana type, building type, item type, pawn level, current level
-                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,m_sacrificeTypes,
-                        m_buildingItems.GetPawnLevels(0), 0);
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType
+                        ,m_buildingItems.GetPawnLevels(0), 0);
                 }
                 else
                 {
-                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,m_sacrificeTypes,
+                    pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType, m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType,
                         m_buildingItems.GetPawnLevels(1), 0);
                 }
             }
@@ -199,7 +216,7 @@ public class Buildings : MonoBehaviour
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
         if (pawnMergeScript)
         {
-            pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType,  m_itemData[randNum].m_itemType,m_itemData[randNum].m_sacrificeType,
+            pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType,  m_itemData[randNum].m_itemType,m_itemData[randNum].m_sacrificeType,m_enemyTypes,m_rewardType,
                     m_itemData[randNum].m_pawnLevels, 0);
             m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_itemData[randNum].m_sacrificialBaseValue,m_itemData[randNum].m_sacrificeType,m_itemData[randNum].m_sacrificialMultiplier);
         }
@@ -217,7 +234,8 @@ public class Buildings : MonoBehaviour
             if (pawnMergeScript)
             {
                 m_minionType = m_minionData[randNum].m_minionType;
-                pawnMergeScript.SetPawnValues(m_objectType,m_minionType, m_minionData[randNum].m_manaType,m_buildingType, m_itemType,m_minionData[randNum].m_sacrificeType, m_minionData[randNum].m_pawnLevels, 0);
+                pawnMergeScript.SetPawnValues(m_objectType,m_minionType, m_minionData[randNum].m_manaType,m_buildingType, m_itemType,m_minionData[randNum].m_sacrificeType,m_enemyTypes,m_rewardType,
+                    m_minionData[randNum].m_pawnLevels, 0);
                 manaData.SetManaValues(m_minionData[randNum].m_manaType, m_minionData[randNum].m_baseMana,m_minionData[randNum].m_manaMultiplier);
             }
 
@@ -226,6 +244,19 @@ public class Buildings : MonoBehaviour
         return false;
     }
 
+    private void SetEnemyType(int randNum)
+    {
+        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+        if (pawnMergeScript)
+        {
+            pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType,
+                m_itemType, m_enemyData[randNum].m_sacrificeType, m_enemyData[randNum].m_enemyTypes,m_rewardType,
+                m_enemyData[randNum].m_pawnLevel, 0);
+        }
+        m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_enemyData[randNum].m_sacrificialBaseValue,m_enemyData[randNum].m_sacrificeType,m_enemyData[randNum].m_sacrificialMultiplier);
+        m_pawnObject.GetComponent<PawnEnemy>().SetEnemyValues(m_enemyData[randNum].m_enemyTypes,
+            m_enemyData[randNum].m_manaAttraction, m_enemyData[randNum].m_health, m_enemyData[randNum].m_reward);
+    }
     private void ResetTypes()
     {
         m_minionType = PawnDefinitions.MMinionType.Empty;

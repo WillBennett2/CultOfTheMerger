@@ -22,9 +22,7 @@ public class PawnMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        
-            m_GridManager.UpdateTile(m_homeTileNum,false);
-        
+        m_GridManager.UpdateTile(m_homeTileNum,false);
     }
 
     public bool GetBeingMoved()

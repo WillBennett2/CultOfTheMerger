@@ -70,7 +70,8 @@ public class GridManager : MonoBehaviour
     {
         if (tileNum < m_columnLength * m_rowLength)
         {
-            m_grid[tileNum].GetComponent<TileInfo>().m_tileTaken = state;
+            if(m_grid[tileNum].GetComponent<TileInfo>())
+                m_grid[tileNum].GetComponent<TileInfo>().m_tileTaken = state;
         }
     }
     

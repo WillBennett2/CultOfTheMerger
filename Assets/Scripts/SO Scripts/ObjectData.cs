@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -55,4 +56,52 @@ public class ObjectData : ScriptableObject
         }
     }
     
+    [System.Serializable]public struct Reward
+    {
+        [SerializeField] private string m_name;
+        public PawnDefinitions.MRewardType m_rewardType;
+        public LootSo m_loot;
+        public PawnLevels m_pawnLevels;
+        public PawnDefinitions.MSacrificeTypes m_sacrificeType;
+        public float m_sacrificialBaseValue;
+        public float m_sacrificialMultiplier;
+    }
+    [SerializeField] private Reward[] m_rewards;
+
+    public Reward[] Rewards {
+        set
+        {
+            m_rewards = value;
+        }
+        get
+        {
+            return m_rewards;
+        }
+    }
+
+    [System.Serializable]
+    public struct Enemy
+    {
+        [SerializeField] private string m_name;
+        public PawnDefinitions.MEnemyTypes m_enemyTypes;
+        public PawnDefinitions.MManaType m_manaAttraction;
+        public float m_health;
+        public GameObject m_reward;
+        public PawnLevels m_pawnLevel;
+        public PawnDefinitions.MSacrificeTypes m_sacrificeType;
+        public float m_sacrificialBaseValue;
+        public float m_sacrificialMultiplier;
+    }
+
+    [SerializeField] private Enemy[] m_enemies;
+    public Enemy[] Enemies {
+        set
+        {
+            m_enemies = value;
+        }
+        get
+        {
+            return m_enemies;
+        }
+    }
 }

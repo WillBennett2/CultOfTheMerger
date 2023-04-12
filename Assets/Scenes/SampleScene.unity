@@ -2897,8 +2897,29 @@ PrefabInstance:
     - target: {fileID: 408791475145392435, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
+      propertyPath: m_enemyTypes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
+      propertyPath: m_objectType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
+      propertyPath: m_buildingType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
+      propertyPath: m_minionPrefab
+      value: 
+      objectReference: {fileID: 1304532761430759268, guid: 1e993c0d56880984ba6c9ac73abeb3f0,
+        type: 3}
     - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
       propertyPath: m_objectDataRef

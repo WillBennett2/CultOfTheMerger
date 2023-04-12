@@ -38,3 +38,22 @@ MonoBehaviour:
     m_sacrificeType: 5
     m_sacrificialBaseValue: 250
     m_sacrificialMultiplier: 0
+  m_rewards:
+  - m_name: CoinChest
+    m_rewardType: 1
+    m_loot: {fileID: 11400000, guid: 6f441cf194074c24ca1db63ddf6f0faa, type: 2}
+    m_pawnLevels: {fileID: 11400000, guid: 92df857ac0ba5d64f895b94ea9edb434, type: 2}
+    m_sacrificeType: 0
+    m_sacrificialBaseValue: 0
+    m_sacrificialMultiplier: 0
+  m_enemies:
+  - m_name: TreeMonster
+    m_enemyTypes: 1
+    m_manaAttraction: 1
+    m_health: 10
+    m_reward: {fileID: 7182468518952366351, guid: 4c94e1ef29996e34fb89c5cb83b01ebb,
+      type: 3}
+    m_pawnLevel: {fileID: 11400000, guid: 2bcbec3721d8ca4469f44b0de1a09279, type: 2}
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 100
+    m_sacrificialMultiplier: 0

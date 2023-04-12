@@ -37,6 +37,7 @@ public class InputManager : MonoBehaviour
         if (context.phase == InputActionPhase.Performed && 
             Physics.Raycast(m_mainCamera.ScreenPointToRay(m_touchPositionAction.ReadValue<Vector2>() ), out RaycastHit hit ))
         {
+            Debug.Log(hit.collider.name);
             m_interactedPawn = hit.collider.GetComponent<Interactable>();
             if(m_interactedPawn)
                 m_interactedPawn.TouchPerformedInput(position);
