@@ -22,8 +22,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float m_lifeCapacity;
     [SerializeField] private TextMeshProUGUI m_lifeUIText;
     [SerializeField] private Slider m_lifeSlider;
-    [Header("Store3")]
-    [SerializeField] private float m_manaStore3;
+    [Header("Hell")]
+    [SerializeField] private float m_hellStore;
+    [SerializeField] private float m_totalHellModifier;
+    [SerializeField] private float m_hellCapacity;
+    [SerializeField] private TextMeshProUGUI m_hellUIText;
+    [SerializeField] private Slider m_hellSlider;
 
     [Header("Sacrifice")] 
     [SerializeField] private int m_cultSacrificeValue;

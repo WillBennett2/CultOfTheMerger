@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
@@ -17,10 +18,13 @@ public class Interactable : MonoBehaviour
     [SerializeField] private bool m_isInteractable = false;
     [SerializeField] private GameManager m_gameManager;
     private bool m_isMinion;
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Awake()
     {
         m_gameManager = FindObjectOfType<GameManager>();
+    }
+    void Start()
+    {
         m_thisPawnMovementScript = GetComponent<PawnMovement>();
         m_thisPawnBuildingScript = GetComponent<Buildings>();
         m_mainCamera = Camera.main;
@@ -29,6 +33,7 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (m_isDragging&&m_isDraggable)
         {
             DragObject();
@@ -45,8 +50,17 @@ public class Interactable : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Vector3 mousePos = Input.mousePosition;
+        //HandleTouchDown(Input.mousePosition);
+    }
 
+    public void TouchPerformedInput(Vector3 position)
+    {
+        HandleTouchDown(position);   
+    }
+
+    private void HandleTouchDown(Vector3 mousePos)
+    {
+        
         if (!m_mainCamera.orthographic)
         {
             mousePos.z = 10;
@@ -72,11 +86,18 @@ public class Interactable : MonoBehaviour
             {
                 m_thisPawnBuildingScript.Tapped();
             }
-			m_gameManager.SelectedPawn = gameObject;
-		}
+            m_gameManager.SelectedPawn = gameObject;
+        }
     }
 
+    public void TouchCancelledInput()
+    {
+        HandleTouchUp();
+    }
     private void OnMouseUp()
+    {
+    }
+    private void HandleTouchUp()
     {
         if (m_isDraggable)
         {
@@ -85,9 +106,10 @@ public class Interactable : MonoBehaviour
             m_thisPawnMovementScript.Dropped();
         }
     }
+
     private void DragObject()
     {
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = Input.mousePosition;;
 
         if(!m_mainCamera.orthographic)
         {
