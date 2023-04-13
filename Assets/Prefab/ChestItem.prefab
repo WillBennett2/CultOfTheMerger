@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
       propertyPath: m_Name
-      value: GraveItem
+      value: ChestItem
       objectReference: {fileID: 0}
     - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
@@ -79,22 +79,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182f7e972f6cbc6429ae9e2663b695e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 1
+  m_objectType: 3
   m_minionType: 0
   m_manaType: 0
   m_buildingType: 0
-  m_itemType: 0
+  m_itemType: 1
   m_sacrificeTypes: 0
   m_enemyTypes: 0
   m_rewardType: 0
   m_buildingItems: {fileID: 11400000, guid: 8385f4aebcb096e4ca0e87e2e24b8f21, type: 2}
-  m_minionPrefab: {fileID: 6153599298191366668, guid: d2dfb6b67b1dcaf42a1e10c893602a5b,
+  m_minionPrefab: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: fa0000002c01000090010000f4010000bc020000
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
+  m_spawnsLimited: 1
+  m_maxUses: 5
+  m_limitedUsesCount: 0
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
   m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
   m_minionData: []
   m_itemData: []
   m_enemyData: []
+  m_rewardData: []

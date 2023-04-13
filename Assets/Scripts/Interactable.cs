@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour
     private bool m_isDragging = false;
     private PawnMovement m_thisPawnMovementScript;
     private Buildings m_thisPawnBuildingScript;
+    
 
     [SerializeField] private bool m_isDraggable = false;
     [SerializeField] private bool m_isInteractable = false;
@@ -86,6 +87,7 @@ public class Interactable : MonoBehaviour
             {
                 m_thisPawnBuildingScript.Tapped();
             }
+            
             m_gameManager.SelectedPawn = gameObject;
         }
     }

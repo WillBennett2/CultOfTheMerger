@@ -31,19 +31,12 @@ MonoBehaviour:
     m_sacrificeType: 1
     m_sacrificialBaseValue: 50
     m_sacrificialMultiplier: 2.1
-  m_items:
-  - m_name: Coin
-    m_itemType: 1
-    m_pawnLevels: {fileID: 11400000, guid: aac321d89cbb8da41a0b76187772625e, type: 2}
-    m_sacrificeType: 5
-    m_sacrificialBaseValue: 250
-    m_sacrificialMultiplier: 0
   m_rewards:
   - m_name: CoinChest
     m_rewardType: 1
-    m_loot: {fileID: 11400000, guid: 6f441cf194074c24ca1db63ddf6f0faa, type: 2}
-    m_pawnLevels: {fileID: 11400000, guid: 92df857ac0ba5d64f895b94ea9edb434, type: 2}
-    m_sacrificeType: 0
+    m_loot: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
+    m_pawnLevel: {fileID: 11400000, guid: 92df857ac0ba5d64f895b94ea9edb434, type: 2}
+    m_sacrificeType: 1
     m_sacrificialBaseValue: 0
     m_sacrificialMultiplier: 0
   m_enemies:

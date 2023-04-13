@@ -21,7 +21,35 @@ public class Buildings : MonoBehaviour
     [SerializeField] private int m_buildingLevel;
     [SerializeField] private int[] m_spawnCosts;
     [SerializeField] private BuildingData m_buildingData;
+    
+    [Header("Spawn Uses")]
+    [SerializeField] private bool m_spawnsLimited = false;
+    [SerializeField] private int m_maxUses;
+    [SerializeField] private int m_limitedUsesCount;
 
+    public int BuildingUses
+    {
+        get
+        {
+            return m_maxUses;
+        }
+        set
+        {
+            m_maxUses = value;
+        }
+    }
+
+    public bool IsBuildingLimited
+    {
+        get
+        {
+            return m_spawnsLimited;
+        }
+        set
+        {
+            m_spawnsLimited = value;
+        }
+    }
 
     private GameManager m_gameManager;
     private Inventory m_inventory;
@@ -30,12 +58,15 @@ public class Buildings : MonoBehaviour
     private int m_sizeOfGrid;
 
     [SerializeField] private ObjectData m_objectDataRef;
+    [SerializeField] private ItemData m_itemDataRef;
     private int m_minionTypesCount;
     [SerializeField] private List<ObjectData.Minion> m_minionData;
     private int m_itemTypesCount;
-    [SerializeField] private List<ObjectData.Item> m_itemData;
+    [SerializeField] private List<ItemData.Item> m_itemData;
     private int m_enemyTypesCount;
     [SerializeField] private List<ObjectData.Enemy> m_enemyData;
+    private int m_rewardTypesCount;
+    [SerializeField] private List<ObjectData.Reward> m_rewardData;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +78,8 @@ public class Buildings : MonoBehaviour
         m_gameManager.Buildings.Add(this);
         AssignObjectData();
         StartCoroutine(LateStart(1));
-        
+
+        m_limitedUsesCount = m_maxUses;
     }
 
     IEnumerator LateStart(float waitTime)
@@ -64,17 +96,23 @@ public class Buildings : MonoBehaviour
             m_minionData.Add(new ObjectData.Minion());
             m_minionData[i] = m_objectDataRef.Minions[i];
         }
-        m_itemTypesCount = m_objectDataRef.Items.Length;
+        m_itemTypesCount = m_itemDataRef.Items.Length;
         for (int i = 0; i < m_itemTypesCount; i++)
         {
-            m_itemData.Add(new ObjectData.Item());
-            m_itemData[i] = m_objectDataRef.Items[i];
+            m_itemData.Add(new ItemData.Item());
+            m_itemData[i] = m_itemDataRef.Items[i];
         }
         m_enemyTypesCount = m_objectDataRef.Enemies.Length;
         for (int i = 0; i < m_enemyTypesCount; i++)
         {
             m_enemyData.Add(new ObjectData.Enemy());
             m_enemyData[i] = m_objectDataRef.Enemies[i];
+        }
+        m_rewardTypesCount = m_objectDataRef.Rewards.Length;
+        for (int i = 0; i < m_rewardTypesCount; i++)
+        {
+            m_rewardData.Add(new ObjectData.Reward());
+            m_rewardData[i] = m_objectDataRef.Rewards[i];
         }
     }
     private void OnDestroy()
@@ -94,8 +132,27 @@ public class Buildings : MonoBehaviour
 
     public void Tapped()
     {
-        if(gameObject.GetComponent<Interactable>().TappedObject == gameObject)
-            SpawnPawn();
+        if (GetComponent<Interactable>()!=null && gameObject.GetComponent<Interactable>().TappedObject == gameObject)
+        {
+            if (m_spawnsLimited)
+            {
+                m_limitedUsesCount--;
+            }
+            else
+            {
+                SpawnPawn();
+            }
+
+            if (m_limitedUsesCount>0)
+            {
+                SpawnPawn();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+        }
         else
         {
             SpawnPawn();
@@ -163,6 +220,12 @@ public class Buildings : MonoBehaviour
             int randNum = GenRandomNum(m_enemyTypesCount); 
             CreateObject(tileNum);
             SetEnemyType(randNum);
+        }
+        if (m_objectType == PawnDefinitions.MPawnObjects.Reward)
+        {
+            int randNum = GenRandomNum(m_rewardTypesCount); 
+            CreateObject(tileNum);
+            SetRewardType(randNum);
         }
         
 
@@ -256,6 +319,17 @@ public class Buildings : MonoBehaviour
         m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_enemyData[randNum].m_sacrificialBaseValue,m_enemyData[randNum].m_sacrificeType,m_enemyData[randNum].m_sacrificialMultiplier);
         m_pawnObject.GetComponent<PawnEnemy>().SetEnemyValues(m_enemyData[randNum].m_enemyTypes,
             m_enemyData[randNum].m_manaAttraction, m_enemyData[randNum].m_health, m_enemyData[randNum].m_reward);
+    }
+    private void SetRewardType(int randNum)
+    {
+        PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
+        if (pawnMergeScript)
+        {
+            pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType,
+                m_itemType, m_rewardData[randNum].m_sacrificeType, m_enemyTypes,m_rewardData[randNum].m_rewardType,
+                m_rewardData[randNum].m_pawnLevel, 0);
+        }
+        m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_rewardData[randNum].m_sacrificialBaseValue,m_rewardData[randNum].m_sacrificeType,m_rewardData[randNum].m_sacrificialMultiplier);
     }
     private void ResetTypes()
     {

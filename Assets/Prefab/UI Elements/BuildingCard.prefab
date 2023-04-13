@@ -625,15 +625,23 @@ MonoBehaviour:
   m_buildingType: 0
   m_itemType: 0
   m_sacrificeTypes: 0
+  m_enemyTypes: 0
+  m_rewardType: 0
   m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
   m_minionPrefab: {fileID: 933107220898322176, guid: 4a3f5e832b4ec644ba8b9e55bfdb974a,
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: 
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
+  m_spawnsLimited: 0
+  m_maxUses: 0
+  m_limitedUsesCount: 0
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
+  m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
   m_minionData: []
   m_itemData: []
+  m_enemyData: []
+  m_rewardData: []
 --- !u!114 &4987435763235684088
 MonoBehaviour:
   m_ObjectHideFlags: 0

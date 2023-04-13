@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,15 @@ public class PawnEnemy : MonoBehaviour
     [SerializeField] private GameObject m_pawnLevel;
     
     private PawnDefinitions m_pawn;
+
+    private Camera m_camera;
+    private Buildings m_buildingScript;
+
+    private void Start()
+    {
+        m_camera = Camera.main;
+        m_buildingScript = m_camera.GetComponent<Buildings>();
+    }
 
     public void SetEnemyValues(PawnDefinitions.MEnemyTypes enemyTypes,
         PawnDefinitions.MManaType manaAttraction,float health, GameObject reward)
@@ -35,7 +45,7 @@ public class PawnEnemy : MonoBehaviour
     {
         Debug.Log("Ahhhhh");
         //spawn reward
-        
+        m_buildingScript.Tapped();
         Destroy(gameObject);
     }
 }

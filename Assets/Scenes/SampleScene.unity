@@ -2911,6 +2911,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
         type: 3}
+      propertyPath: m_itemDataRef
+      value: 
+      objectReference: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f,
+        type: 2}
+    - target: {fileID: 408791475145392445, guid: dcb65fb9f2916cb4aaf6d597dd8a250c,
+        type: 3}
       propertyPath: m_buildingType
       value: 0
       objectReference: {fileID: 0}
@@ -3612,6 +3618,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147630249249420182, guid: 3b78bd433ea1d5e4596908c63c306a29,
         type: 3}
+      propertyPath: m_objectType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 147630249249420182, guid: 3b78bd433ea1d5e4596908c63c306a29,
+        type: 3}
+      propertyPath: m_itemDataRef
+      value: 
+      objectReference: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f,
+        type: 2}
+    - target: {fileID: 147630249249420182, guid: 3b78bd433ea1d5e4596908c63c306a29,
+        type: 3}
       propertyPath: m_objectDataRef
       value: 
       objectReference: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264,
@@ -3714,6 +3731,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194232}
   - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
@@ -3868,6 +3886,41 @@ MonoBehaviour:
     runeCount2: 0
     runeCount3: 0
     runeCount4: 0
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182f7e972f6cbc6429ae9e2663b695e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectType: 5
+  m_minionType: 0
+  m_manaType: 0
+  m_buildingType: 0
+  m_itemType: 0
+  m_sacrificeTypes: 0
+  m_enemyTypes: 0
+  m_rewardType: 1
+  m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
+  m_minionPrefab: {fileID: 933107220898322176, guid: ef094217433e67748b8f00d1c7ab507b,
+    type: 3}
+  m_buildingLevel: 0
+  m_spawnCosts: 
+  m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
+  m_spawnsLimited: 0
+  m_maxUses: 0
+  m_limitedUsesCount: 0
+  m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
+  m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
+  m_minionData: []
+  m_itemData: []
+  m_enemyData: []
+  m_rewardData: []
 --- !u!1 &969956697
 GameObject:
   m_ObjectHideFlags: 0
