@@ -185,14 +185,14 @@ public class Buildings : MonoBehaviour
         m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
         m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
     }
-    private void SpawnPawn()
+    private bool SpawnPawn()
     {
         ResetTypes();
         
         int tileNum = FindFreeTile();
         if (tileNum == -1)
         {
-            return;
+            return false;
         }
         
 
@@ -234,6 +234,7 @@ public class Buildings : MonoBehaviour
             m_GridManager.UpdateTile(tileNum,true);
             m_pawnObject = null;
         }
+        return true;
     
     }
 
