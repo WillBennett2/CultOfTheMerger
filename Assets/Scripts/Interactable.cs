@@ -58,10 +58,27 @@ public class Interactable : MonoBehaviour
     {
         HandleTouchDown(position);   
     }
+    public void HoldPerformedInput(Vector3 position)
+    {
+        HandleHoldInput(position);
+    }
 
     private void HandleTouchDown(Vector3 mousePos)
     {
-        
+       
+        if (m_isInteractable)
+        {
+            if (m_thisPawnBuildingScript != null)
+            {
+                m_thisPawnBuildingScript.Tapped();
+            }
+            
+            m_gameManager.SelectedPawn = gameObject;
+        }
+    }
+    private void HandleHoldInput(Vector3 mousePos)
+    {
+
         if (!m_mainCamera.orthographic)
         {
             mousePos.z = 10;
@@ -71,24 +88,13 @@ public class Interactable : MonoBehaviour
 
         m_startXPos = mousePos.x - transform.localPosition.x;
         m_startZPos = mousePos.z - transform.localPosition.z;
-        
         m_isDragging = true;
-        if(m_isDraggable)
+        if (m_isDraggable)
         {
             if (m_thisPawnMovementScript != null)
             {
                 m_thisPawnMovementScript.BeingHeld();
             }
-        }
-
-        if (m_isInteractable)
-        {
-            if (m_thisPawnBuildingScript != null)
-            {
-                m_thisPawnBuildingScript.Tapped();
-            }
-            
-            m_gameManager.SelectedPawn = gameObject;
         }
     }
 
@@ -101,7 +107,7 @@ public class Interactable : MonoBehaviour
     }
     private void HandleTouchUp()
     {
-        if (m_isDraggable)
+        if (m_isDraggable && m_isDragging)
         {
             m_isDragging = false;
             

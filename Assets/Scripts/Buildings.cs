@@ -24,7 +24,7 @@ public class Buildings : MonoBehaviour
     
     [Header("Spawn Uses")]
     [SerializeField] private bool m_spawnsLimited = false;
-    [SerializeField] private int m_maxUses;
+    [SerializeField] private int m_maxUses=1;
     [SerializeField] private int m_limitedUsesCount;
 
     public int BuildingUses
@@ -132,30 +132,25 @@ public class Buildings : MonoBehaviour
 
     public void Tapped()
     {
-        if (GetComponent<Interactable>()!=null && gameObject.GetComponent<Interactable>().TappedObject == gameObject)
+        bool spawn = false;
+        int tileNum = FindFreeTile();
+
+        if (tileNum != -1 && GetComponent<Interactable>()!=null && GetComponent<Interactable>().TappedObject == gameObject)
         {
             if (m_spawnsLimited)
             {
                 m_limitedUsesCount--;
             }
-            else
-            {
-                SpawnPawn();
-            }
 
-            if (m_limitedUsesCount>0)
-            {
-                SpawnPawn();
-            }
-            else
+            if (m_limitedUsesCount<=0)
             {
                 Destroy(gameObject);
             }
-
         }
-        else
+
+        if(tileNum != -1)
         {
-            SpawnPawn();
+            SpawnPawn(tileNum);
         }
 
     }
@@ -163,38 +158,9 @@ public class Buildings : MonoBehaviour
     {
         return (Random.Range(0,endNum ));
     }
-
-    private int FindFreeTile()
-    {
-        for (int i = 0; i < m_sizeOfGrid; i++)
-        {
-            if (!m_gridRef[i].GetComponent<TileInfo>().m_tileTaken)
-            {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
-    private void CreateObject(int tileNum)
-    {
-        m_pawnObject = Instantiate(m_minionPrefab,
-            new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
-                m_gridRef[tileNum].transform.position.z), Quaternion.identity);
-        m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum],tileNum);
-        m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
-    }
-    private bool SpawnPawn()
+    private void SpawnPawn(int tileNum)
     {
         ResetTypes();
-        
-        int tileNum = FindFreeTile();
-        if (tileNum == -1)
-        {
-            return false;
-        }
-        
 
         if (m_objectType == PawnDefinitions.MPawnObjects.Building)
         {
@@ -234,10 +200,28 @@ public class Buildings : MonoBehaviour
             m_GridManager.UpdateTile(tileNum,true);
             m_pawnObject = null;
         }
-        return true;
     
     }
+    private void CreateObject(int tileNum)
+    {
+        m_pawnObject = Instantiate(m_minionPrefab,
+            new Vector3(m_gridRef[tileNum].transform.position.x, m_minionPrefab.transform.position.y,
+                m_gridRef[tileNum].transform.position.z), Quaternion.identity);
+        m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum], tileNum);
+        m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
+    }
+    private int FindFreeTile()
+    {
+        for (int i = 0; i < m_sizeOfGrid; i++)
+        {
+            if (!m_gridRef[i].GetComponent<TileInfo>().m_tileTaken)
+            {
+                return i;
+            }
+        }
 
+        return -1;
+    }
 
     private void SetBuildingType(int tileNum)
     {
