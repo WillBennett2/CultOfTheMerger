@@ -22,13 +22,25 @@ public class PawnSacrifice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameEvents.m_current.onMinionLevelUp += LevelUpValues;
         if (gameObject.GetComponent<Minions>())
         {
             m_id = gameObject.GetComponent<Minions>().ID;   
         }
         m_inventoryScript = FindObjectOfType<Inventory>();
     }
-    
+    private void OnDestroy()
+    {
+        GameEvents.m_current.onMinionLevelUp -= LevelUpValues;
+    }
+    private void LevelUpValues(int id)
+    {
+        if (id == m_id)
+        {
+            m_baseSacrificialValue *= m_sacrificeMultiplier;
+        }
+    }
+
     public void AttemptSacrifice()
     {
         if (m_alter) 

@@ -135,7 +135,7 @@ public class Buildings : MonoBehaviour
         bool spawn = false;
         int tileNum = FindFreeTile();
 
-        if (tileNum != -1 && GetComponent<Interactable>()!=null)//&&GetComponent<Interactable>().TappedObject == gameObject)
+        if (tileNum != -1 && GetComponent<Interactable>()!=null)
         {
             if (m_spawnsLimited)
             {
@@ -276,8 +276,6 @@ public class Buildings : MonoBehaviour
         {
             m_inventory.NecroStore = -m_spawnCosts[m_buildingLevel];
             CreateObject(tileNum);
-            m_pawnObject.GetComponent<Minions>().ID = m_gameManager.ID;
-            m_pawnObject.GetComponent<Minions>().Damage = m_minionData[randNum].m_damageBaseValue;
             PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
             PawnMana manaData = m_pawnObject.GetComponent<PawnMana>();
             Minions minionData = m_pawnObject.GetComponent<Minions>();
@@ -290,13 +288,13 @@ public class Buildings : MonoBehaviour
                 manaData.SetManaValues(m_minionData[randNum].m_manaType, m_minionData[randNum].m_baseMana,m_minionData[randNum].m_manaMultiplier);
                 minionData.ID = m_gameManager.ID;
                 minionData.Damage = m_minionData[randNum].m_damageBaseValue;
+                minionData.DamageMultiplier = m_minionData[randNum].m_damageMultiplier;
             }
 
             return true;
         }
         return false;
     }
-
     private void SetEnemyType(int randNum)
     {
         PawnMerge pawnMergeScript = m_pawnObject.GetComponent<PawnMerge>();
