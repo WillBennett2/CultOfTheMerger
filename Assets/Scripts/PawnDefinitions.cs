@@ -4,8 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public struct PawnDefinitions
-{
-    
+{ 
     public enum MPawnObjects {Empty,Minions,Building,Item,Enemy,Reward}
     public enum MMinionType {Empty,Zombie,Skeleton}
     public enum MManaType {Empty,Necro,Life,Night}

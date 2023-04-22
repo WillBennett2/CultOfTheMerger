@@ -19,7 +19,7 @@ public class PawnMerge : MonoBehaviour
     [SerializeField] private PawnDefinitions.MRewardType m_rewardType;
     [SerializeField] private PawnLevels m_pawnProgression;
     [SerializeField] private int m_currentLevel;
-    private PawnDefinitions m_pawn;
+    private PawnDefinitions m_thisPawn;
     [SerializeField]private GameObject m_currentGameObject;
 
     public PawnMovement GetThisMovementScript
@@ -59,46 +59,47 @@ public class PawnMerge : MonoBehaviour
     private void DefinePawn()
     {
         if(m_pawnProgression)
-            m_pawn = new PawnDefinitions(m_objectType,m_minionType,m_manaType,m_buildingType,m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType,m_pawnProgression,m_currentLevel);
+            m_thisPawn = new PawnDefinitions(m_objectType,m_minionType,m_manaType,m_buildingType,m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType,m_pawnProgression,m_currentLevel);
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangePawnVisual();
     }
     private void ChangePawnVisual()
     {
         Destroy(m_currentGameObject);
-        m_currentGameObject = Instantiate(m_pawn.m_pawnLevels.m_pawnProgression[m_pawn.m_currentLevel],transform );
+        m_currentGameObject = Instantiate(m_thisPawn.m_pawnLevels.m_pawnProgression[m_thisPawn.m_currentLevel],transform );
         m_currentGameObject.transform.SetParent(transform);
     }
-    private void Merge(PawnDefinitions inHand,PawnMerge onTilePawn)
+    private void Merge(PawnMerge onTilePawn)
     {
         bool sameType = false;
         m_onTilePawn = onTilePawn;
-        if (inHand.m_minionType == onTilePawn.m_minionType)
+        if (m_thisPawn.m_minionType == onTilePawn.m_minionType)
         {
             sameType = true;
         }
 
-        if (inHand.m_buildingType != PawnDefinitions.MBuildingType.Empty && inHand.m_buildingType == onTilePawn.m_buildingType)
+        if (m_thisPawn.m_buildingType != PawnDefinitions.MBuildingType.Empty && m_thisPawn.m_buildingType == onTilePawn.m_buildingType)
         {
             sameType = true;
         }
 
-        if (inHand.m_itemType != PawnDefinitions.MItemType.Empty && inHand.m_itemType == onTilePawn.m_itemType)
+        if (m_thisPawn.m_itemType != PawnDefinitions.MItemType.Empty && m_thisPawn.m_itemType == onTilePawn.m_itemType)
         {
             sameType = true;
         }
-        if (onTilePawn.m_enemyTypes != PawnDefinitions.MEnemyTypes.Empty && inHand.m_minionType != PawnDefinitions.MMinionType.Empty )
+        if (onTilePawn.m_enemyTypes != PawnDefinitions.MEnemyTypes.Empty && m_thisPawn.m_minionType != PawnDefinitions.MMinionType.Empty )
         {
-            onTilePawn.GetComponent<PawnEnemy>().TakeDamage(10);
+            onTilePawn.GetComponent<PawnEnemy>().TakeDamage(GetComponent<Minions>().Damage);
+            Destroy(gameObject);
         }
         
         bool beingMoved = m_onTilePawn.GetThisMovementScript.GetBeingMoved();
         
-        if (sameType && !beingMoved && inHand.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
+        if (sameType && !beingMoved && m_thisPawn.m_currentLevel == onTilePawn.m_currentLevel && m_currentLevel < m_pawnProgression.m_pawnProgression.Length-1)
         {
 
-            onTilePawn.m_pawn.m_currentLevel += 1;
-            onTilePawn.m_currentLevel = onTilePawn.m_pawn.m_currentLevel;
+            onTilePawn.m_thisPawn.m_currentLevel += 1;
+            onTilePawn.m_currentLevel = onTilePawn.m_thisPawn.m_currentLevel;
             onTilePawn.ChangePawnVisual();
 
             GameEvents.m_current.MinionLevelUp(onTilePawn.m_id);
@@ -109,7 +110,7 @@ public class PawnMerge : MonoBehaviour
     {
         if (m_onTilePawn) //try to merge
         {
-            Merge(m_pawn,m_onTilePawn);
+            Merge(m_onTilePawn);
         }
     }
     private void OnTriggerStay(Collider other)
