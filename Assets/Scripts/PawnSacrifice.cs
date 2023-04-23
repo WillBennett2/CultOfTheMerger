@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PawnSacrifice : MonoBehaviour
 {
-    [SerializeField] private int m_id;
+    [SerializeField] private string m_id;
+    private ID m_idScript;
     [SerializeField] private float m_baseSacrificialValue;
     [SerializeField] private float m_sacrificeMultiplier;
     [SerializeField] private PawnDefinitions.MSacrificeTypes m_sacrificeTypes;
@@ -22,18 +23,21 @@ public class PawnSacrifice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.m_current.onMinionLevelUp += LevelUpValues;
-        if (gameObject.GetComponent<Minions>())
-        {
-            m_id = gameObject.GetComponent<Minions>().ID;   
-        }
+        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
+        StartCoroutine(LateStart(1));
         m_inventoryScript = FindObjectOfType<Inventory>();
+    }
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        m_idScript = GetComponent<ID>();
+        m_id = m_idScript.GetID;
     }
     private void OnDestroy()
     {
-        GameEvents.m_current.onMinionLevelUp -= LevelUpValues;
+        GameEvents.m_current.onPawnLevelUp -= LevelUpValues;
     }
-    private void LevelUpValues(int id)
+    private void LevelUpValues(string id)
     {
         if (id == m_id)
         {

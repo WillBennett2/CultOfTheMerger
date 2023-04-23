@@ -10,7 +10,7 @@ public class ObjectData : ScriptableObject
 
     [System.Serializable]public struct Minion
     {
-        [SerializeField] private string m_name;
+        public string m_name;
         public PawnDefinitions.MMinionType m_minionType;
         public PawnLevels m_pawnLevels;
         public PawnDefinitions.MManaType m_manaType;

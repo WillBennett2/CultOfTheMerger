@@ -6,14 +6,10 @@ using UnityEngine;
 public class Minions : MonoBehaviour
 {
     
-    [SerializeField] private int m_id;
     [SerializeField] private float m_damage;
     [SerializeField] private float m_damageMultiplier;
-    public int ID
-    {
-        get => m_id;
-        set => m_id = value;
-    }
+    [SerializeField] private ID m_id;
+
     public float Damage
     {
         get => m_damage;
@@ -24,17 +20,18 @@ public class Minions : MonoBehaviour
        get => m_damageMultiplier;
        set => m_damageMultiplier = value; 
     }
-    private void Start()
+    private void Awake()
     {
-        GameEvents.m_current.onMinionLevelUp += LevelUpValues;
+        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
+        m_id = GetComponent<ID>();
     }
     private void OnDestroy()
     {
-        GameEvents.m_current.onMinionLevelUp -= LevelUpValues;
+        GameEvents.m_current.onPawnLevelUp -= LevelUpValues;
     }
-    private void LevelUpValues(int id)
+    private void LevelUpValues(string id)
     {
-        if (m_id == id)
+        if (m_id.GetID == id)
         {
             m_damage *= m_damageMultiplier;
         }

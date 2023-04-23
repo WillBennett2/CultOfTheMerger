@@ -12,12 +12,12 @@ public class GameEvents : MonoBehaviour
     {
         m_current = this;
     }
-    public event Action<int> onMinionLevelUp;
-    public void MinionLevelUp(int id)
+    public event Action<string> onPawnLevelUp;
+    public void PawnLevelUp(string id)
     {
-        if (onMinionLevelUp!=null)
+        if (onPawnLevelUp!=null)
         {
-            onMinionLevelUp(id);
+            onPawnLevelUp(id);
         }
     }
 

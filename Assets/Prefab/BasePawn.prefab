@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 6088688922613971462}
   - component: {fileID: 5229283668344492284}
   - component: {fileID: -2448934741676752916}
+  - component: {fileID: -306920669962528050}
   m_Layer: 0
   m_Name: BasePawn
   m_TagString: Untagged
@@ -209,12 +210,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_thisMovementScript: {fileID: 6088688922613971462}
   m_thisMinionScript: {fileID: 0}
+  m_idScript: {fileID: 0}
   m_id: 0
   m_objectType: 0
   m_minionType: 0
   m_manaType: 0
   m_buildingType: 0
   m_itemType: 0
+  m_sacrificeTypes: 0
+  m_enemyTypes: 0
+  m_rewardType: 0
   m_pawnProgression: {fileID: 0}
   m_currentLevel: 0
   m_currentGameObject: {fileID: 0}
@@ -233,4 +238,17 @@ MonoBehaviour:
   m_id: 0
   m_baseSacrificialValue: 0
   m_sacrificeMultiplier: 0
-  m_inventoryScript: {fileID: 0}
+  m_sacrificeTypes: 0
+--- !u!114 &-306920669962528050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372346138402663223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea3650ac77ea5643b4cdef621395ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 0

@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 6002445296933345160}
   - component: {fileID: 8540907954852076276}
   - component: {fileID: 4987435763235684088}
+  - component: {fileID: 2218301163552691579}
   m_Layer: 5
   m_Name: BuildingCard
   m_TagString: Untagged
@@ -632,6 +633,7 @@ MonoBehaviour:
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: 
+  m_spawnChances: {fileID: 0}
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
   m_spawnsLimited: 0
   m_maxUses: 1
@@ -639,6 +641,9 @@ MonoBehaviour:
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
   m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
   m_minionData: []
+  m_undeadMinionData: []
+  m_lifeMinionData: []
+  m_hellMinionData: []
   m_itemData: []
   m_enemyData: []
   m_rewardData: []
@@ -657,3 +662,16 @@ MonoBehaviour:
   m_isDraggable: 0
   m_isInteractable: 1
   m_gameManager: {fileID: 0}
+--- !u!114 &2218301163552691579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002445296933345165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea3650ac77ea5643b4cdef621395ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 

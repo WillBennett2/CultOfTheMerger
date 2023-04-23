@@ -43,13 +43,11 @@ public class InputManager : MonoBehaviour
 
     private void TouchPressed(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch");
 
         if (context.phase == InputActionPhase.Performed && 
             Physics.Raycast(m_mainCamera.ScreenPointToRay(m_touchPositionAction.ReadValue<Vector2>() ),
             out RaycastHit hit ))
         {
-            Debug.Log(hit.collider.name);
             m_interactedPawn = hit.collider.GetComponent<Interactable>();
             if(m_interactedPawn)
                 m_interactedPawn.TouchPerformedInput(GetTouchPosition(m_touchPositionAction));
@@ -58,7 +56,6 @@ public class InputManager : MonoBehaviour
     }
     private void TouchHold(InputAction.CallbackContext context)
     {
-        Debug.Log("Hold");
         if (context.phase == InputActionPhase.Performed &&
             Physics.Raycast(m_mainCamera.ScreenPointToRay(m_touchPositionAction.ReadValue<Vector2>()),
             out RaycastHit hit))
@@ -72,7 +69,7 @@ public class InputManager : MonoBehaviour
 
     private void TouchCancelled(InputAction.CallbackContext context)
     {
-        Debug.Log("Let go");
+ 
         if(m_interactedPawn)
             m_interactedPawn.TouchCancelledInput();
         m_interactedPawn = null;

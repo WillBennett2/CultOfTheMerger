@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PawnMana : MonoBehaviour
 {
-    [SerializeField]private int m_id;
+    [SerializeField]private string m_id;
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
     [SerializeField] private float m_baseMana;
     [SerializeField] private float m_manaMultiplier;
@@ -24,12 +24,12 @@ public class PawnMana : MonoBehaviour
     
     void Start()
     {
-        if (GetComponent<Minions>())
+        if (GetComponent<ID>())
         {
-            m_id = GetComponent<Minions>().ID;   
+            m_id = GetComponent<ID>().GetID;   
         }
 
-        GameEvents.m_current.onMinionLevelUp += LevelUpManaGen;
+        GameEvents.m_current.onPawnLevelUp += LevelUpManaGen;
         m_inventoryScript = FindObjectOfType<Inventory>();
         
         
@@ -38,11 +38,11 @@ public class PawnMana : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvents.m_current.onMinionLevelUp -= LevelUpManaGen;
+        GameEvents.m_current.onPawnLevelUp -= LevelUpManaGen;
         m_inventoryScript.NecroModifier = -m_baseMana;
     }
 
-    private void LevelUpManaGen(int id)
+    private void LevelUpManaGen(string id)
     {
         if (id == m_id)
         {

@@ -6,9 +6,10 @@ public class PawnMerge : MonoBehaviour
 {
     [SerializeField]private PawnMovement m_thisMovementScript;
     [SerializeField] private Minions m_thisMinionScript;
+    [SerializeField] private ID m_idScript;
     
     private PawnMerge m_onTilePawn;
-    [SerializeField] private int m_id;
+    [SerializeField] private string m_id;
     [SerializeField] private PawnDefinitions.MPawnObjects m_objectType;
     [SerializeField] private PawnDefinitions.MMinionType m_minionType;
     [SerializeField] private PawnDefinitions.MManaType m_manaType;
@@ -32,14 +33,17 @@ public class PawnMerge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.GetComponent<Minions>())
-        {
-            m_id = m_thisMinionScript.ID;   
-        }
-        
+        StartCoroutine(LateStart(1));
+
         DefinePawn();
     }
-    
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        m_idScript = GetComponent<ID>();
+        m_id = m_idScript.GetID;
+    }
+
     public void SetPawnValues(PawnDefinitions.MPawnObjects objectType,PawnDefinitions.MMinionType minionType,
         PawnDefinitions.MManaType manaType,PawnDefinitions.MBuildingType buildingType,PawnDefinitions.MItemType itemType,
         PawnDefinitions.MSacrificeTypes sacrificeTypes, PawnDefinitions.MEnemyTypes enemyTypes, PawnDefinitions.MRewardType rewardType
@@ -102,7 +106,7 @@ public class PawnMerge : MonoBehaviour
             onTilePawn.m_currentLevel = onTilePawn.m_thisPawn.m_currentLevel;
             onTilePawn.ChangePawnVisual();
 
-            GameEvents.m_current.MinionLevelUp(onTilePawn.m_id);
+            GameEvents.m_current.PawnLevelUp(onTilePawn.m_id);
             Destroy(gameObject); // merge completed
         }
     }

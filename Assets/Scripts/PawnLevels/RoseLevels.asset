@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6bc9f45ffb97784689aae91a13d0b1f, type: 3}
-  m_Name: SkeletonLevels
+  m_Name: RoseLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 3232920848754399374, guid: dc894a8778f02694ca702493ac2cedd7, type: 3}
-  - {fileID: 1190390529547747930, guid: 72d535bde9827794e9c1e63167bd1dcd, type: 3}
-  - {fileID: 2075962012466506024, guid: a2a367bd295f8824e96744278c50fc68, type: 3}
+  - {fileID: 8256699015934762870, guid: bb7c7c00a50fb444181a49dffe2dcc24, type: 3}
