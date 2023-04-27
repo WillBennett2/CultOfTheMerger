@@ -15,3 +15,4 @@ MonoBehaviour:
   m_pawnProgression:
   - {fileID: 2262881969125099700, guid: 0f30c42837af1f2459a63fc78792e116, type: 3}
   - {fileID: 2488706935641311458, guid: c530e894714fdfb45aa531e25606baa8, type: 3}
+  - {fileID: 2488706935641311458, guid: c530e894714fdfb45aa531e25606baa8, type: 3}
