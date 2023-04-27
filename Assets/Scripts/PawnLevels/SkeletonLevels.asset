@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SkeletonLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 3232920848754399374, guid: dc894a8778f02694ca702493ac2cedd7, type: 3}
-  - {fileID: 3137709903653336175, guid: f7d2a420c35b3e1498c0c79d526804ba, type: 3}
-  - {fileID: 2075962012466506024, guid: a2a367bd295f8824e96744278c50fc68, type: 3}
+  - {fileID: 6258423956977520922, guid: 4652be43a5711ee49bbe54f946bc6578, type: 3}
+  - {fileID: 1190390529547747930, guid: 72d535bde9827794e9c1e63167bd1dcd, type: 3}
+  - {fileID: 6999220221009693637, guid: d2bea8e6bbd7ae044ac96152f0d94995, type: 3}

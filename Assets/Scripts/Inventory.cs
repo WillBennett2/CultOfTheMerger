@@ -89,6 +89,30 @@ public class Inventory : MonoBehaviour
             return m_necroStore;
         }
     }
+    public float HellStore
+    {
+        set
+        {
+            m_hellStore += value;
+            UpdateManaUI();
+        }
+        get
+        {
+            return m_hellStore;
+        }
+    }
+    public float LifeStore
+    {
+        set
+        {
+            m_lifeStore += value;
+            UpdateManaUI();
+        }
+        get
+        {
+            return m_lifeStore;
+        }
+    }
 
     public int SacrificeValue
     {
@@ -119,11 +143,20 @@ public class Inventory : MonoBehaviour
         m_necroUIText.text = Mathf.Round(m_necroStore).ToString();
         m_necroSlider.maxValue = m_necroCapacity;
 
+        m_lifeSlider.value = m_lifeStore;
+        m_lifeUIText.text = Mathf.Round(m_lifeStore).ToString();
+        m_lifeSlider.maxValue = m_lifeCapacity;
+
+        m_hellSlider.value = m_hellStore;
+        m_hellUIText.text = Mathf.Round(m_hellStore).ToString();
+        m_hellSlider.maxValue = m_hellCapacity;
+
         m_cultValueSlider.value = m_cultSacrificeValue;
         m_cultValueSlider.maxValue = m_maxCultValue;
         m_cultValueUIText.text = Mathf.Round(m_cultSacrificeValue).ToString();
-        m_MaxCultValueUIText.text = ChangeUINumber(m_maxCultValue).ToString()+ "K";
-        
+        SetValueToString(m_MaxCultValueUIText,m_maxCultValue);
+
+
         while (m_generateMana)
         {
             GenerateMana();
@@ -143,12 +176,32 @@ public class Inventory : MonoBehaviour
         {
             m_necroStore = m_necroCapacity;
         }
+        if (m_hellCapacity > m_hellStore)
+        {
+            HellStore = m_totalHellModifier;
+        }
+        else
+        {
+            m_hellStore = m_hellCapacity;
+        }
+        if (m_lifeCapacity > m_lifeStore)
+        {
+            LifeStore = m_totalLifeModifier;
+        }
+        else
+        {
+            m_lifeStore = m_lifeCapacity;
+        }
     }
 
     void UpdateManaUI()
     {
         m_necroSlider.value = m_necroStore;
-        m_necroUIText.text =ChangeUINumber((int) m_necroStore).ToString()+"K";
+        SetValueToString(m_necroUIText, ChangeUINumber((int)m_necroStore));
+        m_lifeSlider.value = m_lifeStore;
+        SetValueToString(m_lifeUIText, ChangeUINumber((int)m_lifeStore)); ;
+        m_hellSlider.value = m_hellStore;
+        SetValueToString(m_hellUIText, ChangeUINumber((int)m_hellStore));
     }
 
     void UpdateGeneralUI()
@@ -165,5 +218,17 @@ public class Inventory : MonoBehaviour
         }
 
         return value;
+    }
+    void SetValueToString(TextMeshProUGUI uiText,int value)
+    {
+        if(ChangeUINumber(value) <=10)
+        {
+            uiText.text = ChangeUINumber(value).ToString() + "K";
+        }
+        else
+        {
+            uiText.text = ChangeUINumber(value).ToString();
+        }
+
     }
 }

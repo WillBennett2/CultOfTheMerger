@@ -7,24 +7,27 @@ public class PawnMovement : MonoBehaviour
 {
     private PawnMerge m_pawnMergeScript;
     private PawnSacrifice m_pawnSacrificeScript;
+    private GameManager m_gameManager;
     [Header("Movement Data")]
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private int m_homeTileNum;
     [SerializeField] private GridManager m_GridManager;
     [SerializeField] private bool m_beingMoved = false;
+    private Transform m_childTransform;
 
     private void Start()
     {
+        m_gameManager = FindObjectOfType<GameManager>();
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_pawnMergeScript = GetComponent<PawnMerge>();
         m_pawnSacrificeScript = GetComponent<PawnSacrifice>();
+        m_childTransform = GetComponentInChildren<Transform>();
     }
 
     private void OnDestroy()
     {
-        
-            m_GridManager.UpdateTile(m_homeTileNum,false);
-        
+        m_GridManager.UpdateTile(m_homeTileNum,false);
+        m_gameManager.Pawns.Remove(this);
     }
 
     public bool GetBeingMoved()
@@ -62,6 +65,7 @@ public class PawnMovement : MonoBehaviour
     }
     public void Dropped()
     {
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position,-Vector3.up, out hit))
         {
@@ -83,6 +87,7 @@ public class PawnMovement : MonoBehaviour
         MoveToHomeTile();
         //Move current grid
         m_beingMoved = false;
+
     }
     public void SetHomeTile(GameObject newHomeTile,int newHomeTileNum)
     {

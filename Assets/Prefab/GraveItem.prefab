@@ -84,15 +84,25 @@ MonoBehaviour:
   m_manaType: 0
   m_buildingType: 0
   m_itemType: 0
+  m_sacrificeTypes: 0
+  m_enemyTypes: 0
+  m_rewardType: 0
   m_buildingItems: {fileID: 11400000, guid: 8385f4aebcb096e4ca0e87e2e24b8f21, type: 2}
   m_minionPrefab: {fileID: 6153599298191366668, guid: d2dfb6b67b1dcaf42a1e10c893602a5b,
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: fa0000002c01000090010000f4010000bc020000
+  m_spawnChances: {fileID: 11400000, guid: 1eacbaf8d00034443bce17b54eafd466, type: 2}
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
-  m_gameManager: {fileID: 0}
-  m_inventory: {fileID: 0}
-  m_GridManager: {fileID: 0}
-  m_gridRef: []
+  m_spawnsLimited: 0
+  m_maxUses: 1
+  m_limitedUsesCount: 0
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
+  m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
   m_minionData: []
+  m_undeadMinionData: []
+  m_lifeMinionData: []
+  m_hellMinionData: []
+  m_itemData: []
+  m_enemyData: []
+  m_rewardData: []
