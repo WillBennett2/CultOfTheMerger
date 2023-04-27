@@ -92,6 +92,7 @@ MonoBehaviour:
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: fa0000002c01000090010000f4010000bc020000
+  m_spawnChances: {fileID: 11400000, guid: 22ec553924f23de41a65309363116c74, type: 2}
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
   m_spawnsLimited: 0
   m_maxUses: 1
@@ -99,6 +100,9 @@ MonoBehaviour:
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
   m_itemDataRef: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
   m_minionData: []
+  m_undeadMinionData: []
+  m_lifeMinionData: []
+  m_hellMinionData: []
   m_itemData: []
   m_enemyData: []
   m_rewardData: []

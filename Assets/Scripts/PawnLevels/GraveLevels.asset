@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GraveLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 2262881969125099700, guid: 0f30c42837af1f2459a63fc78792e116, type: 3}
-  - {fileID: 2488706935641311458, guid: c530e894714fdfb45aa531e25606baa8, type: 3}
-  - {fileID: 2488706935641311458, guid: c530e894714fdfb45aa531e25606baa8, type: 3}
+  - {fileID: 6460158880645530470, guid: 43aefcc911ea17845938961aad30a37c, type: 3}
+  - {fileID: 4022555337990268392, guid: 603ce8b59351f7f4ca18e76335e26ddf, type: 3}
+  - {fileID: 5969903327999070345, guid: c69077c9d17916e46ae94f6320de9a35, type: 3}
+  - {fileID: 650535000541133839, guid: 45eae4524ad825246a4a63e49084e2a8, type: 3}
