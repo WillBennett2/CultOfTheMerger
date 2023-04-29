@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CoinChest
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 9057265020283130707, guid: 513857f22906f5c428d9e94272dfed2d, type: 3}
+  - {fileID: 782849372751576097, guid: 0e1e3836f9c4ea24ab2e122ba6a2e3e3, type: 3}

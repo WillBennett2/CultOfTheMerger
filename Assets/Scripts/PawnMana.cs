@@ -10,9 +10,9 @@ public class PawnMana : MonoBehaviour
     [SerializeField] private float m_baseMana;
     [SerializeField] private float m_manaMultiplier;
 
-    [SerializeField]private Inventory m_inventoryScript;
-    
-    
+    private Inventory m_inventoryScript;
+    private PawnMerge m_pawnMergeScript;
+
     // Start is called before the first frame update
 
     public void SetManaValues(PawnDefinitions.MManaType manaType, float baseMana, float manaMultiplier)
@@ -31,8 +31,10 @@ public class PawnMana : MonoBehaviour
 
         GameEvents.m_current.onPawnLevelUp += LevelUpManaGen;
         m_inventoryScript = FindObjectOfType<Inventory>();
-        
-        
+        m_pawnMergeScript = GetComponent<PawnMerge>();
+
+
+
         m_inventoryScript.NecroModifier = m_baseMana;
     }
 
@@ -44,7 +46,7 @@ public class PawnMana : MonoBehaviour
 
     private void LevelUpManaGen(string id)
     {
-        if (id == m_id)
+        if (id == m_id && m_pawnMergeScript.GetPawnLevels <= 2)
         {
             m_inventoryScript.NecroModifier = -m_baseMana;
             m_baseMana *= m_manaMultiplier;

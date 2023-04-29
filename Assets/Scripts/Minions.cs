@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Minions : MonoBehaviour
 {
-    
     [SerializeField] private float m_damage;
     [SerializeField] private float m_damageMultiplier;
-    [SerializeField] private ID m_id;
+    [SerializeField] private string m_id;
+    [SerializeField]private PawnMerge m_pawnMergeScript;
 
     public float Damage
     {
@@ -23,15 +23,17 @@ public class Minions : MonoBehaviour
     private void Awake()
     {
         GameEvents.m_current.onPawnLevelUp += LevelUpValues;
-        m_id = GetComponent<ID>();
+        m_id = GetComponent<ID>().GetID;
+        m_pawnMergeScript = GetComponent<PawnMerge>();
     }
+
     private void OnDestroy()
     {
         GameEvents.m_current.onPawnLevelUp -= LevelUpValues;
     }
     private void LevelUpValues(string id)
     {
-        if (m_id.GetID == id)
+        if (m_id == id && m_pawnMergeScript.GetPawnLevels <= 2)
         {
             m_damage *= m_damageMultiplier;
         }

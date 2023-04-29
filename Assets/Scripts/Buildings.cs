@@ -188,7 +188,6 @@ public class Buildings : MonoBehaviour
         if (m_objectType == PawnDefinitions.MPawnObjects.Building)
         {
             SetBuildingType(tileNum);
-            //m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues();
         }
 
         if (m_objectType == PawnDefinitions.MPawnObjects.Minions)

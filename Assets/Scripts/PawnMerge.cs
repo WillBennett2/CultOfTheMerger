@@ -30,6 +30,10 @@ public class PawnMerge : MonoBehaviour
             return m_thisMovementScript;
         }
     }
+    public int GetPawnLevels
+    {
+        get { return m_currentLevel; }
+    }
     // Start is called before the first frame update
     void Start()
     {
