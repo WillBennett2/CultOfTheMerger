@@ -53,6 +53,10 @@ public class PawnMovement : MonoBehaviour
         get { return m_homeTileNum; }
         set { m_homeTileNum = value; }
     }
+    public PawnMerge GetPawnMerge
+    {
+        get { return m_pawnMergeScript; }   
+    }
 
     public void SetHomeTile()
     {

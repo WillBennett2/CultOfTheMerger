@@ -18,6 +18,7 @@ public class GridManager : MonoBehaviour
 
 
     [SerializeField] public GameObject[] m_grid;
+    private bool m_closingGame = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,10 @@ public class GridManager : MonoBehaviour
         m_gameManager = FindObjectOfType<GameManager>();
         m_grid = new GameObject[m_columnLength * m_rowLength];
         CreateGrid();
+    }
+    private void OnDestroy()
+    {
+        m_closingGame = true;
     }
 
     // Update is called once per frame
@@ -68,6 +73,9 @@ public class GridManager : MonoBehaviour
     
     public void UpdateTile(int tileNum, bool state)
     {
+        if (m_closingGame)
+            return;
+
         if (tileNum < m_columnLength * m_rowLength)
         {
             if(m_grid[tileNum].GetComponent<TileInfo>())

@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool m_regen;
     [SerializeField] private int m_idCount;
 
+    [SerializeField] private bool m_Save;
+    [SerializeField] private SaveManager m_saveManagerScript;
+
     public int ID
     {
         get
@@ -90,5 +93,16 @@ public class GameManager : MonoBehaviour
     {
         if (m_regen)
             RegenGird();
+
+        if(m_Save)
+        {
+            SaveData();
+            m_Save = false; 
+        }
+    }
+
+    void SaveData()
+    {
+        m_saveManagerScript.SavePawns(m_moveablePawns);
     }
 }

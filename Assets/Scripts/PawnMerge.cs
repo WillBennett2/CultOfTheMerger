@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PawnMerge : MonoBehaviour
@@ -20,6 +21,7 @@ public class PawnMerge : MonoBehaviour
     [SerializeField] private PawnDefinitions.MRewardType m_rewardType;
     [SerializeField] private PawnLevels m_pawnProgression;
     [SerializeField] private int m_currentLevel;
+    [SerializeField] private int m_pawnDataIndex;
     private PawnDefinitions m_thisPawn;
     [SerializeField]private GameObject m_currentGameObject;
 
@@ -34,6 +36,15 @@ public class PawnMerge : MonoBehaviour
     {
         get { return m_currentLevel; }
     }
+    public PawnDefinitions.MPawnObjects GetPawnObjectType
+    {
+        get { return m_objectType; }
+    }
+    public int GetPawnDataIndex
+    {
+        get { return m_pawnDataIndex; }
+        set { m_pawnDataIndex = value; }
+    }    
     // Start is called before the first frame update
     void Start()
     {
