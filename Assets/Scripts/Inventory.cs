@@ -43,9 +43,9 @@ public class Inventory : MonoBehaviour
     [Serializable]public struct Runes
     {
         [SerializeField] public int m_deathRuneCount;
-        [SerializeField] public int runeCount2;
-        [SerializeField] public int runeCount3;
-        [SerializeField] public int runeCount4;
+        [SerializeField] public int m_lifeRuneCount;
+        [SerializeField] public int m_hellRuneCount;
+        [SerializeField] public int m_specialRuneCount;
     }
 
     public Runes Rune
@@ -64,6 +64,39 @@ public class Inventory : MonoBehaviour
         set
         {
             m_runes.m_deathRuneCount += value;
+        }
+    }
+    public int LifeRune
+    {
+        get
+        {
+            return m_runes.m_lifeRuneCount;
+        }
+        set
+        {
+            m_runes.m_lifeRuneCount += value;
+        }
+    }
+    public int HellRune
+    {
+        get
+        {
+            return m_runes.m_hellRuneCount;
+        }
+        set
+        {
+            m_runes.m_hellRuneCount += value;
+        }
+    }
+    public int SpecialRune
+    {
+        get
+        {
+            return m_runes.m_specialRuneCount;
+        }
+        set
+        {
+            m_runes.m_specialRuneCount += value;
         }
     }
     public float NecroModifier

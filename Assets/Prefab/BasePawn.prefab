@@ -109,8 +109,8 @@ GameObject:
   - component: {fileID: -5169756481787126141}
   - component: {fileID: -2181775720329147441}
   - component: {fileID: 371309686188929881}
-  - component: {fileID: 6088688922613971462}
   - component: {fileID: 5229283668344492284}
+  - component: {fileID: 6088688922613971462}
   - component: {fileID: -2448934741676752916}
   - component: {fileID: -306920669962528050}
   m_Layer: 0
@@ -180,22 +180,6 @@ MonoBehaviour:
   m_isDraggable: 1
   m_isInteractable: 1
   m_gameManager: {fileID: 0}
---- !u!114 &6088688922613971462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7372346138402663223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beec1263174391f4980dd14f8c30a3d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_homeTile: {fileID: 0}
-  m_homeTileNum: 0
-  m_GridManager: {fileID: 0}
-  m_beingMoved: 0
 --- !u!114 &5229283668344492284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +206,25 @@ MonoBehaviour:
   m_rewardType: 0
   m_pawnProgression: {fileID: 0}
   m_currentLevel: 0
+  m_pawnDataIndex: 0
   m_currentGameObject: {fileID: 0}
+--- !u!114 &6088688922613971462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372346138402663223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beec1263174391f4980dd14f8c30a3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameManager: {fileID: 0}
+  m_homeTile: {fileID: 0}
+  m_homeTileNum: 0
+  m_GridManager: {fileID: 0}
+  m_beingMoved: 0
 --- !u!114 &-2448934741676752916
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int m_idCount;
 
     [SerializeField] private bool m_Save;
+    [SerializeField] private bool m_load = false;
     [SerializeField] private SaveManager m_saveManagerScript;
 
     public int ID
@@ -73,6 +74,16 @@ public class GameManager : MonoBehaviour
             return m_moveablePawns;
         }
     }
+
+    public bool IsLoaded
+    {
+        get
+        { return m_load; }
+        set
+        {
+            m_load = value;
+        }
+    }
     public void RegenGird()
     {
         m_regen = false;
@@ -82,27 +93,37 @@ public class GameManager : MonoBehaviour
             m_buildings[i].PopulateGrid();
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
         m_gridManager = Camera.main.GetComponent<GridManager>();
+        StartCoroutine(LateStart(1f));
     }
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        LoadData();
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         if (m_regen)
             RegenGird();
-
         if(m_Save)
-        {
             SaveData();
-            m_Save = false; 
-        }
+
     }
 
-    void SaveData()
+    public void SaveData()
     {
         m_saveManagerScript.SavePawns(m_moveablePawns);
+    }
+    void LoadData()
+    {
+        m_saveManagerScript.LoadPawns();
+        m_load = true;
     }
 }

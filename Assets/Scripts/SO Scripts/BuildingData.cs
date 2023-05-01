@@ -9,7 +9,9 @@ public class BuildingData : ScriptableObject
     [Serializable]public struct RuneCosts
     {
         public int m_graveRuneCost;
-        public int m_runeCost2;
+        public int m_lifeRuneCost;
+        public int m_hellRuneCost;
+        public int m_specialRuneCost;
     }
     [SerializeField]private RuneCosts m_runeCosts;
     

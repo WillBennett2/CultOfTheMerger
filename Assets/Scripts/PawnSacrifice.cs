@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PawnSacrifice : MonoBehaviour
 {
-    [SerializeField] private string m_id;
+    [SerializeField] public string m_id;
     private ID m_idScript;
     [SerializeField] private float m_baseSacrificialValue;
     [SerializeField] private float m_sacrificeMultiplier;
@@ -20,11 +20,16 @@ public class PawnSacrifice : MonoBehaviour
         m_sacrificeMultiplier = sacrificeMultiplier;
         m_sacrificeTypes = sacrificeTypes;
     }
+    private void Awake()
+    {
+        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
+        m_idScript = GetComponent<ID>();
+        m_id = m_idScript.GetID;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
-        StartCoroutine(LateStart(1));
+        //StartCoroutine(LateStart(1));
         m_inventoryScript = FindObjectOfType<Inventory>();
     }
     IEnumerator LateStart(float waitTime)

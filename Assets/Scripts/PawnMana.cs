@@ -34,19 +34,23 @@ public class PawnMana : MonoBehaviour
         m_pawnMergeScript = GetComponent<PawnMerge>();
 
 
-
-        m_inventoryScript.NecroModifier = m_baseMana;
+        if (m_pawnMergeScript.GetPawnLevels >= 2)
+            m_inventoryScript.NecroModifier = m_baseMana;
     }
 
     private void OnDestroy()
     {
         GameEvents.m_current.onPawnLevelUp -= LevelUpManaGen;
-        m_inventoryScript.NecroModifier = -m_baseMana;
+        if (m_pawnMergeScript.GetPawnLevels >= 2)
+        {
+            m_inventoryScript.NecroModifier = -m_baseMana;
+        }
+        
     }
 
     private void LevelUpManaGen(string id)
     {
-        if (id == m_id && m_pawnMergeScript.GetPawnLevels <= 2)
+        if (id == m_id && m_pawnMergeScript.GetPawnLevels >= 2)
         {
             m_inventoryScript.NecroModifier = -m_baseMana;
             m_baseMana *= m_manaMultiplier;

@@ -7,7 +7,7 @@ public class PawnMovement : MonoBehaviour
 {
     private PawnMerge m_pawnMergeScript;
     private PawnSacrifice m_pawnSacrificeScript;
-    private GameManager m_gameManager;
+    [SerializeField]private GameManager m_gameManager;
     [Header("Movement Data")]
     [SerializeField] private GameObject m_homeTile;
     [SerializeField] private int m_homeTileNum;
@@ -15,13 +15,17 @@ public class PawnMovement : MonoBehaviour
     [SerializeField] private bool m_beingMoved = false;
     private Transform m_childTransform;
 
-    private void Start()
+    private void Awake()
     {
         m_gameManager = FindObjectOfType<GameManager>();
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_pawnMergeScript = GetComponent<PawnMerge>();
         m_pawnSacrificeScript = GetComponent<PawnSacrifice>();
         m_childTransform = GetComponentInChildren<Transform>();
+    }
+    private void Start()
+    {
+
     }
 
     private void OnDestroy()
@@ -103,6 +107,8 @@ public class PawnMovement : MonoBehaviour
     public void MoveToHomeTile()
     {
         transform.position = new Vector3(m_homeTile.transform.position.x,transform.position.y,m_homeTile.transform.position.z); //snapping back to grid
+        if (m_gameManager.IsLoaded)
+            m_gameManager.SaveData();
     }
  
 }

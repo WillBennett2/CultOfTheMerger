@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PawnMerge : MonoBehaviour
 {
+    private GameManager m_gameManager;
     [SerializeField]private PawnMovement m_thisMovementScript;
     [SerializeField] private Minions m_thisMinionScript;
     [SerializeField] private ID m_idScript;
@@ -39,6 +40,10 @@ public class PawnMerge : MonoBehaviour
     public PawnDefinitions.MPawnObjects GetPawnObjectType
     {
         get { return m_objectType; }
+    }
+    public PawnDefinitions.MMinionType GetMinionType
+    {
+        get { return m_minionType; }
     }
     public int GetPawnDataIndex
     {
@@ -87,6 +92,8 @@ public class PawnMerge : MonoBehaviour
         Destroy(m_currentGameObject);
         m_currentGameObject = Instantiate(m_thisPawn.m_pawnLevels.m_pawnProgression[m_thisPawn.m_currentLevel],transform );
         m_currentGameObject.transform.SetParent(transform);
+        //if(m_gameManager.IsLoaded)
+            //m_gameManager.SaveData();
     }
     private void Merge(PawnMerge onTilePawn)
     {

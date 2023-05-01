@@ -19,9 +19,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] public GameObject[] m_grid;
     private bool m_closingGame = false;
-    
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         m_gameManager = FindObjectOfType<GameManager>();
         m_grid = new GameObject[m_columnLength * m_rowLength];

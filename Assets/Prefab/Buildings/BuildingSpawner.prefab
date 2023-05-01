@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 408791475145392445}
   - component: {fileID: 408791475145392444}
   - component: {fileID: 549488923497856928}
+  - component: {fileID: 8473238049419953140}
   m_Layer: 0
   m_Name: BuildingSpawner
   m_TagString: Building
@@ -52,20 +53,26 @@ MonoBehaviour:
   m_manaType: 0
   m_buildingType: 1
   m_itemType: 0
+  m_sacrificeTypes: 0
+  m_enemyTypes: 0
+  m_rewardType: 0
   m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
   m_minionPrefab: {fileID: 933107220898322176, guid: 4a3f5e832b4ec644ba8b9e55bfdb974a,
     type: 3}
   m_buildingLevel: 0
   m_spawnCosts: 
+  m_spawnChances: {fileID: 0}
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
-  m_gameManager: {fileID: 0}
-  m_inventory: {fileID: 0}
-  m_GridManager: {fileID: 0}
+  m_spawnsLimited: 0
+  m_maxUses: 1
+  m_limitedUsesCount: 0
   m_gridRef: []
   m_objectDataRef: {fileID: 11400000, guid: 57a79b05778014b45b43daa2c02ca9d4, type: 2}
-  m_objectDatas: []
-  m_minionTypesNum: 0
+  m_itemDataRef: {fileID: 0}
   m_minionData: []
+  m_itemData: []
+  m_enemyData: []
+  m_rewardData: []
 --- !u!114 &408791475145392444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +101,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8473238049419953140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408791475145392435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea3650ac77ea5643b4cdef621395ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 
 --- !u!1 &5267347077757067281
 GameObject:
   m_ObjectHideFlags: 0
