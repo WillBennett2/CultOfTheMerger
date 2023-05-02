@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool m_load = false;
     [SerializeField] private SaveManager m_saveManagerScript;
 
+    [SerializeField] private Buildings m_undeadEnemyBuilding;
+    [SerializeField] private int m_numOfUndeadSpawns;
+    [SerializeField] private int m_maxOfUndeadSpawns;
+
     public int ID
     {
         get
@@ -59,7 +63,6 @@ public class GameManager : MonoBehaviour
         set { m_selectedPawn = value; }
 
     }
-
     public List<Buildings> Buildings
     {
         get
@@ -74,7 +77,6 @@ public class GameManager : MonoBehaviour
             return m_moveablePawns;
         }
     }
-
     public bool IsLoaded
     {
         get
@@ -83,6 +85,12 @@ public class GameManager : MonoBehaviour
         {
             m_load = value;
         }
+    }
+    public int GetNumOfUndeadSpawned
+    {
+        get
+        { return m_numOfUndeadSpawns; }
+        set { m_numOfUndeadSpawns = value; }
     }
     public void RegenGird()
     {
@@ -125,5 +133,21 @@ public class GameManager : MonoBehaviour
     {
         m_saveManagerScript.LoadPawns();
         m_load = true;
+    }
+    public void MinionSpawned(PawnDefinitions.MMinionType minionType)
+    {
+        if(minionType == PawnDefinitions.MMinionType.Undead)
+        {
+            HandleUndeadEnemySpawn();
+        }
+    }
+    void HandleUndeadEnemySpawn()
+    {
+        m_numOfUndeadSpawns++;
+        if(m_numOfUndeadSpawns>=m_maxOfUndeadSpawns)
+        {
+            m_undeadEnemyBuilding.Tapped();
+            m_numOfUndeadSpawns = 0;
+        }
     }
 }

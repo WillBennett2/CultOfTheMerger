@@ -17,12 +17,13 @@ public class AlterSacrifice : MonoBehaviour
         switch (sacrificeTypes)
         {
             case PawnDefinitions.MSacrificeTypes.CultValue:
-                m_inventoryScript.SacrificeValue = Mathf.RoundToInt(sacrificeValue);
+                m_inventoryScript.SacrificeValue += Mathf.RoundToInt(sacrificeValue);
                 break;
             case PawnDefinitions.MSacrificeTypes.Coin:
-                m_inventoryScript.Coins = Mathf.RoundToInt(sacrificeValue);
+                m_inventoryScript.Coins += Mathf.RoundToInt(sacrificeValue);
                 break;
             case PawnDefinitions.MSacrificeTypes.Gem:
+                m_inventoryScript.Gems += Mathf.RoundToInt(sacrificeValue);
                 break;
             case PawnDefinitions.MSacrificeTypes.Mana1:
                 break;
@@ -41,7 +42,8 @@ public class AlterSacrifice : MonoBehaviour
             default:
                 break;
         }
-        
+        pawnReference.GetComponent<PawnMovement>().ClearHomeTile();
+        pawnReference.GetComponent<PawnMovement>().GetHomeTileNum = -1;
         Destroy(pawnReference);
     }
 }

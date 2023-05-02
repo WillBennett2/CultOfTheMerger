@@ -30,8 +30,11 @@ public class PawnMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        m_GridManager.UpdateTile(m_homeTileNum,false);
+        if(m_homeTileNum!=-1)
+            m_GridManager.UpdateTile(m_homeTileNum,false);
         m_gameManager.Pawns.Remove(this);
+        if (m_gameManager.IsLoaded&&m_homeTileNum==-1)
+            m_gameManager.SaveData();
     }
 
     public bool GetBeingMoved()
@@ -62,7 +65,7 @@ public class PawnMovement : MonoBehaviour
         get { return m_pawnMergeScript; }   
     }
 
-    public void SetHomeTile()
+    public void ClearHomeTile()
     {
         m_GridManager.UpdateTile(m_homeTileNum,false);
     }

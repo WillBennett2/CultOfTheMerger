@@ -92,16 +92,15 @@ public class PawnMerge : MonoBehaviour
         Destroy(m_currentGameObject);
         m_currentGameObject = Instantiate(m_thisPawn.m_pawnLevels.m_pawnProgression[m_thisPawn.m_currentLevel],transform );
         m_currentGameObject.transform.SetParent(transform);
-        //if(m_gameManager.IsLoaded)
-            //m_gameManager.SaveData();
     }
-    private void Merge(PawnMerge onTilePawn)
+    private bool Merge(PawnMerge onTilePawn)
     {
         bool sameType = false;
         m_onTilePawn = onTilePawn;
         if (m_thisPawn.m_minionType == onTilePawn.m_minionType)
         {
             sameType = true;
+            //add to the minion count
         }
 
         if (m_thisPawn.m_buildingType != PawnDefinitions.MBuildingType.Empty && m_thisPawn.m_buildingType == onTilePawn.m_buildingType)
@@ -129,15 +128,20 @@ public class PawnMerge : MonoBehaviour
             onTilePawn.ChangePawnVisual();
 
             GameEvents.m_current.PawnLevelUp(onTilePawn.m_id);
+            gameObject.GetComponent<PawnMovement>().ClearHomeTile();
+            gameObject.GetComponent<PawnMovement>().GetHomeTileNum = -1;
             Destroy(gameObject); // merge completed
+            return true;
         }
+        return false;
     }
-    public void AttemptDropMerge()
+    public bool AttemptDropMerge()
     {
         if (m_onTilePawn) //try to merge
         {
-            Merge(m_onTilePawn);
+            return Merge(m_onTilePawn);
         }
+        return false;
     }
     private void OnTriggerStay(Collider other)
     {

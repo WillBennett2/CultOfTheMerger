@@ -19,3 +19,9 @@ MonoBehaviour:
     m_sacrificeType: 5
     m_sacrificialBaseValue: 250
     m_sacrificialMultiplier: 0
+  - m_name: Potion
+    m_itemType: 2
+    m_pawnLevels: {fileID: 11400000, guid: aac321d89cbb8da41a0b76187772625e, type: 2}
+    m_sacrificeType: 2
+    m_sacrificialBaseValue: 1000
+    m_sacrificialMultiplier: 0

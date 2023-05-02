@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
     }
 
     private Inventory m_inventoryScript;
+    private GameManager m_gameManagerScript;
     [SerializeField] private List<string> m_Data;
     [SerializeField] private List<ListWrapper> m_dataList;
     [SerializeField] private bool m_load;
@@ -38,6 +39,7 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
+        m_gameManagerScript = GetComponent<GameManager>();  
         m_inventoryScript = FindObjectOfType<Inventory>();
     }
     // Update is called once per frame
@@ -90,6 +92,14 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetFloat("NecroStore",m_inventoryScript.NecroStore);
         PlayerPrefs.SetFloat("LifeStore", m_inventoryScript.LifeStore);
         PlayerPrefs.SetFloat("HellStore", m_inventoryScript.HellStore);
+        PlayerPrefs.SetInt("SacrificeValue", m_inventoryScript.SacrificeValue);
+        PlayerPrefs.SetInt("DeathRune", m_inventoryScript.DeathRune);
+        PlayerPrefs.SetInt("LifeRune", m_inventoryScript.LifeRune);
+        PlayerPrefs.SetInt("HellRune", m_inventoryScript.HellRune);
+        PlayerPrefs.SetInt("SpecialRune", m_inventoryScript.SpecialRune);
+        PlayerPrefs.SetInt("Coin", m_inventoryScript.Coins);
+        PlayerPrefs.SetInt("Gem", m_inventoryScript.Gems);
+        PlayerPrefs.SetInt("UndeadMinionsSpawned", m_gameManagerScript.GetNumOfUndeadSpawned);
     }
     public void LoadPawns()
     {
@@ -130,12 +140,27 @@ public class SaveManager : MonoBehaviour
     }
     private void LoadStats()
     {
-        m_inventoryScript.NecroStore = -m_inventoryScript.NecroStore;
+
+
         m_inventoryScript.NecroStore = PlayerPrefs.GetFloat("NecroStore");
-        m_inventoryScript.LifeStore = -m_inventoryScript.LifeStore;
+
         m_inventoryScript.LifeStore = PlayerPrefs.GetFloat("LifeStore");
-        m_inventoryScript.HellStore = -m_inventoryScript.HellStore;
+
         m_inventoryScript.HellStore = PlayerPrefs.GetFloat("HellStore");
+
+        //save rune count
+        m_inventoryScript.DeathRune = PlayerPrefs.GetInt("DeathRune");
+        m_inventoryScript.LifeRune = PlayerPrefs.GetInt("LifeRune");
+        m_inventoryScript.HellRune = PlayerPrefs.GetInt("HellRune");
+        m_inventoryScript.SpecialRune = PlayerPrefs.GetInt("SpecialRune");
+        //save coin coint
+        m_inventoryScript.Coins = PlayerPrefs.GetInt("Coin");
+        m_inventoryScript.Gems = PlayerPrefs.GetInt("Gem");
+        //save cult count
+        m_inventoryScript.SacrificeValue = PlayerPrefs.GetInt("SacrificeValue");
+
+        //enemy spawns
+        m_gameManagerScript.GetNumOfUndeadSpawned = PlayerPrefs.GetInt("UndeadMinionsSpawned");
     }
     private void DeletePrefs()
     {

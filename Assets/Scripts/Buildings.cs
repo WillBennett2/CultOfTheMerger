@@ -243,6 +243,10 @@ public class Buildings : MonoBehaviour
             m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
             m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum], tileNum);
             m_GridManager.UpdateTile(tileNum,true);
+            if(m_objectType == PawnDefinitions.MPawnObjects.Minions)
+            {
+                m_gameManager.MinionSpawned(m_minionType);
+            }
             m_pawnObject = null;
         }
     
@@ -292,17 +296,17 @@ public class Buildings : MonoBehaviour
             if (m_minionType == PawnDefinitions.MMinionType.Undead && m_inventory.Rune.m_deathRuneCount >= m_buildingData.RuneCost.m_graveRuneCost)
             {
                 m_buildingType = PawnDefinitions.MBuildingType.Grave;
-                m_inventory.DeathRune = -m_buildingData.RuneCost.m_graveRuneCost;
+                m_inventory.DeathRune -= m_buildingData.RuneCost.m_graveRuneCost;
             }
             else if (m_minionType == PawnDefinitions.MMinionType.Plant)
             {
                 m_buildingType = PawnDefinitions.MBuildingType.Life;
-                m_inventory.LifeRune = -m_buildingData.RuneCost.m_lifeRuneCost;
+                m_inventory.LifeRune -= m_buildingData.RuneCost.m_lifeRuneCost;
             }
             else if (m_minionType == PawnDefinitions.MMinionType.Demon)
             {
                 m_buildingType = PawnDefinitions.MBuildingType.Hell;
-                m_inventory.HellRune = -m_buildingData.RuneCost.m_hellRuneCost;
+                m_inventory.HellRune -= m_buildingData.RuneCost.m_hellRuneCost;
             }
         }
 
@@ -340,17 +344,17 @@ public class Buildings : MonoBehaviour
             if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Necro && m_inventory.NecroStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
-                m_inventory.NecroStore = -m_spawnCosts[m_buildingLevel];
+                m_inventory.NecroStore -= m_spawnCosts[m_buildingLevel];
             }
             if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Life && m_inventory.LifeStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
-                m_inventory.LifeStore = -m_spawnCosts[m_buildingLevel];
+                m_inventory.LifeStore -= m_spawnCosts[m_buildingLevel];
             }
             if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Hell && m_inventory.HellStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
-                m_inventory.HellStore = -m_spawnCosts[m_buildingLevel];
+                m_inventory.HellStore -= m_spawnCosts[m_buildingLevel];
             }
         }
         if (canSpawn)

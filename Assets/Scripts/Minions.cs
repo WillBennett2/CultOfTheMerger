@@ -12,7 +12,14 @@ public class Minions : MonoBehaviour
 
     public float Damage
     {
-        get => m_damage;
+        get
+        {
+            if(m_pawnMergeScript.GetPawnLevels <= 2)
+            {
+                return 0f;
+            }
+            return m_damage;
+        }
         set => m_damage = value;
     }
     public float DamageMultiplier
