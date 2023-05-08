@@ -27,7 +27,7 @@ MonoBehaviour:
   - m_name: Zombie
     m_minionType: 1
     m_pawnLevels: {fileID: 11400000, guid: c73a68d9c14e6d947b1b196c2005fce1, type: 2}
-    m_manaType: 1
+    m_manaType: 2
     m_baseMana: 5
     m_manaMultiplier: 1.2
     m_sacrificeType: 1
@@ -58,21 +58,50 @@ MonoBehaviour:
     m_damageBaseValue: 30
     m_damageMultiplier: 1.8
   m_rewards:
-  - m_name: CoinChest
+  - m_name: MoneyChest
     m_rewardType: 1
     m_loot: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
     m_pawnLevel: {fileID: 11400000, guid: 92df857ac0ba5d64f895b94ea9edb434, type: 2}
     m_sacrificeType: 1
     m_sacrificialBaseValue: 0
     m_sacrificialMultiplier: 0
+  - m_name: DeathRuneChest
+    m_rewardType: 2
+    m_loot: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
+    m_pawnLevel: {fileID: 11400000, guid: f88a6f188a8715646a6df38f65f2c287, type: 2}
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 0
+    m_sacrificialMultiplier: 0
+  - m_name: LifeRuneChest
+    m_rewardType: 2
+    m_loot: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
+    m_pawnLevel: {fileID: 11400000, guid: f88a6f188a8715646a6df38f65f2c287, type: 2}
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 0
+    m_sacrificialMultiplier: 0
+  - m_name: HellRuneChest
+    m_rewardType: 2
+    m_loot: {fileID: 11400000, guid: 9feb361afbf13ec4a89576b852fe0f2f, type: 2}
+    m_pawnLevel: {fileID: 11400000, guid: f88a6f188a8715646a6df38f65f2c287, type: 2}
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 0
+    m_sacrificialMultiplier: 0
   m_enemies:
-  - m_name: TreeMonster
+  - m_name: NecroEnemy
     m_enemyTypes: 1
     m_manaAttraction: 1
     m_health: 10
-    m_reward: {fileID: 7182468518952366351, guid: 4c94e1ef29996e34fb89c5cb83b01ebb,
-      type: 3}
+    m_rewardBuildingName: GemChestSpawner
     m_pawnLevel: {fileID: 11400000, guid: 2bcbec3721d8ca4469f44b0de1a09279, type: 2}
     m_sacrificeType: 1
     m_sacrificialBaseValue: 100
     m_sacrificialMultiplier: 0
+  m_stores:
+  - m_name: NecroStore
+    m_storeType: 1
+    m_pawnLevel: {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
+    m_manaCapacityIncrease: 2000
+    m_manaCapacityMultiplier: 2.4
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 200
+    m_sacrificialMultiplier: 1.5

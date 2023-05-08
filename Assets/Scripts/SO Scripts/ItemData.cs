@@ -7,7 +7,7 @@ public class ItemData : ScriptableObject
 {
     [System.Serializable]public struct Item
     {
-        [SerializeField] private string m_name;
+        public string m_name;
         public PawnDefinitions.MItemType m_itemType;
         public PawnLevels m_pawnLevels;
         public PawnDefinitions.MSacrificeTypes m_sacrificeType;

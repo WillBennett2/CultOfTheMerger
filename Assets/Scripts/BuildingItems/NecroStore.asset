@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 264e51ada04b30b44870127752dd1ad1, type: 3}
-  m_Name: BuildingCosts
+  m_Name: NecroStore
   m_EditorClassIdentifier: 
   m_runeCosts:
     m_graveRuneCost: 5
-    m_runeCost2: 0
+    m_lifeRuneCost: 5
+    m_hellRuneCost: 0
+    m_specialRuneCost: 0

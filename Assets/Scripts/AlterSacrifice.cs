@@ -25,17 +25,23 @@ public class AlterSacrifice : MonoBehaviour
             case PawnDefinitions.MSacrificeTypes.Gem:
                 m_inventoryScript.Gems += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Mana1:
+            case PawnDefinitions.MSacrificeTypes.Necro:
+                m_inventoryScript.NecroStore += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Mana2:
+            case PawnDefinitions.MSacrificeTypes.Life:
+                m_inventoryScript.LifeStore += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Mana3:
+            case PawnDefinitions.MSacrificeTypes.Hell:
+                m_inventoryScript.HellStore += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Rune1:
+            case PawnDefinitions.MSacrificeTypes.DeathRune:
+                m_inventoryScript.DeathRune += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Rune2:
+            case PawnDefinitions.MSacrificeTypes.LifeRune:
+                m_inventoryScript.LifeRune += Mathf.RoundToInt(sacrificeValue);
                 break;
-            case PawnDefinitions.MSacrificeTypes.Rune3:
+            case PawnDefinitions.MSacrificeTypes.HellRune:
+                m_inventoryScript.HellRune += Mathf.RoundToInt(sacrificeValue);
                 break;
             case PawnDefinitions.MSacrificeTypes.Rune4:
                 break;

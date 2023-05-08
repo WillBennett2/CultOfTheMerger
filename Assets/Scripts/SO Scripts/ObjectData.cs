@@ -38,7 +38,7 @@ public class ObjectData : ScriptableObject
    
     [System.Serializable]public struct Reward
     {
-        [SerializeField] private string m_name;
+        public string m_name;
         public PawnDefinitions.MRewardType m_rewardType;
         public ItemData m_loot;
         public PawnLevels m_pawnLevel;
@@ -62,11 +62,11 @@ public class ObjectData : ScriptableObject
     [System.Serializable]
     public struct Enemy
     {
-        [SerializeField] private string m_name;
+        public string m_name;
         public PawnDefinitions.MEnemyTypes m_enemyTypes;
         public PawnDefinitions.MManaType m_manaAttraction;
         public float m_health;
-        public GameObject m_reward;
+        public string m_rewardBuildingName;
         public PawnLevels m_pawnLevel;
         public PawnDefinitions.MSacrificeTypes m_sacrificeType;
         public float m_sacrificialBaseValue;
@@ -82,6 +82,31 @@ public class ObjectData : ScriptableObject
         get
         {
             return m_enemies;
+        }
+    }
+    [System.Serializable]
+    public struct Store
+    {
+        public string m_name;
+        public PawnDefinitions.MStoreType m_storeType;
+        public PawnLevels m_pawnLevel;
+        public float m_manaCapacityIncrease;
+        public float m_manaCapacityMultiplier;
+        public PawnDefinitions.MSacrificeTypes m_sacrificeType;
+        public float m_sacrificialBaseValue;
+        public float m_sacrificialMultiplier;
+    }
+    [SerializeField] private Store[] m_stores;
+
+    public Store[] Stores
+    {
+        set
+        {
+            m_stores = value;
+        }
+        get
+        {
+            return m_stores;
         }
     }
 }

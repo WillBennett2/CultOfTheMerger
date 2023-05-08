@@ -14,7 +14,7 @@ public class Minions : MonoBehaviour
     {
         get
         {
-            if(m_pawnMergeScript.GetPawnLevels <= 2)
+            if(m_pawnMergeScript.GetPawnLevels < 2)
             {
                 return 0f;
             }
@@ -40,7 +40,7 @@ public class Minions : MonoBehaviour
     }
     private void LevelUpValues(string id)
     {
-        if (m_id == id && m_pawnMergeScript.GetPawnLevels <= 2)
+        if (m_id == id && m_pawnMergeScript.GetPawnLevels > 1)
         {
             m_damage *= m_damageMultiplier;
         }

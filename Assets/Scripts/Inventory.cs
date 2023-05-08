@@ -49,7 +49,6 @@ public class Inventory : MonoBehaviour
         [SerializeField] public int m_hellRuneCount;
         [SerializeField] public int m_specialRuneCount;
     }
-
     public Runes Rune
     {
         get
@@ -105,7 +104,11 @@ public class Inventory : MonoBehaviour
     {
         set
         {
-            m_totalNecroModifier += value;
+            m_totalNecroModifier = value;
+            if(m_totalHellModifier<0)
+            {
+                m_totalHellModifier = 0;
+            }
         }
         get
         {
@@ -124,6 +127,18 @@ public class Inventory : MonoBehaviour
             return m_necroStore;
         }
     }
+    public float NecroCapacity
+    {
+        set
+        {
+            m_necroCapacity = value;
+            m_necroSlider.maxValue = m_necroCapacity;
+        }
+        get
+        {
+            return m_necroCapacity;
+        }
+    }
     public float HellStore
     {
         set
@@ -136,6 +151,18 @@ public class Inventory : MonoBehaviour
             return m_hellStore;
         }
     }
+    public float HellCapacity
+    {
+        set
+        {
+            m_hellCapacity = value;
+            m_hellSlider.maxValue = m_hellCapacity;
+        }
+        get
+        {
+            return m_hellCapacity;
+        }
+    }
     public float LifeStore
     {
         set
@@ -146,6 +173,18 @@ public class Inventory : MonoBehaviour
         get
         {
             return m_lifeStore;
+        }
+    }
+    public float LifeCapacity
+    {
+        set
+        {
+            m_lifeCapacity = value;
+            m_lifeSlider.maxValue = m_lifeCapacity;
+        }
+        get
+        {
+            return m_lifeCapacity;
         }
     }
 
@@ -185,6 +224,11 @@ public class Inventory : MonoBehaviour
             UpdateGeneralUI();
         }
     }
+
+    public float GetGenerationDelay
+    {
+        get { return m_genDelay; }
+    }
     private IEnumerator Start()
     {
         m_necroSlider.value = m_necroStore;
@@ -214,7 +258,7 @@ public class Inventory : MonoBehaviour
         
     }
 
-    private void GenerateMana()
+    public void GenerateMana()
     {
         if (m_necroCapacity > m_necroStore)
         {
@@ -250,6 +294,12 @@ public class Inventory : MonoBehaviour
         SetValueToString(m_lifeUIText, ChangeUINumber((int)m_lifeStore)); ;
         m_hellSlider.value = m_hellStore;
         SetValueToString(m_hellUIText, ChangeUINumber((int)m_hellStore));
+    }
+    void UpdateCapacity()
+    {
+        m_necroSlider.maxValue = m_necroCapacity;
+        m_lifeSlider.maxValue = m_lifeCapacity;
+        m_hellSlider.maxValue = m_hellCapacity;
     }
 
     void UpdateGeneralUI()

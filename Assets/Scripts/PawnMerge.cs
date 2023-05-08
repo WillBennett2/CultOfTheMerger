@@ -20,6 +20,7 @@ public class PawnMerge : MonoBehaviour
     [SerializeField] private PawnDefinitions.MSacrificeTypes m_sacrificeTypes;
     [SerializeField] private PawnDefinitions.MEnemyTypes m_enemyTypes;
     [SerializeField] private PawnDefinitions.MRewardType m_rewardType;
+    [SerializeField] private PawnDefinitions.MStoreType m_storeType;
     [SerializeField] private PawnLevels m_pawnProgression;
     [SerializeField] private int m_currentLevel;
     [SerializeField] private int m_pawnDataIndex;
@@ -45,6 +46,22 @@ public class PawnMerge : MonoBehaviour
     {
         get { return m_minionType; }
     }
+    public PawnDefinitions.MItemType GetItemType
+    {
+        get { return m_itemType; }
+    }
+    public PawnDefinitions.MRewardType GetRewardType
+    {
+        get { return m_rewardType; }
+    }
+    public PawnDefinitions.MEnemyTypes GetEnemyType
+    {
+        get { return m_enemyTypes; }
+    }
+    public PawnDefinitions.MStoreType GetStoreType
+    {
+        get { return m_storeType; }
+    }
     public int GetPawnDataIndex
     {
         get { return m_pawnDataIndex; }
@@ -66,7 +83,8 @@ public class PawnMerge : MonoBehaviour
 
     public void SetPawnValues(PawnDefinitions.MPawnObjects objectType,PawnDefinitions.MMinionType minionType,
         PawnDefinitions.MManaType manaType,PawnDefinitions.MBuildingType buildingType,PawnDefinitions.MItemType itemType,
-        PawnDefinitions.MSacrificeTypes sacrificeTypes, PawnDefinitions.MEnemyTypes enemyTypes, PawnDefinitions.MRewardType rewardType
+        PawnDefinitions.MSacrificeTypes sacrificeTypes, PawnDefinitions.MEnemyTypes enemyTypes, 
+        PawnDefinitions.MRewardType rewardType, PawnDefinitions.MStoreType storeType
         ,PawnLevels pawnProgression, int currentLevel)
     {
         m_objectType = objectType;
@@ -78,12 +96,13 @@ public class PawnMerge : MonoBehaviour
         m_pawnProgression = pawnProgression;
         m_enemyTypes = enemyTypes;
         m_rewardType = rewardType;
+        m_storeType = storeType;
         m_currentLevel = currentLevel;
     }
     private void DefinePawn()
     {
         if(m_pawnProgression)
-            m_thisPawn = new PawnDefinitions(m_objectType,m_minionType,m_manaType,m_buildingType,m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType,m_pawnProgression,m_currentLevel);
+            m_thisPawn = new PawnDefinitions(m_objectType,m_minionType,m_manaType,m_buildingType,m_itemType,m_sacrificeTypes,m_enemyTypes,m_rewardType,m_storeType,m_pawnProgression,m_currentLevel);
         m_currentGameObject = transform.GetChild(0).gameObject;
         ChangePawnVisual();
     }

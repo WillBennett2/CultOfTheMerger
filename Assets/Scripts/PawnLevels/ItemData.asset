@@ -25,3 +25,15 @@ MonoBehaviour:
     m_sacrificeType: 2
     m_sacrificialBaseValue: 1000
     m_sacrificialMultiplier: 0
+  - m_name: DeathRune
+    m_itemType: 3
+    m_pawnLevels: {fileID: 11400000, guid: db1527d9b6177ed478a9578ba827f12f, type: 2}
+    m_sacrificeType: 7
+    m_sacrificialBaseValue: 1
+    m_sacrificialMultiplier: 2
+  - m_name: LifeRune
+    m_itemType: 4
+    m_pawnLevels: {fileID: 11400000, guid: 120617d3c23e39047bac421aad137585, type: 2}
+    m_sacrificeType: 8
+    m_sacrificialBaseValue: 1
+    m_sacrificialMultiplier: 2

@@ -5,22 +5,26 @@ using UnityEngine;
 
 public struct PawnDefinitions
 { 
-    public enum MPawnObjects {Empty,Minions,Building,Item,Enemy,Reward}
+    public enum MPawnObjects {Empty,Minions,Building,Item,Enemy,Reward,Store}
     public enum MMinionType {Empty,Undead,Plant,Demon}
     public enum MManaType {Empty,Necro,Life,Hell}
     public enum MBuildingType {Empty,Grave,Life, Hell, General }
-    public enum MItemType {Empty,Coin,Potion,Food }
+    public enum MItemType {Empty,Coin,Gem,DeathRune,LifeRune,HellRune,Potion,Food }
     public enum MSacrificeTypes
     {
-        Empty,CultValue,Mana1,Mana2,Mana3,Coin,Gem,Rune1,Rune2,Rune3,Rune4
+        Empty,CultValue,Necro,Life,Hell,Coin,Gem,DeathRune,LifeRune,HellRune,Rune4
     }
     public enum MEnemyTypes
     {
-        Empty,Enemy1,Enemy2,Enemy3
+        Empty,Undead,Life,Hell
     }
     public enum MRewardType
     {
-        Empty,Chest1,Chest2,Chest3
+        Empty,Money,DeathChest,LifeChest,HellChest
+    }
+    public enum MStoreType
+    {
+        Empty,NecroStore,LifeStore,HellStore
     }
 
 
@@ -32,11 +36,13 @@ public struct PawnDefinitions
     public MSacrificeTypes m_sacrificeTypes;
     public MEnemyTypes m_enemyTypes;
     public MRewardType m_rewardTypes;
+    public MStoreType m_storeTypes;
     public PawnLevels m_pawnLevels;
     public int m_currentLevel;
 
     public PawnDefinitions(MPawnObjects pawnObjects,MMinionType minionType,MManaType manaType,
-        MBuildingType buildingType,MItemType itemType,MSacrificeTypes sacrificeTypes, MEnemyTypes enemyTypes, MRewardType rewardType,
+        MBuildingType buildingType,MItemType itemType,MSacrificeTypes sacrificeTypes, MEnemyTypes enemyTypes, 
+        MRewardType rewardType, MStoreType storeType,
         PawnLevels pawnLevels ,int currentLevel)
     {
         this.m_pawnObjects = pawnObjects;
@@ -47,6 +53,7 @@ public struct PawnDefinitions
         this.m_sacrificeTypes = sacrificeTypes;
         this.m_enemyTypes = enemyTypes;
         this.m_rewardTypes = rewardType;
+        this.m_storeTypes = storeType;
         this.m_pawnLevels = pawnLevels;
         this.m_currentLevel = currentLevel;
     }

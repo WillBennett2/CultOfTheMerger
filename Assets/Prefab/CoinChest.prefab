@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8382734246317800531
+--- !u!1001 &7691239771293203511
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,34 +8,9 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 371309686188929881, guid: f67caf1f7443dfb4ba764bbd50942680,
-        type: 3}
-      propertyPath: m_isDraggable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 371309686188929881, guid: f67caf1f7443dfb4ba764bbd50942680,
-        type: 3}
-      propertyPath: m_isInteractable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4559414251305503682, guid: f67caf1f7443dfb4ba764bbd50942680,
@@ -76,47 +51,51 @@ PrefabInstance:
     - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: CoinChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f67caf1f7443dfb4ba764bbd50942680, type: 3}
---- !u!1 &1304532761430759268 stripped
+--- !u!1 &933107220898322176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
     type: 3}
-  m_PrefabInstance: {fileID: 8382734246317800531}
+  m_PrefabInstance: {fileID: 7691239771293203511}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5931680416508762699
+--- !u!114 &8727496664264252494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304532761430759268}
+  m_GameObject: {fileID: 933107220898322176}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 182f7e972f6cbc6429ae9e2663b695e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 5
+  m_objectType: 3
   m_minionType: 0
   m_manaType: 0
   m_buildingType: 0
-  m_itemType: 0
+  m_itemType: 1
   m_sacrificeTypes: 0
   m_enemyTypes: 0
-  m_rewardType: 2
-  m_storeType: 0
-  m_buildingItems: {fileID: 11400000, guid: 9aaebc6f3e233e74e8d37665c8440e82, type: 2}
-  m_minionPrefab: {fileID: 933107220898322176, guid: ef094217433e67748b8f00d1c7ab507b,
+  m_rewardType: 0
+  m_buildingItems: {fileID: 11400000, guid: 8385f4aebcb096e4ca0e87e2e24b8f21, type: 2}
+  m_minionPrefab: {fileID: 7372346138402663223, guid: f67caf1f7443dfb4ba764bbd50942680,
     type: 3}
   m_buildingLevel: 0
-  m_spawnCosts: 
+  m_spawnCosts: fa0000002c01000090010000f4010000bc020000
   m_spawnChances: {fileID: 0}
   m_buildingData: {fileID: 11400000, guid: dcd6bf65652e175468709fe2945a9260, type: 2}
-  m_spawnsLimited: 0
-  m_maxUses: 1
+  m_spawnsLimited: 1
+  m_maxUses: 5
   m_limitedUsesCount: 0
   m_gridRef: []
   m_objectDataRef: {fileID: 11400000, guid: fde0f150d9d987a45a1497f8eb91d264, type: 2}
@@ -125,22 +104,3 @@ MonoBehaviour:
   m_itemData: []
   m_enemyData: []
   m_rewardData: []
-  m_storeData: []
---- !u!114 &-4315421937397415938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304532761430759268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ef2ce4c44d11044db7f692f849ab0b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enemyTypes: 0
-  m_manaAttraction: 0
-  m_health: 0
-  m_rewardSpawnerName: 
-  m_pawnLevel: {fileID: 0}
-  m_buildingScript: {fileID: 0}

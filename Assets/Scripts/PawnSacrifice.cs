@@ -22,7 +22,6 @@ public class PawnSacrifice : MonoBehaviour
     }
     private void Awake()
     {
-        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
         m_idScript = GetComponent<ID>();
         m_id = m_idScript.GetID;
     }
@@ -30,6 +29,7 @@ public class PawnSacrifice : MonoBehaviour
     void Start()
     {
         //StartCoroutine(LateStart(1));
+        GameEvents.m_current.onPawnLevelUp += LevelUpValues;
         m_inventoryScript = FindObjectOfType<Inventory>();
     }
     IEnumerator LateStart(float waitTime)
