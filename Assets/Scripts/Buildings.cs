@@ -1,12 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
-using static ObjectData;
-using static PawnDefinitions;
 using Random = UnityEngine.Random;
 
 public class Buildings : MonoBehaviour
@@ -42,23 +36,23 @@ public class Buildings : MonoBehaviour
     [SerializeField] private PawnDefinitions.MEnemyTypes m_enemyTypes;
     [SerializeField] private PawnDefinitions.MRewardType m_rewardType;
     [SerializeField] private PawnDefinitions.MStoreType m_storeType;
-    [SerializeField] private BuildingItems m_buildingItems ;
+    [SerializeField] private BuildingItems m_buildingItems;
     [SerializeField] private GameObject m_minionPrefab;
     private GameObject m_pawnObject;
     [SerializeField] private int m_buildingLevel;
     [SerializeField] private int[] m_spawnCosts;
     [SerializeField] private SpawnChances m_spawnChances;
     [SerializeField] private BuildingData m_buildingData;
-    
+
     [Header("Spawn Uses")]
     [SerializeField] private bool m_spawnsLimited = false;
-    [SerializeField] private int m_maxUses=1;
+    [SerializeField] private int m_maxUses = 1;
     [SerializeField] private int m_limitedUsesCount;
 
-    private GameManager m_gameManager;  
+    private GameManager m_gameManager;
     private Inventory m_inventory;
     private GridManager m_GridManager;
-    [SerializeField]private GameObject[] m_gridRef;
+    [SerializeField] private GameObject[] m_gridRef;
     private int m_sizeOfGrid;
 
     [SerializeField] private ObjectData m_objectDataRef;
@@ -87,7 +81,7 @@ public class Buildings : MonoBehaviour
         AssignObjectData();
         StartCoroutine(LateStart(1));
 
-        
+
     }
     void Start()
     {
@@ -160,34 +154,34 @@ public class Buildings : MonoBehaviour
     {
         int tileNum = FindFreeTile();
 
-        if (tileNum != -1 && GetComponent<Interactable>()!=null)
+        if (tileNum != -1 && GetComponent<Interactable>() != null)
         {
             if (m_spawnsLimited)
             {
                 m_limitedUsesCount--;
             }
 
-            if (m_limitedUsesCount<=0)
+            if (m_limitedUsesCount <= 0)
             {
                 Destroy(gameObject);
             }
         }
 
-        if(tileNum != -1)
+        if (tileNum != -1)
         {
-            SpawnPawn(true,tileNum,0,0,"", "", "", "", "");
+            SpawnPawn(true, tileNum, 0, 0, "", "", "", "", "");
         }
 
     }
-    public void LoadPawn(int tileNum,int pawnIndex,int pawnLevel,string minionType,string itemType, string rewardType, string enemyType,string storeType)
+    public void LoadPawn(int tileNum, int pawnIndex, int pawnLevel, string minionType, string itemType, string rewardType, string enemyType, string storeType)
     {
-        SpawnPawn(false,tileNum,pawnIndex,pawnLevel,minionType,itemType,rewardType,enemyType,storeType);
+        SpawnPawn(false, tileNum, pawnIndex, pawnLevel, minionType, itemType, rewardType, enemyType, storeType);
     }
     private int GenRandomNum(int endNum)
     {
-        return (Random.Range(0,endNum ));
+        return (Random.Range(0, endNum));
     }
-    private void SpawnPawn(bool newPawn,int tileNum, int pawnIndex, int pawnLevel, string minionType,string itemType, string rewardType, string enemyType,string storeType)
+    private void SpawnPawn(bool newPawn, int tileNum, int pawnIndex, int pawnLevel, string minionType, string itemType, string rewardType, string enemyType, string storeType)
     {
         ResetTypes();
 
@@ -200,7 +194,7 @@ public class Buildings : MonoBehaviour
         if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
         {
             int minionChance = GenRandomNum(100);
-            int levelToSpawn=0;
+            int levelToSpawn = 0;
             string minionNameToSpawn = null;
             int minionIndex = -1;
             foreach (SpawnChances.MinionPartsChances chance in m_spawnChances.Chances[m_buildingLevel].m_chances)
@@ -212,7 +206,7 @@ public class Buildings : MonoBehaviour
                     break;
                 }
             }
-            for(int i=0; i <m_minionTypesCount; i++)
+            for (int i = 0; i < m_minionTypesCount; i++)
             {
                 if (minionNameToSpawn != null && m_minionData[i].m_name == minionNameToSpawn)
                 {
@@ -225,8 +219,8 @@ public class Buildings : MonoBehaviour
                 minionIndex = pawnIndex;
             }
             //int randNum = GenRandomNum(m_minionTypesCount); 
-            if (minionIndex!=-1 && SetMinionType(newPawn,tileNum, minionIndex,levelToSpawn))
-                m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_minionData[minionIndex].m_sacrificialBaseValue,m_minionData[minionIndex].m_sacrificeType,m_minionData[minionIndex].m_sacrificialMultiplier);
+            if (minionIndex != -1 && SetMinionType(newPawn, tileNum, minionIndex, levelToSpawn))
+                m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_minionData[minionIndex].m_sacrificialBaseValue, m_minionData[minionIndex].m_sacrificeType, m_minionData[minionIndex].m_sacrificialMultiplier);
             //StartCoroutine(DelayTime(2f));
             LevelUpPawn(levelToSpawn);
         }
@@ -266,16 +260,16 @@ public class Buildings : MonoBehaviour
         }
         if (m_objectType == PawnDefinitions.MPawnObjects.Enemy)
         {
-            SetEnemyType(newPawn,tileNum);
+            SetEnemyType(newPawn, tileNum);
         }
         if (m_objectType == PawnDefinitions.MPawnObjects.Reward)
         {
-            int randNum = GenRandomNum(m_rewardTypesCount); 
-            SetRewardType(newPawn,tileNum);
+            int randNum = GenRandomNum(m_rewardTypesCount);
+            SetRewardType(newPawn, tileNum);
         }
         if (m_objectType == PawnDefinitions.MPawnObjects.Store)
         {
-            SetStoreType(newPawn,tileNum,storeType);
+            SetStoreType(newPawn, tileNum, storeType);
             int levelToSpawn = 0;
             if (!newPawn)
             {
@@ -289,14 +283,14 @@ public class Buildings : MonoBehaviour
         {
             m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
             m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum], tileNum);
-            m_GridManager.UpdateTile(tileNum,true);
-            if(m_objectType == PawnDefinitions.MPawnObjects.Minions)
+            m_GridManager.UpdateTile(tileNum, true);
+            if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
             {
                 m_gameManager.MinionSpawned(m_minionType);
             }
             m_pawnObject = null;
         }
-    
+
     }
     private void CreateObject(int tileNum)
     {
@@ -340,7 +334,7 @@ public class Buildings : MonoBehaviour
         }
         else
         {
-            if(!Costs())
+            if (!Costs())
             {
                 return;
             }
@@ -415,7 +409,7 @@ public class Buildings : MonoBehaviour
             }
         }
     }
-    private bool SetMinionType(bool newPawn,int tileNum,int minionIndex,int levelToSpawn)
+    private bool SetMinionType(bool newPawn, int tileNum, int minionIndex, int levelToSpawn)
     {
         bool canSpawn = false;
         //check if enough mana to spawn
@@ -448,7 +442,7 @@ public class Buildings : MonoBehaviour
             if (pawnMergeScript)
             {
                 m_minionType = m_minionData[minionIndex].m_minionType;
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_minionData[minionIndex].m_manaType, m_buildingType, m_itemType, m_minionData[minionIndex].m_sacrificeType, m_enemyTypes, m_rewardType,m_storeType,
+                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_minionData[minionIndex].m_manaType, m_buildingType, m_itemType, m_minionData[minionIndex].m_sacrificeType, m_enemyTypes, m_rewardType, m_storeType,
                     m_minionData[minionIndex].m_pawnLevels, levelToSpawn);
                 pawnMergeScript.GetPawnDataIndex = minionIndex; ;
                 manaData.SetManaValues(m_minionData[minionIndex].m_manaType, m_minionData[minionIndex].m_baseMana, m_minionData[minionIndex].m_manaMultiplier);
@@ -497,7 +491,7 @@ public class Buildings : MonoBehaviour
                 pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_manaType, m_buildingType,
                     m_itemType, m_enemyData[indexToSpawn].m_sacrificeType, m_enemyData[indexToSpawn].m_enemyTypes, m_rewardType, m_storeType,
                     m_enemyData[indexToSpawn].m_pawnLevel, 0);
-               pawnMergeScript.GetPawnDataIndex = indexToSpawn; 
+                pawnMergeScript.GetPawnDataIndex = indexToSpawn;
             }
             m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_enemyData[indexToSpawn].m_sacrificialBaseValue, m_enemyData[indexToSpawn].m_sacrificeType, m_enemyData[indexToSpawn].m_sacrificialMultiplier);
             m_pawnObject.GetComponent<PawnEnemy>().SetEnemyValues(m_enemyData[indexToSpawn].m_enemyTypes,
@@ -551,12 +545,12 @@ public class Buildings : MonoBehaviour
             m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_rewardData[indexToSpawn].m_sacrificialBaseValue, m_rewardData[indexToSpawn].m_sacrificeType, m_rewardData[indexToSpawn].m_sacrificialMultiplier);
         }
     }
-    private void SetStoreType(bool newPawn,int tileNum ,string pawnType)
+    private void SetStoreType(bool newPawn, int tileNum, string pawnType)
     {
         int indexToSpawn = -1;
         string storeName = "";
 
-        if (newPawn&&!Costs())
+        if (newPawn && !Costs())
         {
             return;
         }
@@ -617,7 +611,7 @@ public class Buildings : MonoBehaviour
     }
     private void LevelUpBuildingLevel(string id)
     {
-        if(id == m_id)
+        if (id == m_id)
         {
             m_buildingLevel++;
         }
@@ -630,7 +624,7 @@ public class Buildings : MonoBehaviour
         {
             canSpawn = false;
         }
-        if(m_inventory.Rune.m_lifeRuneCount < m_buildingData.RuneCost.m_lifeRuneCost)
+        if (m_inventory.Rune.m_lifeRuneCount < m_buildingData.RuneCost.m_lifeRuneCost)
         {
             canSpawn = false;
         }
@@ -639,7 +633,7 @@ public class Buildings : MonoBehaviour
             canSpawn = false;
         }
 
-        if(canSpawn)
+        if (canSpawn)
         {
             m_inventory.DeathRune -= m_buildingData.RuneCost.m_graveRuneCost;
             m_inventory.LifeRune -= m_buildingData.RuneCost.m_lifeRuneCost;

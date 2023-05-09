@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
+  - enabled: 0
+    path: Assets/Scenes/google.unity
+    guid: 4e93866ce6ac7ba4eb76a124fd6ff67c
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 32cb0a8664b26b048a29caf329002b64,
       type: 2}
