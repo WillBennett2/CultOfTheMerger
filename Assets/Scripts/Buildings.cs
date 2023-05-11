@@ -189,6 +189,7 @@ public class Buildings : MonoBehaviour
         {
             SetBuildingType(newPawn, tileNum, pawnLevel, minionType);
             LevelUpPawn(pawnLevel);
+            m_pawnObject.GetComponent<Buildings>().m_buildingLevel = pawnLevel;
         }
 
         if (m_objectType == PawnDefinitions.MPawnObjects.Minions)
