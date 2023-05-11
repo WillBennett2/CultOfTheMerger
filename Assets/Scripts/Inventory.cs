@@ -14,32 +14,33 @@ public class Inventory : MonoBehaviour
     private float m_previousNecroStore;
     [SerializeField] private float m_totalNecroModifier;
     [SerializeField] private float m_necroCapacity;
-    [SerializeField]private TextMeshProUGUI m_necroUIText;
+    [SerializeField]private Text m_necroUIText;
     [SerializeField] private Slider m_necroSlider;
     [Header("Life")]
     [SerializeField] private float m_lifeStore;
     [SerializeField] private float m_totalLifeModifier;
     [SerializeField] private float m_lifeCapacity;
-    [SerializeField] private TextMeshProUGUI m_lifeUIText;
+    [SerializeField] private Text m_lifeUIText;
     [SerializeField] private Slider m_lifeSlider;
     [Header("Hell")]
     [SerializeField] private float m_hellStore;
     [SerializeField] private float m_totalHellModifier;
     [SerializeField] private float m_hellCapacity;
-    [SerializeField] private TextMeshProUGUI m_hellUIText;
+    [SerializeField] private Text m_hellUIText;
     [SerializeField] private Slider m_hellSlider;
 
-    [Header("Sacrifice")] 
+    [Header("Sacrifice")]
+    [SerializeField] private GooglePlayManager m_GPMScript;
     [SerializeField] private int m_cultSacrificeValue;
     [SerializeField] private int m_maxCultValue;
-    [SerializeField]private TextMeshProUGUI m_cultValueUIText;
-    [SerializeField]private TextMeshProUGUI m_MaxCultValueUIText;
+    [SerializeField]private Text m_cultValueUIText;
+    [SerializeField]private Text m_MaxCultValueUIText;
     [SerializeField] private Slider m_cultValueSlider;
     [Header("Shop")]
     [SerializeField] private int m_coinCount;
-    [SerializeField] private TextMeshProUGUI m_coinValueUIText;
+    [SerializeField] private Text m_coinValueUIText;
     [SerializeField] private int m_gemCount;
-    [SerializeField] private TextMeshProUGUI m_gemValueUIText;
+    [SerializeField] private Text m_gemValueUIText;
     [SerializeField] public Runes m_runes;
 
     [Serializable]public struct Runes
@@ -197,6 +198,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_cultSacrificeValue = value;
+            m_GPMScript.UpdateLeaderBoardCultScore(m_cultSacrificeValue);
             UpdateGeneralUI();
         }
     }
@@ -320,7 +322,7 @@ public class Inventory : MonoBehaviour
 
         return value;
     }
-    void SetValueToString(TextMeshProUGUI uiText,int value)
+    void SetValueToString(Text uiText,int value)
     {
         if(ChangeUINumber(value) <=10)
         {

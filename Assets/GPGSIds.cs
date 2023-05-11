@@ -25,6 +25,7 @@
 public static class GPGSIds
 {
         public const string achievement_tester = "CgkI0J6Kr_sSEAIQAQ"; // <GPGSID>
+        public const string leaderboard_cultofthemerger_cultvalue = "CgkI0J6Kr_sSEAIQAg"; // <GPGSID>
 
 }
 

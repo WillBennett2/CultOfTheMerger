@@ -29,6 +29,7 @@ public class SaveManager : MonoBehaviour
 
     private Inventory m_inventoryScript;
     private GameManager m_gameManagerScript;
+
     [SerializeField] private List<string> m_Data;
     [SerializeField] private List<ListWrapper> m_dataList;
     [SerializeField] private bool m_load;
@@ -142,6 +143,9 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Coin", m_inventoryScript.Coins);
         PlayerPrefs.SetInt("Gem", m_inventoryScript.Gems);
         PlayerPrefs.SetInt("UndeadMinionsSpawned", m_gameManagerScript.GetNumOfUndeadSpawned);
+
+        PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
+
     }
     public void LoadPawns()
     {
@@ -302,7 +306,7 @@ public class SaveManager : MonoBehaviour
             DateTime temp = DateTime.Now;
             m_previousDate = temp;
         }
-
+        
         TimeSpan difference = m_currentDate.Subtract(m_previousDate);
         Debug.Log(difference);
         float numOfGenerations = (int)difference.TotalSeconds / m_inventoryScript.GetGenerationDelay;
