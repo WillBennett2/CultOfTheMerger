@@ -32,6 +32,10 @@ public class GooglePlayManager : MonoBehaviour
     {
         Social.ReportProgress(GPGSIds.achievement_tester,100f,(bool callback) => { });
     }
+    public void ShowAchievements()
+    {
+        Social.ShowAchievementsUI();
+    }    
 
     public void ShowLeaderBoard()
     {

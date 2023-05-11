@@ -144,7 +144,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Gem", m_inventoryScript.Gems);
         PlayerPrefs.SetInt("UndeadMinionsSpawned", m_gameManagerScript.GetNumOfUndeadSpawned);
 
-        PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
+        //PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
 
     }
     public void LoadPawns()
@@ -216,8 +216,14 @@ public class SaveManager : MonoBehaviour
             }
             if (m_dataList[i][1] == "Reward")
             {
-                if (m_dataList[i][6] == "HellRune")
+                if (m_dataList[i][6] == "Money")
                 {
+                    m_NecroChestBuilding.LoadPawn(int.Parse(m_dataList[i][0]), int.Parse(m_dataList[i][2]), int.Parse(m_dataList[i][3]),
+                    m_dataList[i][4], m_dataList[i][5], m_dataList[i][6], m_dataList[i][7], m_dataList[i][8]);
+                }
+                else if (m_dataList[i][6] == "DeathChest")
+                {
+                    Debug.Log("loading Chest");
                     m_NecroChestBuilding.LoadPawn(int.Parse(m_dataList[i][0]), int.Parse(m_dataList[i][2]), int.Parse(m_dataList[i][3]),
                     m_dataList[i][4], m_dataList[i][5], m_dataList[i][6], m_dataList[i][7], m_dataList[i][8]);
                 }

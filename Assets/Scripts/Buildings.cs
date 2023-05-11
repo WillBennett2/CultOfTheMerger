@@ -504,7 +504,7 @@ public class Buildings : MonoBehaviour
         string RewardName = "";
         if (m_rewardType == PawnDefinitions.MRewardType.Money)
         {
-            RewardName = "Money";
+            RewardName = "MoneyChest";
         }
         else if (m_rewardType == PawnDefinitions.MRewardType.DeathChest)
         {
@@ -529,6 +529,7 @@ public class Buildings : MonoBehaviour
             if (RewardName != "Empty" && m_rewardData[i].m_name == RewardName)
             {
                 indexToSpawn = i;
+                Debug.Log("found index");
             }
         }
         if (m_rewardType != PawnDefinitions.MRewardType.Empty)

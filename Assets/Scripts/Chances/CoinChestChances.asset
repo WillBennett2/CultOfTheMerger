@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedc61ae09cfcac42978c6f9d3711eca, type: 3}
+  m_Name: CoinChestChances
+  m_EditorClassIdentifier: 
+  m_totalChances:
+  - m_spawnLevel: 0
+    m_chances:
+    - m_minionName: Coin
+      m_minionLevel: 1
+      m_chance: 50
+    - m_minionName: Coin
+      m_minionLevel: 0
+      m_chance: 100

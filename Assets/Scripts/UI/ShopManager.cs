@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private Inventory m_inventoryScript;
+    [SerializeField] private Buildings m_coinChestSpawner;
     [SerializeField] public DateTime m_timeGiftWasClaimed;
 
     [SerializeField] private DateTime m_currentDate;
@@ -31,6 +32,7 @@ public class ShopManager : MonoBehaviour
         if (difference.Minutes>=2 )
         {
             Debug.Log("SPAWN CHEST");
+            m_coinChestSpawner.Tapped();
             PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
         }
 
