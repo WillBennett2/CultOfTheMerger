@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DeadRuneLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 6196865038506604984, guid: 07174984cf3060d41a80f79f9f6f8d4e, type: 3}
-  - {fileID: 7953909531840393840, guid: c3c06b824b47d7b4ab57ab4f989af266, type: 3}
+  - {fileID: 5421121192507228114, guid: 291f8dc4ef1a2fd4598e5a7e3dededbd, type: 3}
+  - {fileID: 5421121192507228114, guid: c81c6624032234c4cb4e7b522f5a9ff5, type: 3}
+  - {fileID: 5421121192507228114, guid: 3f3fde6c1cad3394e9847378abbfe8c3, type: 3}

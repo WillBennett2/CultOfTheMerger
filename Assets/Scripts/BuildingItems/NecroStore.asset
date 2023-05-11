@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecroStore
   m_EditorClassIdentifier: 
   m_runeCosts:
-    m_graveRuneCost: 5
-    m_lifeRuneCost: 5
+    m_graveRuneCost: 15
+    m_lifeRuneCost: 10
     m_hellRuneCost: 0
     m_specialRuneCost: 0

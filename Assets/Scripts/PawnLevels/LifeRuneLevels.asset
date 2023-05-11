@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: LifeRuneLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 6196865038506604984, guid: f129c82897384734db4191c5623aa1b9, type: 3}
+  - {fileID: 5421121192507228114, guid: 132cbc4dc352b8b418e003bd566087cd, type: 3}
+  - {fileID: 5421121192507228114, guid: 57eec1bda7f48a248b643e6ae2fd797e, type: 3}
+  - {fileID: 5421121192507228114, guid: cba16f3ab5d524f48b185dbc9bf608a3, type: 3}

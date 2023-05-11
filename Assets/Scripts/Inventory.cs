@@ -11,7 +11,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float m_genDelay;
     [Header("Necro")]
     [SerializeField] private float m_necroStore;
-    private float m_previousNecroStore;
     [SerializeField] private float m_totalNecroModifier;
     [SerializeField] private float m_necroCapacity;
     [SerializeField]private Text m_necroUIText;
@@ -42,6 +41,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int m_gemCount;
     [SerializeField] private Text m_gemValueUIText;
     [SerializeField] public Runes m_runes;
+    [SerializeField] private Text m_NecroRuneCount;
+    [SerializeField] private Text m_LifeRuneCount;
+    [SerializeField] private Text m_HellRuneCount;
+
 
     [Serializable]public struct Runes
     {
@@ -66,6 +69,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_runes.m_deathRuneCount = value;
+            m_NecroRuneCount.text = m_runes.m_deathRuneCount.ToString();
         }
     }
     public int LifeRune
@@ -77,6 +81,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_runes.m_lifeRuneCount = value;
+            m_LifeRuneCount.text = m_runes.m_lifeRuneCount.ToString();
         }
     }
     public int HellRune
@@ -88,6 +93,7 @@ public class Inventory : MonoBehaviour
         set
         {
             m_runes.m_hellRuneCount = value;
+            m_HellRuneCount.text = m_runes.m_hellRuneCount.ToString();
         }
     }
     public int SpecialRune
@@ -309,8 +315,8 @@ public class Inventory : MonoBehaviour
         m_cultValueSlider.value = m_cultSacrificeValue;
         m_cultValueUIText.text = Mathf.Round(ChangeUINumber(m_cultSacrificeValue)).ToString();
 
-        m_coinValueUIText.text = Mathf.Round(ChangeUINumber(m_coinCount)).ToString();
-        m_gemValueUIText.text = Mathf.Round(ChangeUINumber(m_gemCount)).ToString();
+        m_coinValueUIText.text = Mathf.Round(m_coinCount).ToString();
+        m_gemValueUIText.text = Mathf.Round(m_gemCount).ToString();
     }
 
     int ChangeUINumber(int value)

@@ -265,7 +265,6 @@ public class Buildings : MonoBehaviour
         }
         if (m_objectType == PawnDefinitions.MPawnObjects.Reward)
         {
-            int randNum = GenRandomNum(m_rewardTypesCount);
             SetRewardType(newPawn, tileNum);
         }
         if (m_objectType == PawnDefinitions.MPawnObjects.Store)

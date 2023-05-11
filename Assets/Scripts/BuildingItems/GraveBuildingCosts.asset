@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GraveBuildingCosts
   m_EditorClassIdentifier: 
   m_runeCosts:
-    m_graveRuneCost: 5
-    m_runeCost2: 0
+    m_graveRuneCost: 10
+    m_lifeRuneCost: 0
+    m_hellRuneCost: 0
+    m_specialRuneCost: 0
