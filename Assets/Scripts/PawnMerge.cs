@@ -116,7 +116,7 @@ public class PawnMerge : MonoBehaviour
     {
         bool sameType = false;
         m_onTilePawn = onTilePawn;
-        if (m_thisPawn.m_minionType == onTilePawn.m_minionType)
+        if (m_thisPawn.m_minionType != PawnDefinitions.MMinionType.Empty && m_thisPawn.m_minionType == onTilePawn.m_minionType)
         {
             sameType = true;
             //add to the minion count
@@ -129,7 +129,9 @@ public class PawnMerge : MonoBehaviour
 
         if (m_thisPawn.m_itemType != PawnDefinitions.MItemType.Empty && m_thisPawn.m_itemType == onTilePawn.m_itemType)
         {
-            sameType = true;
+			Debug.Log(m_thisPawn.m_itemType);
+			Debug.Log(onTilePawn.m_itemType);
+			sameType = true;
         }
         if (onTilePawn.m_enemyTypes != PawnDefinitions.MEnemyTypes.Empty && m_thisPawn.m_minionType != PawnDefinitions.MMinionType.Empty )
         {

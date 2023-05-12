@@ -294,7 +294,7 @@ public class SaveManager : MonoBehaviour
         //save rune count
         if (PlayerPrefs.GetInt("DeathRune") == 0 || !PlayerPrefs.HasKey("DeathRune"))
         {
-            m_inventoryScript.NecroStore += 10;
+            m_inventoryScript.DeathRune += 10;
         }
         else
             m_inventoryScript.DeathRune = PlayerPrefs.GetInt("DeathRune");

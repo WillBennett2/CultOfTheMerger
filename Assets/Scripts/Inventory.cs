@@ -241,7 +241,9 @@ public class Inventory : MonoBehaviour
                 m_gameManager.LevelUpCult();
                 m_maxCultValue *= 2;
                 m_MaxCultValueUIText.text = m_maxCultValue.ToString();
-            }
+				m_cultValueSlider.maxValue= m_maxCultValue;
+
+			}
             m_GPMScript.UpdateLeaderBoardCultScore(m_cultSacrificeValue);
             UpdateGeneralUI();
         }
