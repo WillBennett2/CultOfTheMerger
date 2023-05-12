@@ -179,7 +179,7 @@ public class Buildings : MonoBehaviour
         else 
         {
             if (m_objectType == PawnDefinitions.MPawnObjects.Enemy|| m_objectType == PawnDefinitions.MPawnObjects.Reward
-                || m_objectType == PawnDefinitions.MPawnObjects.Store|| m_objectType == PawnDefinitions.MPawnObjects.Building)
+                || m_objectType == PawnDefinitions.MPawnObjects.Store)//|| m_objectType == PawnDefinitions.MPawnObjects.Building)
             {
                 bool notInQueue= true;
                 foreach (var obj in m_gameManager.GetSpawnQueue()) 
@@ -311,6 +311,7 @@ public class Buildings : MonoBehaviour
 
         if (m_pawnObject != null)
         {
+            Debug.Log("minion Added");
             m_gameManager.Pawns.Add(m_pawnObject.GetComponent<PawnMovement>());
             m_pawnObject.GetComponent<PawnMovement>().SetHomeTile(m_gridRef[tileNum], tileNum);
             m_GridManager.UpdateTile(tileNum, true);

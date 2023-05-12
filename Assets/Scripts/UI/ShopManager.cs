@@ -16,6 +16,7 @@ public class ShopManager : MonoBehaviour
 
     public void ClaimDailyGift()
     {
+        bool canSpawn = false;
         m_currentDate = DateTime.Now;
         if (PlayerPrefs.HasKey("TimeGiftWasClaimed"))
         {
@@ -26,12 +27,14 @@ public class ShopManager : MonoBehaviour
         {
             DateTime temp = DateTime.Now;
             m_previousDate = temp;
+            canSpawn = true;
         }
 
         TimeSpan difference = m_currentDate.Subtract(m_previousDate);
+
         Debug.Log(difference.Minutes);
 
-        if (difference.Minutes>=2 )
+        if (difference.Minutes>=2 || canSpawn )
         {
             Debug.Log("SPAWN CHEST");
             m_coinChestSpawner.Tapped();
