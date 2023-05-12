@@ -9,27 +9,34 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHa
 {
     public ScreenGroup m_screenGroup;
     public Image m_background;
+    [SerializeField] bool m_enabled = true;
+    [SerializeField] private AudioManager m_audioManager;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        m_screenGroup.OnScreenSelected(this);
+        if(m_screenGroup!=null)
+            m_screenGroup.OnScreenSelected(this);
+        m_audioManager.Play("ButtonClick");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        m_screenGroup.OnScreenEnter(this);
+        if (m_screenGroup != null)
+            m_screenGroup.OnScreenEnter(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        m_screenGroup.OnScreenExit(this);
+        if (m_screenGroup != null)
+            m_screenGroup.OnScreenExit(this);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         m_background = GetComponent<Image>();
-        m_screenGroup.Subscribe(this);
+        if(m_enabled)
+            m_screenGroup.Subscribe(this);
     }
     
 }

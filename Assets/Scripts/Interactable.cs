@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
+    private AudioManager m_AudioManager;
     private Camera m_mainCamera;
     private float m_startXPos;
     private float m_startZPos;
@@ -23,6 +24,7 @@ public class Interactable : MonoBehaviour
     private void Awake()
     {
         m_gameManager = FindObjectOfType<GameManager>();
+        m_AudioManager = m_gameManager.GetComponent<AudioManager>();
     }
     void Start()
     {
@@ -112,6 +114,7 @@ public class Interactable : MonoBehaviour
             m_isDragging = false;
             
             m_thisPawnMovementScript.Dropped();
+            m_AudioManager.Play("DropPawn");
         }
     }
 

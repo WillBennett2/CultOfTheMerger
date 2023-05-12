@@ -6,6 +6,8 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private Inventory m_inventoryScript;
+    [SerializeField] private GooglePlayManager m_googlePlayManager;
+    [SerializeField] private AudioManager m_audioManager;
     [SerializeField] private Buildings m_coinChestSpawner;
     [SerializeField] public DateTime m_timeGiftWasClaimed;
 
@@ -34,16 +36,23 @@ public class ShopManager : MonoBehaviour
             Debug.Log("SPAWN CHEST");
             m_coinChestSpawner.Tapped();
             PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
+            m_googlePlayManager.AchievementsTest(GPGSIds.achievement_free_is_good);
         }
 
-
+        PlayButtonSound();
     }
     public void Buy25Gems()
     {
         m_inventoryScript.Gems += 25;
+        PlayButtonSound();
     }
     public void Buy100Gems()
     {
         m_inventoryScript.Gems += 100;
+        PlayButtonSound();
+    }
+    private void PlayButtonSound()
+    {
+        m_audioManager.Play("ButtonClick");
     }
 }

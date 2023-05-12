@@ -6,7 +6,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.Audio;
 
 public class SaveManager : MonoBehaviour
 {
@@ -62,11 +62,13 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private DateTime m_currentDate;
     [SerializeField] private DateTime m_previousDate;
 
+    [SerializeField] private AudioMixer m_mixer;
+
     private void Start()
     {
         m_gameManagerScript = GetComponent<GameManager>();  
         m_inventoryScript = FindObjectOfType<Inventory>();
-
+        
     }
     private void OnApplicationFocus(bool focusings)
     {
@@ -142,8 +144,12 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("SpecialRune", m_inventoryScript.SpecialRune);
         PlayerPrefs.SetInt("Coin", m_inventoryScript.Coins);
         PlayerPrefs.SetInt("Gem", m_inventoryScript.Gems);
+        Debug.Log(m_inventoryScript.Gems);
         PlayerPrefs.SetInt("UndeadMinionsSpawned", m_gameManagerScript.GetNumOfUndeadSpawned);
-
+        float volume;
+        m_mixer.GetFloat("Volume", out volume);
+        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.SetInt("Quality", QualitySettings.GetQualityLevel());
         //PlayerPrefs.SetString("TimeGiftWasClaimed", System.DateTime.Now.ToBinary().ToString());
 
     }
@@ -269,29 +275,42 @@ public class SaveManager : MonoBehaviour
         LoadStats();
     }
     private void LoadStats()
-    { 
-        if(PlayerPrefs.GetFloat("NecroStore")==0)
+    {
+        //sm_inventoryScript.NecroStore = 3000;
+        if (PlayerPrefs.HasKey("NecroStore"))
         {
-            m_inventoryScript.NecroStore = 3000;
+            if (PlayerPrefs.GetFloat("NecroStore") == 0)
+                m_inventoryScript.NecroStore += 3000;
+            else
+                m_inventoryScript.NecroStore = PlayerPrefs.GetFloat("NecroStore");
         }
         else
-            m_inventoryScript.NecroStore = PlayerPrefs.GetFloat("NecroStore");
+            m_inventoryScript.NecroStore = 3000;
 
         m_inventoryScript.LifeStore = PlayerPrefs.GetFloat("LifeStore");
 
         m_inventoryScript.HellStore = PlayerPrefs.GetFloat("HellStore");
 
         //save rune count
-        m_inventoryScript.DeathRune = 100;// PlayerPrefs.GetInt("DeathRune");
+        if (PlayerPrefs.GetInt("DeathRune") == 0 || !PlayerPrefs.HasKey("DeathRune"))
+        {
+            m_inventoryScript.NecroStore += 10;
+        }
+        else
+            m_inventoryScript.DeathRune = PlayerPrefs.GetInt("DeathRune");
         m_inventoryScript.LifeRune = PlayerPrefs.GetInt("LifeRune");
         m_inventoryScript.HellRune = PlayerPrefs.GetInt("HellRune");
         m_inventoryScript.SpecialRune = PlayerPrefs.GetInt("SpecialRune");
         //save coin coint
         m_inventoryScript.Coins = PlayerPrefs.GetInt("Coin");
         m_inventoryScript.Gems = PlayerPrefs.GetInt("Gem");
+        Debug.Log(PlayerPrefs.GetInt("Gem"));
+        Debug.Log(m_inventoryScript.Gems);
         //save cult count
         m_inventoryScript.SacrificeValue = PlayerPrefs.GetInt("SacrificeValue");
 
+        m_mixer.SetFloat("Volume", PlayerPrefs.GetFloat("Volume"));
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality"));
         //enemy spawns
         m_gameManagerScript.GetNumOfUndeadSpawned = PlayerPrefs.GetInt("UndeadMinionsSpawned");
 

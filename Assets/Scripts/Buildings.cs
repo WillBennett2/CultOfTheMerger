@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -52,6 +53,7 @@ public class Buildings : MonoBehaviour
     private GameManager m_gameManager;
     private Inventory m_inventory;
     private GridManager m_GridManager;
+    [SerializeField] private AudioManager m_audioManager;
     [SerializeField] private GameObject[] m_gridRef;
     private int m_sizeOfGrid;
 
@@ -75,6 +77,7 @@ public class Buildings : MonoBehaviour
     {
         m_GridManager = Camera.main.GetComponent<GridManager>();
         m_gameManager = FindObjectOfType<GameManager>();
+        m_audioManager = m_gameManager.GetComponent<AudioManager>();
         m_inventory = FindObjectOfType<Inventory>();
         //auto assign item based on type?
         m_gameManager.Buildings.Add(this);
@@ -169,8 +172,33 @@ public class Buildings : MonoBehaviour
 
         if (tileNum != -1)
         {
+            m_gameManager.HasSpawned = true;
             SpawnPawn(true, tileNum, 0, 0, "", "", "", "", "");
+            m_audioManager.Play("SpawnPawn");
         }
+        else 
+        {
+            if (m_objectType == PawnDefinitions.MPawnObjects.Enemy|| m_objectType == PawnDefinitions.MPawnObjects.Reward
+                || m_objectType == PawnDefinitions.MPawnObjects.Store|| m_objectType == PawnDefinitions.MPawnObjects.Building)
+            {
+                bool notInQueue= true;
+                foreach (var obj in m_gameManager.GetSpawnQueue()) 
+                {
+                    if(obj == this)
+                    {
+                        notInQueue = false;
+                        break;
+                    }
+                }
+                if(notInQueue)
+                {
+                    m_gameManager.AddSelfToQueue(this);
+                    m_gameManager.HasSpawned = false;
+
+                }
+            }
+        }
+
 
     }
     public void LoadPawn(int tileNum, int pawnIndex, int pawnLevel, string minionType, string itemType, string rewardType, string enemyType, string storeType)
@@ -219,6 +247,8 @@ public class Buildings : MonoBehaviour
                 levelToSpawn = pawnLevel;
                 minionIndex = pawnIndex;
             }
+            Debug.Log("name to spawn "+minionNameToSpawn);
+            Debug.Log("name from index "+m_minionData[minionIndex].m_name);
             //int randNum = GenRandomNum(m_minionTypesCount); 
             if (minionIndex != -1 && SetMinionType(newPawn, tileNum, minionIndex, levelToSpawn))
                 m_pawnObject.GetComponent<PawnSacrifice>().SetPawnValues(m_minionData[minionIndex].m_sacrificialBaseValue, m_minionData[minionIndex].m_sacrificeType, m_minionData[minionIndex].m_sacrificialMultiplier);
@@ -416,17 +446,17 @@ public class Buildings : MonoBehaviour
         if (!newPawn) { canSpawn = true; }
         else
         {
-            if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Necro && m_inventory.NecroStore >= m_spawnCosts[m_buildingLevel])
+            if (m_minionData[minionIndex].m_manaTypeCost == PawnDefinitions.MManaType.Necro && m_inventory.NecroStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
                 m_inventory.NecroStore -= m_spawnCosts[m_buildingLevel];
             }
-            if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Life && m_inventory.LifeStore >= m_spawnCosts[m_buildingLevel])
+            if (m_minionData[minionIndex].m_manaTypeCost == PawnDefinitions.MManaType.Life && m_inventory.LifeStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
                 m_inventory.LifeStore -= m_spawnCosts[m_buildingLevel];
             }
-            if (m_minionData[minionIndex].m_manaType == PawnDefinitions.MManaType.Hell && m_inventory.HellStore >= m_spawnCosts[m_buildingLevel])
+            if (m_minionData[minionIndex].m_manaTypeCost == PawnDefinitions.MManaType.Hell && m_inventory.HellStore >= m_spawnCosts[m_buildingLevel])
             {
                 canSpawn = true;
                 m_inventory.HellStore -= m_spawnCosts[m_buildingLevel];
@@ -442,10 +472,10 @@ public class Buildings : MonoBehaviour
             if (pawnMergeScript)
             {
                 m_minionType = m_minionData[minionIndex].m_minionType;
-                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_minionData[minionIndex].m_manaType, m_buildingType, m_itemType, m_minionData[minionIndex].m_sacrificeType, m_enemyTypes, m_rewardType, m_storeType,
+                pawnMergeScript.SetPawnValues(m_objectType, m_minionType, m_minionData[minionIndex].m_manaTypeCost, m_buildingType, m_itemType, m_minionData[minionIndex].m_sacrificeType, m_enemyTypes, m_rewardType, m_storeType,
                     m_minionData[minionIndex].m_pawnLevels, levelToSpawn);
                 pawnMergeScript.GetPawnDataIndex = minionIndex; ;
-                manaData.SetManaValues(m_minionData[minionIndex].m_manaType, m_minionData[minionIndex].m_baseMana, m_minionData[minionIndex].m_manaMultiplier);
+                manaData.SetManaValues(m_minionData[minionIndex].m_manaTypeCost, m_minionData[minionIndex].m_manaTypeGenerated, m_minionData[minionIndex].m_baseMana, m_minionData[minionIndex].m_manaMultiplier);
                 minionData.Damage = m_minionData[minionIndex].m_damageBaseValue;
                 minionData.DamageMultiplier = m_minionData[minionIndex].m_damageMultiplier;
             }

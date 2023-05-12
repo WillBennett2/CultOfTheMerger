@@ -28,9 +28,9 @@ public class GooglePlayManager : MonoBehaviour
             m_connectedToGooglePlay = false;
         }
     }
-    public void AchievementsTest()
+    public void AchievementsTest(string achievementName)
     {
-        Social.ReportProgress(GPGSIds.achievement_tester,100f,(bool callback) => { });
+        Social.ReportProgress(achievementName, 100f,(bool callback) => { });
     }
     public void ShowAchievements()
     {

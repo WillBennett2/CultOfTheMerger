@@ -77,8 +77,11 @@ public class GridManager : MonoBehaviour
 
         if (tileNum < m_columnLength * m_rowLength)
         {
-            if(m_grid[tileNum].GetComponent<TileInfo>())
+            if (m_grid[tileNum].GetComponent<TileInfo>())
+            {
                 m_grid[tileNum].GetComponent<TileInfo>().m_tileTaken = state;
+                m_gameManager.AttemptToFindFreeSpace();
+            }
         }
     }
     

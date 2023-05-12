@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bc9f45ffb97784689aae91a13d0b1f, type: 3}
+  m_Name: FungusLevels
+  m_EditorClassIdentifier: 
+  m_pawnProgression:
+  - {fileID: 7208778148460344929, guid: 51e46d67e34da9442a1bfcac7b793125, type: 3}
+  - {fileID: 2095892931674739304, guid: eb62d1f34d9f9134fbee72f1d9391fa6, type: 3}
+  - {fileID: 4432829001880409791, guid: 84207733aa9248d4898a325a27de434d, type: 3}

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private GameManager m_gameManager;
     [SerializeField] private bool m_generateMana;
     [SerializeField] private float m_genDelay;
     [Header("Necro")]
@@ -146,6 +147,21 @@ public class Inventory : MonoBehaviour
             return m_necroCapacity;
         }
     }
+    public float HellModifier
+    {
+        set
+        {
+            m_totalHellModifier = value;
+            if (m_totalHellModifier < 0)
+            {
+                m_totalHellModifier = 0;
+            }
+        }
+        get
+        {
+            return m_totalHellModifier;
+        }
+    }
     public float HellStore
     {
         set
@@ -168,6 +184,21 @@ public class Inventory : MonoBehaviour
         get
         {
             return m_hellCapacity;
+        }
+    }
+    public float LifeModifier
+    {
+        set
+        {
+            m_totalLifeModifier = value;
+            if (m_totalLifeModifier < 0)
+            {
+                m_totalLifeModifier = 0;
+            }
+        }
+        get
+        {
+            return m_totalLifeModifier;
         }
     }
     public float LifeStore
@@ -204,6 +235,13 @@ public class Inventory : MonoBehaviour
         set
         {
             m_cultSacrificeValue = value;
+            if(m_cultSacrificeValue>=m_maxCultValue)
+            {
+                //level up
+                m_gameManager.LevelUpCult();
+                m_maxCultValue *= 2;
+                m_MaxCultValueUIText.text = m_maxCultValue.ToString();
+            }
             m_GPMScript.UpdateLeaderBoardCultScore(m_cultSacrificeValue);
             UpdateGeneralUI();
         }
@@ -313,7 +351,7 @@ public class Inventory : MonoBehaviour
     void UpdateGeneralUI()
     {
         m_cultValueSlider.value = m_cultSacrificeValue;
-        m_cultValueUIText.text = Mathf.Round(ChangeUINumber(m_cultSacrificeValue)).ToString();
+        m_cultValueUIText.text = Mathf.Round(m_cultSacrificeValue).ToString();
 
         m_coinValueUIText.text = Mathf.Round(m_coinCount).ToString();
         m_gemValueUIText.text = Mathf.Round(m_gemCount).ToString();

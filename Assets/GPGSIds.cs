@@ -24,7 +24,9 @@
 
 public static class GPGSIds
 {
+        public const string achievement_going_big = "CgkI0J6Kr_sSEAIQBA"; // <GPGSID>
         public const string achievement_tester = "CgkI0J6Kr_sSEAIQAQ"; // <GPGSID>
+        public const string achievement_free_is_good = "CgkI0J6Kr_sSEAIQAw"; // <GPGSID>
         public const string leaderboard_cultofthemerger_cultvalue = "CgkI0J6Kr_sSEAIQAg"; // <GPGSID>
 
 }

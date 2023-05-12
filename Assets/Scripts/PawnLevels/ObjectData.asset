@@ -16,7 +16,8 @@ MonoBehaviour:
   - m_name: Skeleton
     m_minionType: 1
     m_pawnLevels: {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
-    m_manaType: 1
+    m_manaTypeCost: 1
+    m_manaTypeGenerated: 1
     m_baseMana: 3
     m_manaMultiplier: 1.2
     m_sacrificeType: 1
@@ -27,7 +28,8 @@ MonoBehaviour:
   - m_name: Zombie
     m_minionType: 1
     m_pawnLevels: {fileID: 11400000, guid: c73a68d9c14e6d947b1b196c2005fce1, type: 2}
-    m_manaType: 2
+    m_manaTypeCost: 1
+    m_manaTypeGenerated: 2
     m_baseMana: 5
     m_manaMultiplier: 1.2
     m_sacrificeType: 1
@@ -35,10 +37,11 @@ MonoBehaviour:
     m_sacrificialMultiplier: 2.1
     m_damageBaseValue: 25
     m_damageMultiplier: 2
-  - m_name: Rose
+  - m_name: Fungus
     m_minionType: 2
     m_pawnLevels: {fileID: 11400000, guid: 856cde78457f97b4a846684d5c99be3b, type: 2}
-    m_manaType: 2
+    m_manaTypeCost: 2
+    m_manaTypeGenerated: 2
     m_baseMana: 5
     m_manaMultiplier: 1.2
     m_sacrificeType: 1
@@ -49,7 +52,8 @@ MonoBehaviour:
   - m_name: Imp
     m_minionType: 3
     m_pawnLevels: {fileID: 11400000, guid: 181c1c49bdf013e4ea1b6226cafb70e7, type: 2}
-    m_manaType: 3
+    m_manaTypeCost: 3
+    m_manaTypeGenerated: 3
     m_baseMana: 5
     m_manaMultiplier: 1.2
     m_sacrificeType: 1
@@ -99,9 +103,17 @@ MonoBehaviour:
   m_stores:
   - m_name: NecroStore
     m_storeType: 1
-    m_pawnLevel: {fileID: 11400000, guid: d4393bb22b5ab354b94f04e57d3d9ac9, type: 2}
+    m_pawnLevel: {fileID: 11400000, guid: 23c6e4d8659c3de409079c01d60a6441, type: 2}
     m_manaCapacityIncrease: 2000
     m_manaCapacityMultiplier: 2.4
     m_sacrificeType: 1
-    m_sacrificialBaseValue: 200
+    m_sacrificialBaseValue: 100
+    m_sacrificialMultiplier: 1.5
+  - m_name: LifeStore
+    m_storeType: 1
+    m_pawnLevel: {fileID: 11400000, guid: 65b0faff958193145b263da19207bb7d, type: 2}
+    m_manaCapacityIncrease: 2000
+    m_manaCapacityMultiplier: 2.4
+    m_sacrificeType: 1
+    m_sacrificialBaseValue: 100
     m_sacrificialMultiplier: 1.5

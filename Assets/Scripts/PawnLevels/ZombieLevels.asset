@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ZombieLevels
   m_EditorClassIdentifier: 
   m_pawnProgression:
-  - {fileID: 6681050471209975726, guid: dee1d3239d63b5648b57774acf6d8729, type: 3}
-  - {fileID: 3470328382846620311, guid: 3fe813c8db243e044a90770c4c889dce, type: 3}
-  - {fileID: 7346684587705164563, guid: 4a75d120fd9649541adf16398a7fb017, type: 3}
+  - {fileID: 3068046026370213956, guid: 067c4f71b8e06b14590e998528764d3f, type: 3}
+  - {fileID: 4818447604363182140, guid: 456ca1420f8c7a94780ba5141b095bee, type: 3}
+  - {fileID: 6859023917573049140, guid: 9f52fa9afb3a4fe4e8327a460f747147, type: 3}

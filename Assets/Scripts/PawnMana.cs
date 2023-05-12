@@ -6,7 +6,8 @@ using UnityEngine;
 public class PawnMana : MonoBehaviour
 {
     [SerializeField]private string m_id;
-    [SerializeField] private PawnDefinitions.MManaType m_manaType;
+    [SerializeField] private PawnDefinitions.MManaType m_manaTypeCost;
+    [SerializeField] private PawnDefinitions.MManaType m_manaTypeGenerated;
     [SerializeField] private float m_baseMana;
     [SerializeField] private float m_manaMultiplier;
 
@@ -15,13 +16,17 @@ public class PawnMana : MonoBehaviour
 
     // Start is called before the first frame update
 
-    public void SetManaValues(PawnDefinitions.MManaType manaType, float baseMana, float manaMultiplier)
+    public void SetManaValues(PawnDefinitions.MManaType manaTypeCost, PawnDefinitions.MManaType manaTypeGen, float baseMana, float manaMultiplier)
     {
-        m_manaType = manaType;
+        m_manaTypeCost = manaTypeCost;
+        m_manaTypeGenerated = manaTypeGen;
         m_baseMana = baseMana;
         m_manaMultiplier = manaMultiplier;
     }
-    
+    private void Awake()
+    {
+        GameEvents.m_current.onPawnLevelUp += LevelUpManaGen;
+    }
     void Start()
     {
         if (GetComponent<ID>())
@@ -29,13 +34,25 @@ public class PawnMana : MonoBehaviour
             m_id = GetComponent<ID>().GetID;   
         }
 
-        GameEvents.m_current.onPawnLevelUp += LevelUpManaGen;
         m_inventoryScript = FindObjectOfType<Inventory>();
         m_pawnMergeScript = GetComponent<PawnMerge>();
 
 
         if (m_pawnMergeScript.GetPawnLevels >= 2)
-            m_inventoryScript.NecroModifier += m_baseMana;
+        {
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Necro)
+            {
+                m_inventoryScript.NecroModifier += m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Life)
+            {
+                m_inventoryScript.LifeModifier += m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Hell)
+            {
+                m_inventoryScript.HellModifier += m_baseMana;
+            }
+        }
     }
 
     private void OnDestroy()
@@ -43,7 +60,19 @@ public class PawnMana : MonoBehaviour
         GameEvents.m_current.onPawnLevelUp -= LevelUpManaGen;
         if (m_pawnMergeScript.GetPawnLevels >= 2)
         {
-            m_inventoryScript.NecroModifier -= m_baseMana;
+
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Necro)
+            {
+                m_inventoryScript.NecroModifier -= m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Life)
+            {
+                m_inventoryScript.LifeModifier -= m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Hell)
+            {
+                m_inventoryScript.HellModifier -= m_baseMana;
+            }
         }
         
     }
@@ -52,10 +81,28 @@ public class PawnMana : MonoBehaviour
     {
         if (id == m_id && m_pawnMergeScript.GetPawnLevels >= 2)
         {
-            m_inventoryScript.NecroModifier -= m_baseMana;
-            m_baseMana *= m_manaMultiplier;
-            m_inventoryScript.NecroModifier += m_baseMana;
-        } 
-    }
+
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Necro)
+            {
+                m_inventoryScript.NecroModifier -= m_baseMana;
+                m_baseMana *= m_manaMultiplier;
+                m_inventoryScript.NecroModifier += m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Life)
+            {
+                m_inventoryScript.LifeModifier -= m_baseMana;
+                m_baseMana *= m_manaMultiplier;
+                m_inventoryScript.LifeModifier += m_baseMana;
+            }
+            if (m_manaTypeGenerated == PawnDefinitions.MManaType.Hell)
+            {
+                m_inventoryScript.HellModifier -= m_baseMana;
+                m_baseMana *= m_manaMultiplier;
+                m_inventoryScript.HellModifier += m_baseMana;
+            }
+
+        }
+    } 
+    
 
 }

@@ -13,7 +13,8 @@ public class ObjectData : ScriptableObject
         public string m_name;
         public PawnDefinitions.MMinionType m_minionType;
         public PawnLevels m_pawnLevels;
-        public PawnDefinitions.MManaType m_manaType;
+        public PawnDefinitions.MManaType m_manaTypeCost;
+        public PawnDefinitions.MManaType m_manaTypeGenerated;
         public float m_baseMana;
         public float m_manaMultiplier;
         public PawnDefinitions.MSacrificeTypes m_sacrificeType;
